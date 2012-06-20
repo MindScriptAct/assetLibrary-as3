@@ -1,0 +1,151 @@
+test used PicPack file, size : 88 MB.
+
+NORMAL LOAD
+
+######################################################################
+Load action started for PicPack1...
+normal load 1720
+GigTest.handlePicPack > asset loaded in  1720 ms momery: 92.954
+######################################################################
+Load action started for PicPack2...
+normal load 1690
+GigTest.handlePicPack > asset loaded in  1700 ms momery: 181.023
+######################################################################
+Load action started for PicPack3...
+normal load 1690
+GigTest.handlePicPack > asset loaded in  1690 ms momery: 268.982
+######################################################################
+Load action started for PicPack4...
+normal load 1710
+GigTest.handlePicPack > asset loaded in  1710 ms momery: 356.985
+######################################################################
+Load action started for PicPack5...
+normal load 1710
+GigTest.handlePicPack > asset loaded in  1710 ms momery: 444.98
+
+
+BINARY LOAD + STORE
+
+######################################################################
+Load action started for PicPack1...
+binary load 338
+binary stored 1040
+converter load 2092
+GigTest.handlePicPack > asset loaded in  3489 ms momery: 179.272
+######################################################################
+Load action started for PicPack2...
+binary load 355
+binary stored 1054
+converter load 2028
+GigTest.handlePicPack > asset loaded in  3448 ms momery: 267.06
+######################################################################
+Load action started for PicPack3...
+binary load 354
+binary stored 1035
+converter load 2006
+GigTest.handlePicPack > asset loaded in  3407 ms momery: 354.715
+######################################################################
+Load action started for PicPack4...
+binary load 369
+binary stored 1053
+converter load 2019
+GigTest.handlePicPack > asset loaded in  3453 ms momery: 442.444
+######################################################################
+Load action started for PicPack5...
+binary load 350
+binary stored 1062
+converter load 2073
+GigTest.handlePicPack > asset loaded in  3496 ms momery: 530.177
+######################################################################
+unloading PicPack1...
+######################################################################
+unloading PicPack2...
+######################################################################
+unloading PicPack3...
+######################################################################
+unloading PicPack4...
+######################################################################
+unloading PicPack5...
+######################################################################
+Load action started for PicPack6...
+binary load 337
+binary stored 5404
+converter load 2110
+GigTest.handlePicPack > asset loaded in  7863 ms momery: 353.222
+######################################################################
+Load action started for PicPack7...
+binary load 343
+binary stored 2617
+converter load 2014
+GigTest.handlePicPack > asset loaded in  4986 ms momery: 353.273
+######################################################################
+Load action started for PicPack8...
+binary load 379
+binary stored 3511
+converter load 1999
+GigTest.handlePicPack > asset loaded in  5902 ms momery: 440.901
+######################################################################
+Load action started for PicPack9...
+binary load 356
+binary stored 2466
+converter load 2029
+GigTest.handlePicPack > asset loaded in  4862 ms momery: 528.622
+
+Get from STORADGE
+
+######################################################################
+Load action started for PicPack1...
+binary RETRIEVED 587
+converter load 2005
+GigTest.handlePicPack > asset loaded in  2607 ms momery: 93.106
+######################################################################
+Load action started for PicPack2...
+binary RETRIEVED 592
+converter load 2000
+GigTest.handlePicPack > asset loaded in  2601 ms momery: 180.89
+######################################################################
+Load action started for PicPack3...
+binary RETRIEVED 586
+converter load 2004
+GigTest.handlePicPack > asset loaded in  2599 ms momery: 268.56
+######################################################################
+Load action started for PicPack4...
+binary RETRIEVED 600
+converter load 1998
+GigTest.handlePicPack > asset loaded in  2607 ms momery: 356.266
+######################################################################
+Load action started for PicPack5...
+binary RETRIEVED 601
+converter load 2011
+GigTest.handlePicPack > asset loaded in  2621 ms momery: 443.995
+######################################################################
+unloading PicPack1...
+######################################################################
+unloading PicPack2...
+######################################################################
+unloading PicPack3...
+######################################################################
+unloading PicPack4...
+######################################################################
+unloading PicPack5...
+######################################################################
+Load action started for PicPack6...
+binary RETRIEVED 597
+converter load 2090
+GigTest.handlePicPack > asset loaded in  2696 ms momery: 180.945
+######################################################################
+Load action started for PicPack7...
+binary RETRIEVED 585
+converter load 1991
+GigTest.handlePicPack > asset loaded in  2585 ms momery: 267.107
+######################################################################
+Load action started for PicPack8...
+binary RETRIEVED 585
+converter load 1987
+GigTest.handlePicPack > asset loaded in  3549 ms momery: 441.151
+######################################################################
+Load action started for PicPack9...
+binary RETRIEVED 598
+converter load 1969
+GigTest.handlePicPack > asset loaded in  2663 ms momery: 528.583
+

@@ -1,0 +1,185 @@
+
+
+Features :
+  * manages asset throw mapnig to id.
+  **support file definition.
+  **support path definition for easer management of files in same folders.
+  **support group definition, an array of files.  (used for group pre-loading or unloading)
+  **in XML : paths can be nested in groups, or groups can be nested in paths.
+  * files has these propertios :
+  ** id
+  ** file name and path
+  ** file type can be defined if not standart file extention is used.
+  ** urlParams can be added for version controll.
+  ** files can be permanent or temporal. Permanent files can be downloaded only once, Cant be unloaded, and only permanent files can be instant retreated.
+
+  * allows to add files in 2 ways: dynamic with code, load from XML.
+  * allows 2 ways of getting files: instant, send to handling function.
+  * pernament file protection can be removed. (not recomended)
+  * it's possibel to preload single or group of files. (with progress tracking)
+  * it's possible to unload single or group of files.
+  * Suppornted files:
+  ** swf
+  ** jpg, png, gif
+  ** mp3 - [in progress]
+  ** xml, xml stared as object. - [in progress]
+  * allows to use local object as file storadge mechanizm.
+  
+  
+  
+
+
+
+AssetLybrary is simple yet flexible asset manager for any file loading and memory managment needs.
+
+#add file asset difinitions in 3 ways.
+
+-simple with code
+-advanced with code
+-advanced with XML's
+
+
+file have 2 states - pernament, and temporal.
+temporal files can be protected from direct access. (they can be only sent to handling function)
+
+
+#asset file retrieving:
+
+instante : if file is pernament or if it's loaded temporary file and temporary file access protection is off.. it's posible to get asset content directly throght AssetLibrary function (if temporal asset is not loaded while this function is used - you will get an error.).
+preload : send asset to callBack function. File is preloaded in background and sent as parameter to function.
+
+it should be possible to listen to asset lybrary starting and finishing loading, events should have asset
+
+#file load. 
+all pernament files should be loaded on start, if pernament asset is added after initial preload is done - error is thrown.
+temporal files are loaded by demend.
+its possible to use xml to load large amount of xml files.
+
+
+#file unload
+Its possible to unload targeted asset.
+Its possible to unload large ammount of assets defined in xml file.
+Pernament files are protected from unload.
+
+
+###### posseble errors.
+
+- bad url
+- bad xml
+- loading not existing assetId
+- getting not existing lincage object for existing assetId
+- asset is defined twice with diferent signatures. (same signature will give no error.)
+
+
+
+
+
+# misc
+users can define error handling function.
+
+
+
+######## SCENARIOS
+
+
+add assets
+start preload
+add xml asset file...
+try to load xlm... ???
+
+##
+
+add assets
+start normal load
+start pernament preload... ???
+
+
+
+
+
+
+
+
+
+
+- TODO
+
+
+ - handle .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ .
+ 
+   
+  + Functions to clear the cash. (then file gets depricated, it could be removed from local data.)
+ 
+ 
+ + add file cashing to cookies 
+ 
+ + functions to handle sounds as library (lybrary functions...)
+ 
+ + add extra parameters to callback function.
+ 
+ 
+ + test png vs png in swf
+ + test png bitmap vs custom bitmap
+ 
+ + option to disable cashing for loaded files.
+ 
+ + functions to disable lockal cashing.
+ 
+ + simultanious loading, with ammount parameter.
+ 
+ + handle errors is local storadge can not be used.
+ 
+ + Pic assets must be eather dissalawed to reuse, if use is already there, or clone it.
+ 
+ + handle disposing of loaders. use worker to TAKE, RELEASE available loaders by needs. (mind that loader could be reused by assetLoader before dispose triger..)
+ 
+ 
+ @@@@@@@@@@@@@@@@@@@@@@@@@@@
+ in progress :
+ 
+ 
+ 
+ 
+  + add integer of seconds of how often autoUnloadFunction should run, 0 vill disable it.
+  
+  - add number for overoll loading progress to loder event.
+  
+  - add sounds to local storadge.
+  
+  - move sound playback to separated, dedicated class.
+ 
+  - other xml file tag in xml file. (to congregate lot of xml files)
+  
+  - add error codes to errors..
+  
+  - clean, document the code.
+  
+  - generate asDocs, 
+  
+  - write usage documentation.
+  
+  - optimize time for keeping asset in cash implementation for clearer code/better perfarmance.
+   
+  @@@@@@@@@@@@@@@@@@@@@@@@@@@
+future ideas :  
+   
+ 
+ - handle binary?
+ - handle xml
+ - handle xml to object ?
+ - handle json ?
+ - handle json to object ?
+ 
+ 
+ 
+ - research possible data protection in lacal staradge.. if data gets damaged somehow.. (is it needed? file hash.. bit count..)
+ 
