@@ -19,7 +19,7 @@ import flash.system.SecurityPanel;
 import flash.utils.Dictionary;
 
 /**
- * Quick and dirty asset library.
+ * Asset managment utility.
  * @author Raimundas Banevicius
  */
 public class AssetLibrary {
@@ -55,26 +55,26 @@ public class AssetLibrary {
 	
 	static public function loadList(list:Vector.<AssetDefinition>):void {
 		use namespace assetlibrary;
-		if (!isInitted){
+		if (!isInitted) {
 			init();
 		}
-		for (var i:int = 0; i < list.length; i++){
+		for (var i:int = 0; i < list.length; i++) {
 			var item:AssetDefinition = list[i];
-			if (item.isPermanent){
+			if (item.isPermanent) {
 				assetLibraryLoader.loadAsset(item);
 			}
 		}
 	}
 	
 	static public function getLoader():AssetLibraryLoader {
-		if (!isInitted){
+		if (!isInitted) {
 			init();
 		}
 		return assetLibraryLoader;
 	}
 	
 	static public function getIndex():AssetLibraryIndex {
-		if (!isInitted){
+		if (!isInitted) {
 			init();
 		}
 		return assetLibraryIndex;
@@ -89,8 +89,8 @@ public class AssetLibrary {
 	
 	static public function unloadAsset(assetId:String):void {
 		var asset:AssetAbstract = assetLibraryIndex.getAsset(assetId);
-		if (asset){
-			if (asset.isPermanent && assetLibraryLoader.isPermanentsProtected){
+		if (asset) {
+			if (asset.isPermanent && assetLibraryLoader.isPermanentsProtected) {
 				errorHandler(Error("AssetLibrary.unloadAsset can't unload assetId:" + assetId + " because it is permanent asset. If you want to disable this protection: use AssetLibrary.removePermanentAssetProtection();"));
 			}
 			asset.unload();
@@ -104,7 +104,7 @@ public class AssetLibrary {
 	static public function loadGroupAssets(groupId:String):void {
 		DebugMan.info("AssetLibraryIndex.loadGroupAssets > groupId : " + groupId);
 		var assetIds:Vector.<String> = assetLibraryIndex.getGroupAssets(groupId);
-		for (var i:int = 0; i < assetIds.length; i++){
+		for (var i:int = 0; i < assetIds.length; i++) {
 			AssetLibrary.sendAssetToFunction(assetIds[i], handleAssetBlank);
 		}
 	}
@@ -116,7 +116,7 @@ public class AssetLibrary {
 	static public function unloadGroupAssets(groupId:String):void {
 		DebugMan.info("AssetLibraryIndex.unloadGroupAssets > groupId : " + groupId);
 		var assetIds:Vector.<String> = assetLibraryIndex.getGroupAssets(groupId);
-		for (var i:int = 0; i < assetIds.length; i++){
+		for (var i:int = 0; i < assetIds.length; i++) {
 			AssetLibrary.unloadAsset(assetIds[i]);
 		}
 	}
@@ -124,8 +124,8 @@ public class AssetLibrary {
 	static public function unloadAllNonPermanents():void {
 		use namespace assetlibrary;
 		var assetIndex:Dictionary = assetLibraryIndex.assetIndex;
-		for each (var assetDefinition:AssetDefinition in assetIndex){
-			if (!assetDefinition.isPermanent && assetDefinition.isLoaded){
+		for each (var assetDefinition:AssetDefinition in assetIndex) {
+			if (!assetDefinition.isPermanent && assetDefinition.isLoaded) {
 				assetDefinition.asset.unload();
 			}
 		}
@@ -133,7 +133,7 @@ public class AssetLibrary {
 	
 	static public function setRootPath(rootPath:String):void {
 		use namespace assetlibrary;
-		if (!isInitted){
+		if (!isInitted) {
 			init();
 		}
 		assetLibraryLoader.rootPath = rootPath;
@@ -161,7 +161,7 @@ public class AssetLibrary {
 	
 	static public function set localStoradgeEnabled(value:Boolean):void {
 		use namespace assetlibrary;
-		if (!isInitted){
+		if (!isInitted) {
 			init();
 		}
 		assetLibraryLoader._localStoradgeEnabled = value;
@@ -169,7 +169,7 @@ public class AssetLibrary {
 	
 	static public function get localStoradgeEnabled():Boolean {
 		use namespace assetlibrary;
-		if (!isInitted){
+		if (!isInitted) {
 			init();
 		}
 		return assetLibraryLoader._localStoradgeEnabled;
@@ -193,7 +193,7 @@ public class AssetLibrary {
 	
 	static public function get maxSimultaneousLoads():int {
 		use namespace assetlibrary;
-		if (!isInitted){
+		if (!isInitted) {
 			init();
 		}
 		return assetLibraryLoader.maxSimultaneousLoads;
@@ -201,10 +201,10 @@ public class AssetLibrary {
 	
 	static public function set maxSimultaneousLoads(value:int):void {
 		use namespace assetlibrary;
-		if (!isInitted){
+		if (!isInitted) {
 			init();
 		}
-		if (value < 1){
+		if (value < 1) {
 			value = 1;
 		}
 		assetLibraryLoader.maxSimultaneousLoads = value;
@@ -216,15 +216,15 @@ public class AssetLibrary {
 	
 	static public function sendAssetToFunction(assetId:String, callbackFunction:Function, callBackParams:Array = null, assetKeepTime:int = int.MAX_VALUE):void {
 		use namespace assetlibrary;
-		if (!callBackParams){
+		if (!callBackParams) {
 			callBackParams = [];
 		}
-		if (assetLibraryIndex.assetIsLoaded(assetId)){
+		if (assetLibraryIndex.assetIsLoaded(assetId)) {
 			callBackParams.unshift(assetLibraryIndex.getAsset(assetId));
 			callbackFunction.apply(null, callBackParams);
 		} else {
 			var assetDef:AssetDefinition = assetLibraryIndex.getAssetDefinition(assetId);
-			if (assetDef){
+			if (assetDef) {
 				assetDef.callBackFunctions.push(callbackFunction);
 				assetDef.callBackParams.push(callBackParams);
 				assetDef.keepTime = assetKeepTime;
@@ -311,14 +311,14 @@ public class AssetLibrary {
 	/* General function to get SWF asset stuff. */
 	static private function getSWFStuff(assetId:String, lincageId:String, type:String):Object {
 		var asset:SWFAsset = assetLibraryIndex.getAsset(assetId) as SWFAsset;
-		if (!asset){
+		if (!asset) {
 			errorHandler(Error("AssetLibrary can't find SWF asset with assetId :" + assetId));
 		} else {
-			if (restrictAccsessToNonPermanents && !asset.isPermanent){
+			if (restrictAccsessToNonPermanents && !asset.isPermanent) {
 				errorHandler(Error("AssetLibrary can't directly use SWF asset with assetId:" + assetId + ". Only permanent assets can be used that way. Use AssetLibrary.sendAssetToFunction(" + assetId + ", myHandleAssetFunction); instead."));
 			} else {
 				try {
-					switch (type){
+					switch (type) {
 						case "STAGE": 
 							return asset.getStageContent();
 							break;
@@ -341,7 +341,7 @@ public class AssetLibrary {
 							trace("not handled case : ", type);
 							break;
 					}
-				} catch (error:Error){
+				} catch (error:Error) {
 					errorHandler(error);
 				}
 			}
@@ -364,10 +364,10 @@ public class AssetLibrary {
 	 */
 	static public function getPICBitmap(assetId:String):Bitmap {
 		var asset:PICAsset = assetLibraryIndex.getAsset(assetId) as PICAsset;
-		if (!asset){
+		if (!asset) {
 			errorHandler(Error("AssetLibrary can't find PIC asset with assetId :" + assetId));
 		} else {
-			if (restrictAccsessToNonPermanents && !asset.isPermanent){
+			if (restrictAccsessToNonPermanents && !asset.isPermanent) {
 				errorHandler(Error("AssetLibrary can't directly use PIC asset with assetId:" + assetId + ". Only permanent assets can be used that way. Use AssetLibrary.sendAssetToFunction(" + assetId + ", myHandleAssetFunction); instead."));
 			} else {
 				return asset.getBitmap();
@@ -386,10 +386,10 @@ public class AssetLibrary {
 	 */
 	static public function getPICClonedBitmap(assetId:String):Bitmap {
 		var asset:PICAsset = assetLibraryIndex.getAsset(assetId) as PICAsset;
-		if (!asset){
+		if (!asset) {
 			errorHandler(Error("AssetLibrary can't find PIC asset with assetId :" + assetId));
 		} else {
-			if (restrictAccsessToNonPermanents && !asset.isPermanent){
+			if (restrictAccsessToNonPermanents && !asset.isPermanent) {
 				errorHandler(Error("AssetLibrary can't directly use PIC asset with assetId:" + assetId + ". Only permanent assets can be used that way. Use AssetLibrary.sendAssetToFunction(" + assetId + ", myHandleAssetFunction); instead."));
 			} else {
 				return asset.getClonedBitmap();
@@ -409,10 +409,10 @@ public class AssetLibrary {
 	 */
 	static public function getMP3Sound(assetId:String):Sound {
 		var asset:MP3Asset = assetLibraryIndex.getAsset(assetId) as MP3Asset;
-		if (!asset){
+		if (!asset) {
 			errorHandler(Error("AssetLibrary can't find MP3 asset with assetId :" + assetId));
 		} else {
-			if (restrictAccsessToNonPermanents && !asset.isPermanent){
+			if (restrictAccsessToNonPermanents && !asset.isPermanent) {
 				errorHandler(Error("AssetLibrary can't directly use MP3 asset with assetId:" + assetId + ". Only permanent assets can be used that way. Use AssetLibrary.sendAssetToFunction(" + assetId + ", myHandleAssetFunction); instead."));
 			} else {
 				return asset.getSound();
@@ -432,16 +432,15 @@ public class AssetLibrary {
 	 * If you need more controll over how you want to use sound = use getMP3Sound() instead.
 	 * @param	assetId		Id of asset in assetIndex
 	 * @param	startTime	The initial position in milliseconds at which playback should start.
-	 * @param	loops	Defines the number of times a sound loops back to the startTime value
-	 * before the sound channel stops playback.
+	 * @param	loops	Defines the number of times a sound loops back to the startTime value before the sound channel stops playback.
 	 * @param	sndTransform	The initial SoundTransform object assigned to the sound channel.
 	 */
 	static public function playMP3(assetId:String, startTime:Number = 0, loops:int = 0, sndTransform:SoundTransform = null):void {
 		var asset:MP3Asset = assetLibraryIndex.getAsset(assetId) as MP3Asset;
-		if (!asset){
+		if (!asset) {
 			errorHandler(Error("AssetLibrary can't find MP3 asset with assetId :" + assetId));
 		} else {
-			if (restrictAccsessToNonPermanents && !asset.isPermanent){
+			if (restrictAccsessToNonPermanents && !asset.isPermanent) {
 				errorHandler(Error("AssetLibrary can't directly use MP3 asset with assetId:" + assetId + ". Only permanent assets can be used that way. Use AssetLibrary.sendAssetToFunction(" + assetId + ", myHandleAssetFunction); instead."));
 			} else {
 				asset.play(startTime, loops, sndTransform);
@@ -456,10 +455,10 @@ public class AssetLibrary {
 	 */
 	static public function stopMP3Channels(assetId:String):void {
 		var asset:MP3Asset = assetLibraryIndex.getAsset(assetId) as MP3Asset;
-		if (!asset){
+		if (!asset) {
 			errorHandler(Error("AssetLibrary can't find MP3 asset with assetId :" + assetId));
 		} else {
-			if (restrictAccsessToNonPermanents && !asset.isPermanent){
+			if (restrictAccsessToNonPermanents && !asset.isPermanent) {
 				errorHandler(Error("AssetLibrary can't directly use MP3 asset with assetId:" + assetId + ". Only permanent assets can be used that way. Use AssetLibrary.sendAssetToFunction(" + assetId + ", myHandleAssetFunction); instead."));
 			} else {
 				asset.stopAllChannels();
@@ -473,7 +472,7 @@ public class AssetLibrary {
 	 */
 	static public function stopAllMP3Sounds():void {
 		var soundAssets:Vector.<MP3Asset> = assetLibraryIndex.getAllSoundAssets();
-		for (var i:int = 0; i < soundAssets.length; i++){
+		for (var i:int = 0; i < soundAssets.length; i++) {
 			soundAssets[i].stopAllChannels();
 		}
 	}
@@ -487,17 +486,50 @@ public class AssetLibrary {
 	 * If you need more controll over how you want to use sound = use getMP3Sound() instead.
 	 * @param	assetId		Id of asset in assetIndex
 	 * @param	startTime	The initial position in milliseconds at which playback should start.
-	 * @param	loops	Defines the number of times a sound loops back to the startTime value
-	 * before the sound channel stops playback.
+	 * @param	loops	Defines the number of times a sound loops back to the startTime value before the sound channel stops playback.
 	 * @param	sndTransform	The initial SoundTransform object assigned to the sound channel.
 	 */
 	static public function playMP3NowOrNever(assetId:String, startTime:Number = 0, loops:int = 0, sndTransform:SoundTransform = null):void {
 		var asset:MP3Asset = assetLibraryIndex.getAsset(assetId) as MP3Asset;
-		if (!asset){
+		if (!asset) {
 			errorHandler(Error("AssetLibrary can't find MP3 asset with assetId :" + assetId));
 		} else {
-			if (asset.isLoaded){
+			if (asset.isLoaded) {
 				asset.play(startTime, loops, sndTransform);
+			} else {
+				sendAssetToFunction(assetId, handleAssetBlank);
+			}
+		}
+	}
+	
+	/**
+	 * Plays sound located in swf asset, and linked as a sound.
+	 * @param	assetId		Id of asset in assetIndex
+	 * @param	lincageId	object lincage id in swf file library
+	 * @param	startTime	The initial position in milliseconds at which playback should start.
+	 * @param	loops	Defines the number of times a sound loops back to the startTime value before the sound channel stops playback.
+	 * @param	sndTransform	The initial SoundTransform object assigned to the sound channel.
+	 */
+	static public function playSwfSound(assetId:String, lincageId:String, startTime:Number = 0, loops:int = 0, sndTransform:SoundTransform = null):void {
+		var sound:Sound = getSWFSound(assetId, lincageId);
+		sound.play(startTime, loops, sndTransform);
+	}
+	
+	/**
+	 * Plays sound  located in swf asset, and linked as a sound if it is currently loaded. If not - it will not play the sound - but it will loand the asset for next use.
+	 * @param	assetId		Id of asset in assetIndex
+	 * @param	lincageId	object lincage id in swf file library
+	 * @param	startTime	The initial position in milliseconds at which playback should start.
+	 * @param	loops	Defines the number of times a sound loops back to the startTime value before the sound channel stops playback.
+	 * @param	sndTransform	The initial SoundTransform object assigned to the sound channel.
+	 */
+	static public function playSwfSoundNowOrNever(assetId:String, lincageId:String, startTime:Number = 0, loops:int = 0, sndTransform:SoundTransform = null):void {
+		var asset:SWFAsset = assetLibraryIndex.getAsset(assetId) as SWFAsset;
+		if (!asset) {
+			errorHandler(Error("AssetLibrary can't find SWF asset with assetId :" + assetId));
+		} else {
+			if (asset.isLoaded) {
+				playSwfSound(assetId, lincageId, startTime, loops, sndTransform);
 			} else {
 				sendAssetToFunction(assetId, handleAssetBlank);
 			}
