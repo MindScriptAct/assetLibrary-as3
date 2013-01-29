@@ -49,12 +49,9 @@ public class UnloadHelper {
 	
 	// TODO: optimize. Current solution will use 140 ms to handle 100000 size dictionary. It should be ok for most cases. But still its good idea to optivime it.
 	private function handleAutoUnload(event:TimerEvent):void {
-		trace("########### Do stuff...");
 		var currentTyme:int = getTimer();
 		for (var assetId:String in assetsForUnload) {
-			trace(">>",assetId);
 			if (assetsForUnload[assetId] < currentTyme) {
-				trace("...unload it!!!!");
 				AssetLibrary.unloadAsset(assetId);
 				delete assetsForUnload[assetId];
 			}

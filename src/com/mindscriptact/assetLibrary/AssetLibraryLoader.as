@@ -24,6 +24,13 @@ import flash.net.URLRequest;
 import flash.utils.ByteArray;
 import flash.utils.getTimer;
 
+[Event(name="assetXmlLoadingStarted",type="com.mindscriptact.assetLibrary.event.AssetEvent")]
+[Event(name="assetXmlLoaded",type="com.mindscriptact.assetLibrary.event.AssetEvent")]
+[Event(name="assetLoadingStarted",type="com.mindscriptact.assetLibrary.event.AssetEvent")]
+[Event(name="assetLoaded",type="com.mindscriptact.assetLibrary.event.AssetEvent")]
+[Event(name="assetLoadProgress",type="com.mindscriptact.assetLibrary.event.AssetEvent")]
+[Event(name="allPermanentAssetsLoaded",type="com.mindscriptact.assetLibrary.event.AssetEvent")]
+
 /**
  * COMMENT
  * @author Raimundas Banevicius
@@ -62,7 +69,7 @@ public class AssetLibraryLoader extends EventDispatcher {
 	assetlibrary var totalXMLFiles:int = 0;
 	
 	//
-	public function AssetLibraryLoader(assetLibraryIndex:AssetLibraryIndex, localStoradge:AssetLibraryStoradge, errorHandler:Function){
+	public function AssetLibraryLoader(assetLibraryIndex:AssetLibraryIndex, localStoradge:AssetLibraryStoradge, errorHandler:Function) {
 		this.assetLibraryIndex = assetLibraryIndex;
 		this.localStoradge = localStoradge;
 		this.assetLibraryIndex.addEventListener(AssetIndexEvent.START_XML_LOAD, handleXmlLoadStart);
@@ -75,13 +82,13 @@ public class AssetLibraryLoader extends EventDispatcher {
 	}
 	
 	public function preloadPermanents():void {
-		if (!isPreloadingXMLs){
+		if (!isPreloadingXMLs) {
 			var filesForPreloading:Vector.<AssetDefinition> = assetLibraryIndex.getAssetsForPreloading();
 			DebugMan.info("filesForPreloading : " + filesForPreloading);
-			for (var i:int = 0; i < filesForPreloading.length; i++){
+			for (var i:int = 0; i < filesForPreloading.length; i++) {
 				loadAsset(filesForPreloading[i]);
 			}
-			if (filesForPreloading.length > 0){
+			if (filesForPreloading.length > 0) {
 				isPreloading = true;
 			} else {
 				endPermanentsPreload();
@@ -98,11 +105,11 @@ public class AssetLibraryLoader extends EventDispatcher {
 		//
 		this.totalFiles++;
 		
-		if (!_isLoading){
+		if (!_isLoading) {
 			loadNextFile();
 		}
 		
-		if (isPreloadingXMLs){
+		if (isPreloadingXMLs) {
 			dispatchEvent(new AssetEvent(AssetEvent.XML_LOADING_STARTED, item.assetId, this.lodedFiles, this.totalFiles, assetLoadWorker.filesInProgress, assetLoadWorker.getProgress()));
 		} else {
 			dispatchEvent(new AssetEvent(AssetEvent.ASSET_LOADING_STARTED, item.assetId, this.lodedFiles, this.totalFiles, assetLoadWorker.filesInProgress, assetLoadWorker.getProgress()));
@@ -111,30 +118,30 @@ public class AssetLibraryLoader extends EventDispatcher {
 	
 	private function loadNextFile():void {
 		use namespace assetlibrary;
-		if (filesQueue.length){
+		if (filesQueue.length) {
 			_isLoading = true;
 			var loadItem:AssetDefinition = filesQueue.shift();
-			switch (loadItem.type){
+			switch (loadItem.type) {
 				case AssetType.SWF: 
 				case AssetType.JPG: 
 				case AssetType.PNG: 
 				case AssetType.GIF: 
 					var loadNarmaly:Boolean = true;
-					if (_localStoradgeEnabled){
-						if (localStoradge.canUseStore()){
+					if (_localStoradgeEnabled) {
+						if (localStoradge.canUseStore()) {
 							loadNarmaly = false;
 						} else {
 							handleStoradgeFail();
 						}
 					}
-					if (loadNarmaly){
+					if (loadNarmaly) {
 						assetLoadWorker.loadNormally(loadItem);
 					} else {
 						testTime = getTimer();
 						var binary:ByteArray = localStoradge.get(loadItem.assetId, loadItem.filePath);
 						DebugMan.info(" >> binary file retreved !:", (getTimer() - testTime), "data exists:", (binary != null));
 						testTime = getTimer();
-						if (binary){
+						if (binary) {
 							assetLoadWorker.loadStoradgeBytes(loadItem, binary);
 						} else {
 							assetLoadWorker.loadBinary(loadItem);
@@ -152,13 +159,13 @@ public class AssetLibraryLoader extends EventDispatcher {
 					break;
 			}
 			// start simultaneous loads if able.
-			if (filesQueue.length && assetLoadWorker.filesInProgress < maxSimultaneousLoads){
+			if (filesQueue.length && assetLoadWorker.filesInProgress < maxSimultaneousLoads) {
 				loadNextFile();
 			}
 		} else {
-			if (!assetLoadWorker.filesInProgress){
+			if (!assetLoadWorker.filesInProgress) {
 				_isLoading = false;
-				if (isPreloading){
+				if (isPreloading) {
 					isPreloading = false;
 					endPermanentsPreload();
 				}
@@ -169,7 +176,7 @@ public class AssetLibraryLoader extends EventDispatcher {
 	
 	private function endPermanentsPreload():void {
 		use namespace assetlibrary;
-		if (isPermanentsProtected){
+		if (isPermanentsProtected) {
 			assetLibraryIndex.canAddPermanents = false;
 		}
 		dispatchEvent(new AssetEvent(AssetEvent.ALL_PERMANENTS_LOADED, "", this.lodedFiles, this.totalFiles, assetLoadWorker.filesInProgress, assetLoadWorker.getProgress()));
@@ -209,7 +216,7 @@ public class AssetLibraryLoader extends EventDispatcher {
 		DebugMan.info(" @@ binary file loaded:", getTimer() - testTime);
 		testTime = getTimer();
 		//
-		if (!localStoradge.store(asssetDefinition.assetId, asssetDefinition.filePath, data)){
+		if (!localStoradge.store(asssetDefinition.assetId, asssetDefinition.filePath, data)) {
 			errorHandler(Error("Storing assit to local SharedObject failed." + " [assetId:" + asssetDefinition.assetId + "] [assetPath:" + asssetDefinition.filePath + "]"));
 		}
 		DebugMan.info(" << binary file stored:", getTimer() - testTime);
@@ -222,7 +229,7 @@ public class AssetLibraryLoader extends EventDispatcher {
 	assetlibrary function handleLoadedContent(asssetDefinition:AssetDefinition, content:Object, applicationDomain:ApplicationDomain, binaryLoad:Boolean = false):void {
 		use namespace assetlibrary;
 		// benchmarking
-		if (binaryLoad){
+		if (binaryLoad) {
 			DebugMan.info(" ## binary file converted to object:", getTimer() - testTime);
 		} else {
 			DebugMan.info(" $$ normal load", getTimer() - testTime);
@@ -244,13 +251,13 @@ public class AssetLibraryLoader extends EventDispatcher {
 		//
 		asssetDefinition.setAssetData(data);
 		//
-		if (isPreloadingXMLs && asssetDefinition.isAssetXmlFile){
+		if (isPreloadingXMLs && asssetDefinition.isAssetXmlFile) {
 			xmlAssetParser.parseXML(asssetDefinition.asset as XMLAsset);
 			assetLibraryIndex.xmlFilesLoaded++;
 			this.dispatchEvent(new AssetEvent(AssetEvent.XML_LOADED, asssetDefinition.assetId, this.lodedFiles, this.totalFiles, assetLoadWorker.filesInProgress, assetLoadWorker.getProgress()));
-			if (assetLibraryIndex.xmlFilesLoaded == assetLibraryIndex.xmlFilesTotal){
+			if (assetLibraryIndex.xmlFilesLoaded == assetLibraryIndex.xmlFilesTotal) {
 				isPreloadingXMLs = false;
-				if (needsPreloading){
+				if (needsPreloading) {
 					resetFileCounters();
 					needsPreloading = false;
 					preloadPermanents();

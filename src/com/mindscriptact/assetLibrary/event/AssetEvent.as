@@ -9,7 +9,7 @@ public class AssetEvent extends Event {
 	
 	static public const XML_LOADING_STARTED:String = "assetXmlLoadingStarted";
 	static public const XML_LOADED:String = "assetXmlLoaded";
-	static public const ALL_XMLS_LOADED:String = "allXmlsLoaded";
+	//static public const ALL_XMLS_LOADED:String = "allXmlsLoaded";
 	
 	static public const ASSET_LOADING_STARTED:String = "assetLoadingStarted";
 	static public const ASSET_LOADED:String = "assetLoaded";

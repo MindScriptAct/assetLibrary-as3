@@ -320,7 +320,7 @@ public class AssetLoadWorker {
 	
 	private function handleSoundProgress(event:ProgressEvent):void {
 		use namespace assetlibrary;
-		var assetLoader:AssetLoader = event.target as AssetLoader;
+		var assetLoader:SoundLoader = event.target as SoundLoader;
 		assetLibraryLoader.dispatchEvent(new AssetEvent(AssetEvent.PROGRESS, assetLoader.asssetDefinition.assetId, assetLibraryLoader.lodedFiles, assetLibraryLoader.totalFiles, this.filesInProgress, event.bytesLoaded, event.bytesTotal));
 	}
 	
