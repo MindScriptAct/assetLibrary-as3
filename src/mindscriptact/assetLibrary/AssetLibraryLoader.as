@@ -4,12 +4,14 @@ import flash.system.ApplicationDomain;
 import flash.utils.ByteArray;
 import flash.utils.getTimer;
 import mindscriptact.assetLibrary.assets.XMLAsset;
+import mindscriptact.assetLibrary.core.AssetDefinition;
+import mindscriptact.assetLibrary.core.AssetType;
 import mindscriptact.assetLibrary.event.AssetEvent;
 import mindscriptact.assetLibrary.event.AssetIndexEvent;
-import mindscriptact.assetLibrary.loader.AssetLoadWorker;
-import mindscriptact.assetLibrary.namespaces.assetlibrary;
-import mindscriptact.assetLibrary.sharedObject.AssetLibraryStoradge;
-import mindscriptact.assetLibrary.xml.AssetXmlParser;
+import mindscriptact.assetLibrary.core.loader.AssetLoadWorker;
+import mindscriptact.assetLibrary.core.namespaces.assetlibrary;
+import mindscriptact.assetLibrary.core.sharedObject.AssetLibraryStoradge;
+import mindscriptact.assetLibrary.core.xml.AssetXmlParser;
 import mindscriptact.logmaster.DebugMan;
 
 [Event(name="assetXmlLoadingStarted",type="mindscriptact.assetLibrary.event.AssetEvent")]
@@ -39,7 +41,7 @@ public class AssetLibraryLoader extends EventDispatcher {
 	private var isPreloadingXMLs:Boolean = false;
 	private var needsPreloading:Boolean = false;
 	//
-	public var isPermanentsProtected:Boolean = true;
+	public var canUnloadPermanents:Boolean = false;
 	internal var handleStoradgeFail:Function = internalHandleStoradgeFail;
 	assetlibrary var _localStoradgeEnabled:Boolean;
 	//
@@ -164,7 +166,7 @@ public class AssetLibraryLoader extends EventDispatcher {
 	
 	private function endPermanentsPreload():void {
 		use namespace assetlibrary;
-		if (isPermanentsProtected) {
+		if (!canUnloadPermanents) {
 			assetLibraryIndex.canAddPermanents = false;
 		}
 		dispatchEvent(new AssetEvent(AssetEvent.ALL_PERMANENTS_LOADED, "", this.lodedFiles, this.totalFiles, assetLoadWorker.filesInProgress, assetLoadWorker.getProgress()));

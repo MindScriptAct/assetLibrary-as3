@@ -1,4 +1,4 @@
-package mindscriptact.assetLibrary.loader {
+package mindscriptact.assetLibrary.core.loader {
 import flash.events.Event;
 import flash.events.EventDispatcher;
 import flash.events.IOErrorEvent;
@@ -6,8 +6,8 @@ import flash.events.ProgressEvent;
 import flash.events.SecurityErrorEvent;
 import flash.media.Sound;
 import flash.net.URLRequest;
-import mindscriptact.assetLibrary.AssetDefinition;
-import mindscriptact.assetLibrary.namespaces.assetlibrary;
+import mindscriptact.assetLibrary.core.AssetDefinition;
+import mindscriptact.assetLibrary.core.namespaces.assetlibrary;
 
 /**
  * ...
@@ -17,7 +17,7 @@ public class SoundLoader extends EventDispatcher {
 	private var _sound:Sound;
 	assetlibrary var asssetDefinition:AssetDefinition;
 	
-	public function SoundLoader(){
+	public function SoundLoader() {
 	}
 	
 	assetlibrary function get sound():Sound {

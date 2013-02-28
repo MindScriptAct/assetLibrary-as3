@@ -1,4 +1,4 @@
-package mindscriptact.assetLibrary.loader {
+package mindscriptact.assetLibrary.core.loader {
 import flash.display.LoaderInfo;
 import flash.events.Event;
 import flash.events.IOErrorEvent;
@@ -7,10 +7,10 @@ import flash.events.SecurityErrorEvent;
 import flash.net.URLLoaderDataFormat;
 import flash.net.URLRequest;
 import flash.utils.ByteArray;
-import mindscriptact.assetLibrary.AssetDefinition;
+import mindscriptact.assetLibrary.core.AssetDefinition;
 import mindscriptact.assetLibrary.AssetLibraryLoader;
 import mindscriptact.assetLibrary.event.AssetEvent;
-import mindscriptact.assetLibrary.namespaces.assetlibrary;
+import mindscriptact.assetLibrary.core.namespaces.assetlibrary;
 
 /**
  * Handles diferent loader censtruction, pregress and errrors.
@@ -38,7 +38,7 @@ public class AssetLoadWorker {
 	
 	assetlibrary var filesInProgress:int = 0;
 	
-	public function AssetLoadWorker(assetLibraryLoader:AssetLibraryLoader){
+	public function AssetLoadWorker(assetLibraryLoader:AssetLibraryLoader) {
 		this.assetLibraryLoader = assetLibraryLoader;
 	}
 	
@@ -49,7 +49,7 @@ public class AssetLoadWorker {
 	private function getAssetLoader(loadItem:AssetDefinition):AssetLoader {
 		use namespace assetlibrary;
 		var assetLoader:AssetLoader;
-		if (assetLoaders.length){
+		if (assetLoaders.length) {
 			assetLoader = assetLoaders.pop();
 		} else {
 			assetLoader = new AssetLoader();
@@ -69,7 +69,7 @@ public class AssetLoadWorker {
 	private function getBinaryAssetLoader(loadItem:AssetDefinition):AssetLoader {
 		use namespace assetlibrary;
 		var binaryAssetLoader:AssetLoader;
-		if (binaryAssetLoaders.length){
+		if (binaryAssetLoaders.length) {
 			binaryAssetLoader = binaryAssetLoaders.pop();
 		} else {
 			binaryAssetLoader = new AssetLoader();
@@ -90,7 +90,7 @@ public class AssetLoadWorker {
 	private function getAssetUrlLoader(loadItem:AssetDefinition):AssetURLLoader {
 		use namespace assetlibrary;
 		var urlLoader:AssetURLLoader;
-		if (urlLoaders.length){
+		if (urlLoaders.length) {
 			urlLoader = urlLoaders.pop();
 		} else {
 			urlLoader = new AssetURLLoader();
@@ -110,7 +110,7 @@ public class AssetLoadWorker {
 	private function getBinaryUrlLoader(loadItem:AssetDefinition):AssetURLLoader {
 		use namespace assetlibrary;
 		var binaryLoader:AssetURLLoader;
-		if (binaryLoaders.length){
+		if (binaryLoaders.length) {
 			binaryLoader = binaryLoaders.pop();
 		} else {
 			binaryLoader = new AssetURLLoader();
@@ -131,7 +131,7 @@ public class AssetLoadWorker {
 	private function getSoundLoader(loadItem:AssetDefinition):SoundLoader {
 		use namespace assetlibrary;
 		var soundLoader:SoundLoader;
-		if (soundLoaders.length){
+		if (soundLoaders.length) {
 			soundLoader = soundLoaders.pop();
 		} else {
 			soundLoader = new SoundLoader();
@@ -156,8 +156,8 @@ public class AssetLoadWorker {
 	private function disposeAssetLoader(loader:AssetLoader):void {
 		use namespace assetlibrary;
 		loader.dispose();
-		for (var i:int = 0; i < assetLoadersInUse.length; i++){
-			if (assetLoadersInUse[i] == loader){
+		for (var i:int = 0; i < assetLoadersInUse.length; i++) {
+			if (assetLoadersInUse[i] == loader) {
 				assetLoadersInUse.splice(i, 1);
 				break;
 			}
@@ -168,8 +168,8 @@ public class AssetLoadWorker {
 	private function disposeBinaryAssetLoader(loader:AssetLoader):void {
 		use namespace assetlibrary;
 		loader.dispose();
-		for (var i:int = 0; i < assetLoadersInUse.length; i++){
-			if (assetLoadersInUse[i] == loader){
+		for (var i:int = 0; i < assetLoadersInUse.length; i++) {
+			if (assetLoadersInUse[i] == loader) {
 				assetLoadersInUse.splice(i, 1);
 				break;
 			}
@@ -181,8 +181,8 @@ public class AssetLoadWorker {
 	private function disposeAssetUrlLoader(loader:AssetURLLoader):void {
 		use namespace assetlibrary;
 		loader.dispose();
-		for (var i:int = 0; i < urlLoadersInUse.length; i++){
-			if (urlLoadersInUse[i] == loader){
+		for (var i:int = 0; i < urlLoadersInUse.length; i++) {
+			if (urlLoadersInUse[i] == loader) {
 				urlLoadersInUse.splice(i, 1);
 				break;
 			}
@@ -194,8 +194,8 @@ public class AssetLoadWorker {
 	private function disposeBinaryUrlLoader(loader:AssetURLLoader):void {
 		use namespace assetlibrary;
 		loader.dispose();
-		for (var i:int = 0; i < urlLoadersInUse.length; i++){
-			if (urlLoadersInUse[i] == loader){
+		for (var i:int = 0; i < urlLoadersInUse.length; i++) {
+			if (urlLoadersInUse[i] == loader) {
 				urlLoadersInUse.splice(i, 1);
 				break;
 			}
@@ -207,8 +207,8 @@ public class AssetLoadWorker {
 	private function disposeSoundLoader(loader:SoundLoader):void {
 		use namespace assetlibrary;
 		loader.dispose();
-		for (var i:int = 0; i < soundLoadersInUse.length; i++){
-			if (soundLoadersInUse[i] == loader){
+		for (var i:int = 0; i < soundLoadersInUse.length; i++) {
+			if (soundLoadersInUse[i] == loader) {
 				soundLoadersInUse.splice(i, 1);
 				break;
 			}
@@ -329,7 +329,7 @@ public class AssetLoadWorker {
 		filesInProgress--;
 		assetLibraryLoader.handleLoadError(assetLoader.asssetDefinition, event.text);
 		//
-		if (assetLoader.isConverter){
+		if (assetLoader.isConverter) {
 			disposeBinaryAssetLoader(assetLoader);
 		} else {
 			disposeAssetLoader(assetLoader);
@@ -343,7 +343,7 @@ public class AssetLoadWorker {
 		assetLibraryLoader.handleLoadError(assetUrlLoader.asssetDefinition, event.text);
 		//
 		//assetUrlLoader.dispose();
-		if (assetUrlLoader.dataFormat == URLLoaderDataFormat.BINARY){
+		if (assetUrlLoader.dataFormat == URLLoaderDataFormat.BINARY) {
 			disposeBinaryUrlLoader(assetUrlLoader);
 		} else {
 			disposeAssetUrlLoader(assetUrlLoader);
@@ -375,15 +375,15 @@ public class AssetLoadWorker {
 				bytesTotal += loaderInfo.bytesTotal;
 			}
 		}
-		for (i = 0; i < urlLoadersInUse.length; i++){
+		for (i = 0; i < urlLoadersInUse.length; i++) {
 			bytesLoadedSum += urlLoadersInUse[i].bytesLoaded;
 			bytesTotal += urlLoadersInUse[i].bytesTotal;
 		}
-		for (i = 0; i < soundLoadersInUse.length; i++){
+		for (i = 0; i < soundLoadersInUse.length; i++) {
 			bytesLoadedSum += soundLoadersInUse[i].sound.bytesLoaded;
 			bytesTotal += soundLoadersInUse[i].sound.bytesTotal;
 		}
-		if (bytesTotal){
+		if (bytesTotal) {
 			return bytesLoadedSum / bytesTotal;
 		} else {
 			return 0;

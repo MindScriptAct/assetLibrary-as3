@@ -3,7 +3,6 @@ import flash.events.Event;
 import flash.media.Sound;
 import flash.media.SoundChannel;
 import flash.media.SoundTransform;
-import mindscriptact.assetLibrary.AssetAbstract;
 
 /**
  * Wraper for .mp3 sound asset
@@ -12,7 +11,7 @@ import mindscriptact.assetLibrary.AssetAbstract;
 public class MP3Asset extends AssetAbstract {
 	private var soundChannels:Vector.<SoundChannel> = new Vector.<SoundChannel>();
 	
-	public function MP3Asset(assetId:String){
+	public function MP3Asset(assetId:String) {
 		super(assetId);
 	}
 	
@@ -20,9 +19,9 @@ public class MP3Asset extends AssetAbstract {
 	 * Starts standart mp3 asset playBack.
 	 * The only thing you can do if you use this method after its started : use stopAllChannels() to stop all sounds of this asset.
 	 * If you need more controll over how you want to use sound = use getSound() instead.
-	 * @param	startTime	The initial position in milliseconds at which playback should start. 
-	 * @param	loops	Defines the number of times a sound loops back to the startTime value 
-	 * before the sound channel stops playback.  
+	 * @param	startTime	The initial position in milliseconds at which playback should start.
+	 * @param	loops	Defines the number of times a sound loops back to the startTime value
+	 * before the sound channel stops playback.
 	 * @param	sndTransform	The initial SoundTransform object assigned to the sound channel.
 	 */
 	public function play(startTime:Number = 0, loops:int = 0, sndTransform:SoundTransform = null):void {
@@ -41,7 +40,7 @@ public class MP3Asset extends AssetAbstract {
 	}
 	
 	public function stopAllChannels():void {
-		while(soundChannels.length){
+		while (soundChannels.length) {
 			soundChannels.pop().stop();
 		}
 	}

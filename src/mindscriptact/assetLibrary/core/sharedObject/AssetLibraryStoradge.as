@@ -1,4 +1,4 @@
-package mindscriptact.assetLibrary.sharedObject {
+package mindscriptact.assetLibrary.core.sharedObject {
 import flash.net.SharedObject;
 import flash.utils.ByteArray;
 import flash.utils.getTimer;

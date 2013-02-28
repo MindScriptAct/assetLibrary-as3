@@ -1,10 +1,10 @@
-package mindscriptact.assetLibrary.unloadHelper {
+package mindscriptact.assetLibrary.core.unloadHelper {
 import flash.events.TimerEvent;
 import flash.utils.Dictionary;
-import flash.utils.Timer;
 import flash.utils.getTimer;
+import flash.utils.Timer;
 import mindscriptact.assetLibrary.AssetLibrary;
-import mindscriptact.assetLibrary.namespaces.assetlibrary;
+import mindscriptact.assetLibrary.core.namespaces.assetlibrary;
 
 /**
  * ...
@@ -14,12 +14,12 @@ public class UnloadHelper {
 	private var unloadTimer:Timer;
 	private var assetsForUnload:Dictionary;
 	
-	public function UnloadHelper(){
+	public function UnloadHelper() {
 		assetsForUnload = new Dictionary();
 	}
 	
 	assetlibrary function addAssetTime(assetId:String, assetKeepTime:int):void {
-		if (assetKeepTime == int.MAX_VALUE || assetKeepTime <= 0){
+		if (assetKeepTime == int.MAX_VALUE || assetKeepTime <= 0) {
 			if (assetsForUnload[assetId]) {
 				delete assetsForUnload[assetId];
 			}
@@ -29,18 +29,18 @@ public class UnloadHelper {
 	}
 	
 	assetlibrary function setUnloadIntervalTime(autoUnloadIntervalTime:int):void {
-		if (autoUnloadIntervalTime > 0){
-			if (!unloadTimer){
+		if (autoUnloadIntervalTime > 0) {
+			if (!unloadTimer) {
 				unloadTimer = new Timer(autoUnloadIntervalTime * 1000);
 				unloadTimer.addEventListener(TimerEvent.TIMER, handleAutoUnload);
 			} else {
 				unloadTimer.delay = autoUnloadIntervalTime * 1000;
 			}
-			if (!unloadTimer.running){
+			if (!unloadTimer.running) {
 				unloadTimer.start();
 			}
 		} else {
-			if (unloadTimer){
+			if (unloadTimer) {
 				unloadTimer.stop();
 			}
 		}

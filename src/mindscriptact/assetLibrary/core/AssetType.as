@@ -1,4 +1,4 @@
-package mindscriptact.assetLibrary {
+package mindscriptact.assetLibrary.core {
 	
 /**
  * COMMENT

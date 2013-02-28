@@ -4,18 +4,17 @@ import flash.display.MovieClip;
 import flash.display.SimpleButton;
 import flash.display.Sprite;
 import flash.media.Sound;
-import mindscriptact.assetLibrary.AssetAbstract;
 
 /**
  * Wraper for swf asset
  * @author Raimundas Banevicius
  */
 public class SWFAsset extends AssetAbstract {
-
-	public function SWFAsset(assetId:String){
+	
+	public function SWFAsset(assetId:String) {
 		super(assetId);
 	}
-
+	
 	/**
 	 * Gives instance of SWF file stage.
 	 * It can be used only once(this function does not create instance of the stage, it gives stage itself.)
@@ -24,7 +23,7 @@ public class SWFAsset extends AssetAbstract {
 	 */
 	public function getStageContent():MovieClip {
 		if ((content as MovieClip).stage != null) {
-			throw Error("AssetSWF content is already added to display list. You can't use it twice, remove first instance from display list. [assetId:" + assetId+"]");
+			throw Error("AssetSWF content is already added to display list. You can't use it twice, remove first instance from display list. [assetId:" + assetId + "]");
 		}
 		return content as MovieClip;
 	}
@@ -35,12 +34,12 @@ public class SWFAsset extends AssetAbstract {
 	 * @return	instance of MovieClip taken from asset library, using lincageId
 	 */
 	public function getMovieClip(lincageId:String):MovieClip {
-		if (!_isLoaded){
+		if (!_isLoaded) {
 			throw Error("AssetSWF has no loaded content. assetID:" + assetId);
 		}
 		try {
 			var lincageClass:Class = applicationDomain.getDefinition(lincageId) as Class;
-		} catch (error:Error){
+		} catch (error:Error) {
 			throw Error("AssetSWF could not find class with lincageId:" + lincageId + " in assetID:" + assetId);
 		}
 		return new lincageClass();
@@ -52,12 +51,12 @@ public class SWFAsset extends AssetAbstract {
 	 * @return	instance of Sprite taken from asset library, using lincageId
 	 */
 	public function getSprite(lincageId:String):Sprite {
-		if (!_isLoaded){
+		if (!_isLoaded) {
 			throw Error("AssetSWF has no loaded content. assetID:" + assetId);
 		}
 		try {
 			var lincageClass:Class = applicationDomain.getDefinition(lincageId) as Class;
-		} catch (error:Error){
+		} catch (error:Error) {
 			throw Error("AssetSWF could not find class with lincageId:" + lincageId + " in assetID:" + assetId);
 		}
 		return new lincageClass();
@@ -69,12 +68,12 @@ public class SWFAsset extends AssetAbstract {
 	 * @return	instance of SimpleButton taken from asset library, using lincageId
 	 */
 	public function getSimpleButton(lincageId:String):SimpleButton {
-		if (!_isLoaded){
+		if (!_isLoaded) {
 			throw Error("AssetSWF has no loaded content. assetID:" + assetId);
 		}
 		try {
 			var lincageClass:Class = applicationDomain.getDefinition(lincageId) as Class;
-		} catch (error:Error){
+		} catch (error:Error) {
 			throw Error("AssetSWF could not find class with lincageId:" + lincageId + " in assetID:" + assetId);
 		}
 		return new lincageClass();
@@ -86,12 +85,12 @@ public class SWFAsset extends AssetAbstract {
 	 * @return	instance of BitmapData taken from asset library, using lincageId
 	 */
 	public function getBitmapData(lincageId:String):BitmapData {
-		if (!_isLoaded){
+		if (!_isLoaded) {
 			throw Error("AssetSWF has no loaded content. assetID:" + assetId);
 		}
 		try {
 			var lincageClass:Class = applicationDomain.getDefinition(lincageId) as Class;
-		} catch (error:Error){
+		} catch (error:Error) {
 			throw Error("AssetSWF could not find class with lincageId:" + lincageId + " in assetID:" + assetId);
 		}
 		return new lincageClass();
@@ -103,16 +102,16 @@ public class SWFAsset extends AssetAbstract {
 	 * @return	instance of Sound taken from asset library, using lincageId
 	 */
 	public function getSound(lincageId:String):Sound {
-		if (!_isLoaded){
+		if (!_isLoaded) {
 			throw Error("AssetSWF has no loaded content. assetID:" + assetId);
 		}
 		try {
 			var lincageClass:Class = applicationDomain.getDefinition(lincageId) as Class;
-		} catch (error:Error){
+		} catch (error:Error) {
 			throw Error("AssetSWF could not find class with lincageId:" + lincageId + " in assetID:" + assetId);
 		}
 		return new lincageClass();
-	}	
+	}
 
 }
 }

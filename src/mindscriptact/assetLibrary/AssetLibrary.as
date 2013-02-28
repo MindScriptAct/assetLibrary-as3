@@ -9,12 +9,14 @@ import flash.media.SoundTransform;
 import flash.system.Security;
 import flash.system.SecurityPanel;
 import flash.utils.Dictionary;
+import mindscriptact.assetLibrary.assets.AssetAbstract;
 import mindscriptact.assetLibrary.assets.MP3Asset;
 import mindscriptact.assetLibrary.assets.PICAsset;
 import mindscriptact.assetLibrary.assets.SWFAsset;
-import mindscriptact.assetLibrary.namespaces.assetlibrary;
-import mindscriptact.assetLibrary.sharedObject.AssetLibraryStoradge;
-import mindscriptact.assetLibrary.unloadHelper.UnloadHelper;
+import mindscriptact.assetLibrary.core.AssetDefinition;
+import mindscriptact.assetLibrary.core.namespaces.assetlibrary;
+import mindscriptact.assetLibrary.core.sharedObject.AssetLibraryStoradge;
+import mindscriptact.assetLibrary.core.unloadHelper.UnloadHelper;
 import mindscriptact.logmaster.DebugMan;
 
 /**
@@ -23,8 +25,8 @@ import mindscriptact.logmaster.DebugMan;
  */
 public class AssetLibrary {
 	
-	/** If set to true - trying to get not permanent asset dirrectly and unloading permanent assets will throw an error. */
-	static public var restrictAccsessToNonPermanents:Boolean = true;
+	/** If set to true - trying to get not permanent asset dirrectly will throw an error. */
+	static private var canGetNonPermanentsDirectly:Boolean = true;
 	
 	static private var errorHandler:Function = throwError;
 	
@@ -36,10 +38,10 @@ public class AssetLibrary {
 	
 	static private var unloadHelper:UnloadHelper = new UnloadHelper();
 	
-	/** Time interval for asset library to try and unload not needed assets in secconds. 
+	/** Time interval for asset library to try and unload not needed assets in secconds.
 	 * By default it is 0 - autounload is disabled.
 	 * @prdivate */
-	static private var _autoUnloadIntervalTime:int = 0;	
+	static private var _autoUnloadIntervalTime:int = 0;
 	
 	//----------------------------------
 	//     System
@@ -63,17 +65,19 @@ public class AssetLibrary {
 		return assetLibraryIndex;
 	}
 	
-	////////////
 	
+	/**
+	 * Removes permament asset protection. It will be possible to add permanents after initial load and 
+	 */
 	static public function removePermanentAssetProtection():void {
 		assetLibraryIndex.canAddPermanents = true;
-		assetLibraryLoader.isPermanentsProtected = false;
+		assetLibraryLoader.canUnloadPermanents = true;
 	}
 	
 	static public function unloadAsset(assetId:String):void {
 		var asset:AssetAbstract = assetLibraryIndex.getAsset(assetId);
 		if (asset) {
-			if (asset.isPermanent && assetLibraryLoader.isPermanentsProtected) {
+			if (asset.isPermanent && !assetLibraryLoader.canUnloadPermanents) {
 				errorHandler(Error("AssetLibrary.unloadAsset can't unload assetId:" + assetId + " because it is permanent asset. If you want to disable this protection: use AssetLibrary.removePermanentAssetProtection();"));
 			}
 			asset.unload();
@@ -282,7 +286,7 @@ public class AssetLibrary {
 		if (!asset) {
 			errorHandler(Error("AssetLibrary can't find SWF asset with assetId :" + assetId));
 		} else {
-			if (restrictAccsessToNonPermanents && !asset.isPermanent) {
+			if (canGetNonPermanentsDirectly && !asset.isPermanent) {
 				errorHandler(Error("AssetLibrary can't directly use SWF asset with assetId:" + assetId + ". Only permanent assets can be used that way. Use AssetLibrary.sendAssetToFunction(" + assetId + ", myHandleAssetFunction); instead."));
 			} else {
 				try {
@@ -335,7 +339,7 @@ public class AssetLibrary {
 		if (!asset) {
 			errorHandler(Error("AssetLibrary can't find PIC asset with assetId :" + assetId));
 		} else {
-			if (restrictAccsessToNonPermanents && !asset.isPermanent) {
+			if (canGetNonPermanentsDirectly && !asset.isPermanent) {
 				errorHandler(Error("AssetLibrary can't directly use PIC asset with assetId:" + assetId + ". Only permanent assets can be used that way. Use AssetLibrary.sendAssetToFunction(" + assetId + ", myHandleAssetFunction); instead."));
 			} else {
 				return asset.getBitmap();
@@ -357,7 +361,7 @@ public class AssetLibrary {
 		if (!asset) {
 			errorHandler(Error("AssetLibrary can't find PIC asset with assetId :" + assetId));
 		} else {
-			if (restrictAccsessToNonPermanents && !asset.isPermanent) {
+			if (canGetNonPermanentsDirectly && !asset.isPermanent) {
 				errorHandler(Error("AssetLibrary can't directly use PIC asset with assetId:" + assetId + ". Only permanent assets can be used that way. Use AssetLibrary.sendAssetToFunction(" + assetId + ", myHandleAssetFunction); instead."));
 			} else {
 				return asset.getClonedBitmap();
@@ -380,7 +384,7 @@ public class AssetLibrary {
 		if (!asset) {
 			errorHandler(Error("AssetLibrary can't find MP3 asset with assetId :" + assetId));
 		} else {
-			if (restrictAccsessToNonPermanents && !asset.isPermanent) {
+			if (canGetNonPermanentsDirectly && !asset.isPermanent) {
 				errorHandler(Error("AssetLibrary can't directly use MP3 asset with assetId:" + assetId + ". Only permanent assets can be used that way. Use AssetLibrary.sendAssetToFunction(" + assetId + ", myHandleAssetFunction); instead."));
 			} else {
 				return asset.getSound();
@@ -408,7 +412,7 @@ public class AssetLibrary {
 		if (!asset) {
 			errorHandler(Error("AssetLibrary can't find MP3 asset with assetId :" + assetId));
 		} else {
-			if (restrictAccsessToNonPermanents && !asset.isPermanent) {
+			if (canGetNonPermanentsDirectly && !asset.isPermanent) {
 				errorHandler(Error("AssetLibrary can't directly use MP3 asset with assetId:" + assetId + ". Only permanent assets can be used that way. Use AssetLibrary.sendAssetToFunction(" + assetId + ", myHandleAssetFunction); instead."));
 			} else {
 				asset.play(startTime, loops, sndTransform);
@@ -426,7 +430,7 @@ public class AssetLibrary {
 		if (!asset) {
 			errorHandler(Error("AssetLibrary can't find MP3 asset with assetId :" + assetId));
 		} else {
-			if (restrictAccsessToNonPermanents && !asset.isPermanent) {
+			if (canGetNonPermanentsDirectly && !asset.isPermanent) {
 				errorHandler(Error("AssetLibrary can't directly use MP3 asset with assetId:" + assetId + ". Only permanent assets can be used that way. Use AssetLibrary.sendAssetToFunction(" + assetId + ", myHandleAssetFunction); instead."));
 			} else {
 				asset.stopAllChannels();

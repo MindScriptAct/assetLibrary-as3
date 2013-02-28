@@ -30,7 +30,7 @@ public class AssetEvent extends Event {
 	/** current progress of loading progress. Number from 0 to 1 representing percentages. */
 	private var currentProgress:Number = 0;
 	
-	public function AssetEvent(type:String, assetId:String, filesLoaded:int, filesQueued:int, filesInProgress:int, progress:Number, bytesLoaded:int = 0, bytesTotal:int = 0){
+	public function AssetEvent(type:String, assetId:String, filesLoaded:int, filesQueued:int, filesInProgress:int, progress:Number, bytesLoaded:int = 0, bytesTotal:int = 0) {
 		super(type);
 		this.assetId = assetId;
 		//
@@ -42,7 +42,7 @@ public class AssetEvent extends Event {
 		this.bytesLoaded = bytesLoaded;
 		this.bytesTotal = bytesTotal;
 		//
-		if (filesQueued){
+		if (filesQueued) {
 			var oneFilePart:Number = 1 / filesQueued;
 			currentProgress = (filesLoaded * oneFilePart) + ((filesInProgress * oneFilePart) * progress);
 		}

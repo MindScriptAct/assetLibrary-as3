@@ -1,6 +1,7 @@
-package mindscriptact.assetLibrary {
+package mindscriptact.assetLibrary.core {
 import flash.system.ApplicationDomain;
-import mindscriptact.assetLibrary.namespaces.assetlibrary;
+import mindscriptact.assetLibrary.assets.AssetAbstract;
+import mindscriptact.assetLibrary.core.namespaces.assetlibrary;
 
 /**
  * COMMENT
@@ -24,7 +25,7 @@ public class AssetDefinition {
 	//
 	private var _keepTime:int = int.MAX_VALUE;
 	
-	public function AssetDefinition(assetId:String, filePath:String, type:String, permanent:Boolean = false){
+	public function AssetDefinition(assetId:String, filePath:String, type:String, permanent:Boolean = false) {
 		use namespace assetlibrary;
 		this.assetId = assetId;
 		//
@@ -40,7 +41,7 @@ public class AssetDefinition {
 		}
 		_keepTime = int.MAX_VALUE;
 		//
-		while (callBackFunctions.length){
+		while (callBackFunctions.length) {
 			var params:Array = callBackParams.pop();
 			params.unshift(asset);
 			callBackFunctions.pop().apply(null, params);
@@ -54,7 +55,7 @@ public class AssetDefinition {
 		}
 		_keepTime = int.MAX_VALUE;
 		//
-		while (callBackFunctions.length){
+		while (callBackFunctions.length) {
 			var params:Array = callBackParams.pop();
 			params.unshift(asset);
 			callBackFunctions.pop().apply(null, params);
@@ -74,7 +75,7 @@ public class AssetDefinition {
 	
 	assetlibrary function get isLoaded():Boolean {
 		use namespace assetlibrary;
-		if (asset){
+		if (asset) {
 			return asset.isLoaded;
 		} else {
 			return false;
@@ -84,7 +85,7 @@ public class AssetDefinition {
 	assetlibrary function set keepTime(value:int):void {
 		if (_keepTime == int.MAX_VALUE) {
 			_keepTime = value;
-		} else if (_keepTime < value){
+		} else if (_keepTime < value) {
 			_keepTime = value;
 		}
 	}

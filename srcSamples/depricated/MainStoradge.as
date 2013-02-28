@@ -9,7 +9,7 @@ import mindscriptact.assetLibrary.AssetLibraryLoader;
 import mindscriptact.assetLibrary.assets.PICAsset;
 import mindscriptact.assetLibrary.assets.SWFAsset;
 import mindscriptact.assetLibrary.event.AssetEvent;
-import mindscriptact.assetLibrary.sharedObject.AssetLibraryStoradge;
+import mindscriptact.assetLibrary.core.sharedObject.AssetLibraryStoradge;
 import mindscriptact.logmaster.DebugMan;
 
 /**

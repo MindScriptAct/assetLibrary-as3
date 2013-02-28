@@ -1,4 +1,4 @@
-package assetLibraryTest {
+package depricated {
 import flash.display.Sprite;
 import flash.events.Event;
 import flash.events.MouseEvent;

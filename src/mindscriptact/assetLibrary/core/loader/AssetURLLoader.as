@@ -1,7 +1,7 @@
-package mindscriptact.assetLibrary.loader {
+package mindscriptact.assetLibrary.core.loader {
 import flash.net.URLLoader;
-import mindscriptact.assetLibrary.AssetDefinition;
-import mindscriptact.assetLibrary.namespaces.assetlibrary;
+import mindscriptact.assetLibrary.core.AssetDefinition;
+import mindscriptact.assetLibrary.core.namespaces.assetlibrary;
 
 /**
  * COMMENT
@@ -10,7 +10,7 @@ import mindscriptact.assetLibrary.namespaces.assetlibrary;
 public class AssetURLLoader extends URLLoader {
 	assetlibrary var asssetDefinition:AssetDefinition;
 	
-	public function AssetURLLoader(){
+	public function AssetURLLoader() {
 		super();
 	}
 	

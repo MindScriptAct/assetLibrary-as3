@@ -1,7 +1,6 @@
 package mindscriptact.assetLibrary.assets {
 import flash.display.Bitmap;
 import flash.display.BitmapData;
-import mindscriptact.assetLibrary.AssetAbstract;
 
 /**
  * Wraper for picture assets: jpg, png, gif
@@ -9,7 +8,7 @@ import mindscriptact.assetLibrary.AssetAbstract;
  */
 public class PICAsset extends AssetAbstract {
 	
-	public function PICAsset(assetId:String){
+	public function PICAsset(assetId:String) {
 		super(assetId);
 	}
 	

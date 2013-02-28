@@ -1,5 +1,4 @@
 package mindscriptact.assetLibrary.assets {
-import mindscriptact.assetLibrary.AssetAbstract;
 
 /**
  * Wraper for XML asset

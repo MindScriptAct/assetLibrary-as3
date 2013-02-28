@@ -1,7 +1,7 @@
-package mindscriptact.assetLibrary.loader {
+package mindscriptact.assetLibrary.core.loader {
 import flash.display.Loader;
-import mindscriptact.assetLibrary.AssetDefinition;
-import mindscriptact.assetLibrary.namespaces.assetlibrary;
+import mindscriptact.assetLibrary.core.AssetDefinition;
+import mindscriptact.assetLibrary.core.namespaces.assetlibrary;
 
 /**
  * COMMENT
@@ -12,7 +12,7 @@ public class AssetLoader extends Loader {
 	
 	assetlibrary var isConverter:Boolean = false;
 	
-	public function AssetLoader(){
+	public function AssetLoader() {
 		super();
 	}
 	

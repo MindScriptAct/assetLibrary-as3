@@ -7,7 +7,7 @@ package depricated {
 	import flash.net.URLLoaderDataFormat;
 	import flash.utils.ByteArray;
 	import flash.utils.getTimer;
-	import mindscriptact.assetLibrary.sharedObject.AssetLibraryStoradge;
+	import mindscriptact.assetLibrary.core.sharedObject.AssetLibraryStoradge;
 	import mindscriptact.logmaster.DebugMan;
 
 /**
