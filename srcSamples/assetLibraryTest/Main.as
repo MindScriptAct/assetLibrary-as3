@@ -9,6 +9,7 @@ import mindscriptact.assetLibrary.AssetLibraryLoader;
 import mindscriptact.assetLibrary.assets.PICAsset;
 import mindscriptact.assetLibrary.assets.SWFAsset;
 import mindscriptact.assetLibrary.event.AssetEvent;
+import mindscriptact.assetLibrary.event.AssetLoaderEvent;
 import mindscriptact.logmaster.DebugMan;
 
 /**
@@ -40,8 +41,8 @@ public class Main extends Sprite {
 		//assetIndex.addAsset(asset);
 
 		//
-		assetLoader.addEventListener(AssetEvent.XML_LOADING_STARTED, handleXMLLoadStartted);
-		assetLoader.addEventListener(AssetEvent.XML_LOADED, handleXMLLoadFinished);
+		assetLoader.addEventListener(AssetLoaderEvent.XML_LOADING_STARTED, handleXMLLoadStartted);
+		assetLoader.addEventListener(AssetLoaderEvent.XML_LOADED, handleXMLLoadFinished);
 		//assetLoader.addEventListener(AssetEvent.ALL_XMLS_LOADED, handleXmlsLoadedFinished);
 		//
 		assetLoader.addEventListener(AssetEvent.ASSET_LOADING_STARTED, handleLoadStarted);
@@ -49,7 +50,7 @@ public class Main extends Sprite {
 		//
 		assetLoader.addEventListener(AssetEvent.PROGRESS, handleLoadingProgress);
 
-		assetLoader.addEventListener(AssetEvent.ALL_PERMANENTS_LOADED, handleAllLoadFinished);
+		assetLoader.addEventListener(AssetLoaderEvent.ALL_PERMANENTS_LOADED, handleAllLoadFinished);
 
 		/*
 		// root path test
@@ -118,11 +119,11 @@ public class Main extends Sprite {
 
 
 
-	private function handleXMLLoadStartted(event:AssetEvent):void {
+	private function handleXMLLoadStartted(event:AssetLoaderEvent):void {
 		DebugMan.info("Main.handleXMLLoadStartted > event : " + event);
 	}
 
-	private function handleXMLLoadFinished(event:AssetEvent):void {
+	private function handleXMLLoadFinished(event:AssetLoaderEvent):void {
 		DebugMan.info("Main.handleXMLLoadFinished > event : " + event);
 	}
 
@@ -140,7 +141,7 @@ public class Main extends Sprite {
 
 
 
-	private function handleAllLoadFinished(event:AssetEvent):void {
+	private function handleAllLoadFinished(event:AssetLoaderEvent):void {
 		////DebugMan.info("Main.handleAllLoadFinished > event : " + event);
 		//
 		AssetLibrary.sendAssetToFunction("test1", handleTest1);

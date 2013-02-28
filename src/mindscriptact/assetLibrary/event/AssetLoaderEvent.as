@@ -5,16 +5,16 @@ import flash.events.Event;
  * COMMENT
  * @author Raimundas Banevicius
  */
-public class AssetEvent extends Event {
+public class AssetLoaderEvent extends Event {
 	
-	/**  asset load start event */
-	static public const ASSET_LOADING_STARTED:String = "assetLoadingStarted";
+	/** xml with file definitiens loading start event */
+	static public const XML_LOADING_STARTED:String = "assetXmlLoadingStarted";
 	
-	/**  asset load end event */
-	static public const ASSET_LOADED:String = "assetLoaded";
+	/** xml with file definitiens loading end event */
+	static public const XML_LOADED:String = "assetXmlLoaded";
 	
-	/** progress of asset loading */
-	static public const PROGRESS:String = "assetLoadProgress";
+	/** all permanents loaded */
+	static public const ALL_PERMANENTS_LOADED:String = "allPermanentAssetsLoaded";
 	
 	
 	/** Asset id if event is asset related. */
@@ -23,23 +23,17 @@ public class AssetEvent extends Event {
 	public var filesLoaded:int = 0;
 	public var filesQueued:int = 0;
 	public var filesInProgress:int = 0;
-	//
-	public var bytesLoaded:int = 0;
-	public var bytesTotal:int = 0;
 	
 	/** current progress of loading progress. Number from 0 to 1 representing percentages. */
 	private var currentProgress:Number = 0;
 	
-	public function AssetEvent(type:String, assetId:String, filesLoaded:int, filesQueued:int, filesInProgress:int, progress:Number, bytesLoaded:int = 0, bytesTotal:int = 0) {
+	public function AssetLoaderEvent(type:String, assetId:String, filesLoaded:int, filesQueued:int, filesInProgress:int, progress:Number) {
 		super(type);
 		this.assetId = assetId;
 		//
 		this.filesLoaded = filesLoaded;
 		this.filesQueued = filesQueued;
 		this.filesInProgress = filesInProgress;
-		//
-		this.bytesLoaded = bytesLoaded;
-		this.bytesTotal = bytesTotal;
 		//
 		if (filesQueued) {
 			var oneFilePart:Number = 1 / filesQueued;
@@ -48,14 +42,12 @@ public class AssetEvent extends Event {
 	}
 	
 	override public function toString():String {
-		return "[AssetEvent" //
+		return "[AssetLoaderEvent" //
 			+ " type=" + type //
 			+ " assetId=" + assetId //
 			+ " filesLoaded=" + filesLoaded //
 			+ " filesQueued=" + filesQueued //
 			+ " filesInProgress=" + filesInProgress //
-			+ " bytesLoaded=" + bytesLoaded //
-			+ " bytesTotal=" + bytesTotal //
 			+ "]";
 	}
 }

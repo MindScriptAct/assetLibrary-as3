@@ -7,19 +7,20 @@ import mindscriptact.assetLibrary.assets.XMLAsset;
 import mindscriptact.assetLibrary.core.AssetDefinition;
 import mindscriptact.assetLibrary.core.AssetType;
 import mindscriptact.assetLibrary.event.AssetEvent;
-import mindscriptact.assetLibrary.event.AssetIndexEvent;
 import mindscriptact.assetLibrary.core.loader.AssetLoadWorker;
 import mindscriptact.assetLibrary.core.namespaces.assetlibrary;
 import mindscriptact.assetLibrary.core.sharedObject.AssetLibraryStoradge;
 import mindscriptact.assetLibrary.core.xml.AssetXmlParser;
+import mindscriptact.assetLibrary.event.AssetLoaderEvent;
 import mindscriptact.logmaster.DebugMan;
 
-[Event(name="assetXmlLoadingStarted",type="mindscriptact.assetLibrary.event.AssetEvent")]
-[Event(name="assetXmlLoaded",type="mindscriptact.assetLibrary.event.AssetEvent")]
+[Event(name="assetXmlLoadingStarted",type="mindscriptact.assetLibrary.event.AssetLoaderEvent")]
+[Event(name="assetXmlLoaded",type="mindscriptact.assetLibrary.event.AssetLoaderEvent")]
+[Event(name="allPermanentAssetsLoaded",type="mindscriptact.assetLibrary.event.AssetLoaderEvent")]
+
 [Event(name="assetLoadingStarted",type="mindscriptact.assetLibrary.event.AssetEvent")]
 [Event(name="assetLoaded",type="mindscriptact.assetLibrary.event.AssetEvent")]
 [Event(name="assetLoadProgress",type="mindscriptact.assetLibrary.event.AssetEvent")]
-[Event(name="allPermanentAssetsLoaded",type="mindscriptact.assetLibrary.event.AssetEvent")]
 
 /**
  * COMMENT
@@ -62,7 +63,7 @@ public class AssetLibraryLoader extends EventDispatcher {
 	public function AssetLibraryLoader(assetLibraryIndex:AssetLibraryIndex, localStoradge:AssetLibraryStoradge, errorHandler:Function) {
 		this.assetLibraryIndex = assetLibraryIndex;
 		this.localStoradge = localStoradge;
-		this.assetLibraryIndex.addEventListener(AssetIndexEvent.START_XML_LOAD, handleXmlLoadStart);
+		this.assetLibraryIndex.libraryLaderLoadXmlFunction = handleXmlLoadStart;
 		//
 		this.errorHandler = errorHandler;
 		//
@@ -100,7 +101,7 @@ public class AssetLibraryLoader extends EventDispatcher {
 		}
 		
 		if (isPreloadingXMLs) {
-			dispatchEvent(new AssetEvent(AssetEvent.XML_LOADING_STARTED, item.assetId, this.lodedFiles, this.totalFiles, assetLoadWorker.filesInProgress, assetLoadWorker.getProgress()));
+			dispatchEvent(new AssetLoaderEvent(AssetLoaderEvent.XML_LOADING_STARTED, item.assetId, this.lodedFiles, this.totalFiles, assetLoadWorker.filesInProgress, assetLoadWorker.getProgress()));
 		} else {
 			dispatchEvent(new AssetEvent(AssetEvent.ASSET_LOADING_STARTED, item.assetId, this.lodedFiles, this.totalFiles, assetLoadWorker.filesInProgress, assetLoadWorker.getProgress()));
 		}
@@ -169,7 +170,7 @@ public class AssetLibraryLoader extends EventDispatcher {
 		if (!canUnloadPermanents) {
 			assetLibraryIndex.canAddPermanents = false;
 		}
-		dispatchEvent(new AssetEvent(AssetEvent.ALL_PERMANENTS_LOADED, "", this.lodedFiles, this.totalFiles, assetLoadWorker.filesInProgress, assetLoadWorker.getProgress()));
+		dispatchEvent(new AssetLoaderEvent(AssetLoaderEvent.ALL_PERMANENTS_LOADED, "", this.lodedFiles, this.totalFiles, assetLoadWorker.filesInProgress, assetLoadWorker.getProgress()));
 	}
 	
 	private function resetFileCounters():void {
@@ -187,10 +188,10 @@ public class AssetLibraryLoader extends EventDispatcher {
 		return _localStoradgeEnabled;
 	}
 	
-	private function handleXmlLoadStart(event:AssetIndexEvent):void {
+	private function handleXmlLoadStart(assetDefinition:AssetDefinition):void {
 		//DebugMan.info("AssetLibraryLoader.handleXmlLoadStart > event : " + event.assetDefinition.assetId);
 		isPreloadingXMLs = true;
-		loadAsset(event.assetDefinition);
+		loadAsset(assetDefinition);
 	}
 	
 	private function internalHandleStoradgeFail():void {
@@ -244,7 +245,7 @@ public class AssetLibraryLoader extends EventDispatcher {
 		if (isPreloadingXMLs && asssetDefinition.isAssetXmlFile) {
 			xmlAssetParser.parseXML(asssetDefinition.asset as XMLAsset);
 			assetLibraryIndex.xmlFilesLoaded++;
-			this.dispatchEvent(new AssetEvent(AssetEvent.XML_LOADED, asssetDefinition.assetId, this.lodedFiles, this.totalFiles, assetLoadWorker.filesInProgress, assetLoadWorker.getProgress()));
+			this.dispatchEvent(new AssetLoaderEvent(AssetLoaderEvent.XML_LOADED, asssetDefinition.assetId, this.lodedFiles, this.totalFiles, assetLoadWorker.filesInProgress, assetLoadWorker.getProgress()));
 			if (assetLibraryIndex.xmlFilesLoaded == assetLibraryIndex.xmlFilesTotal) {
 				isPreloadingXMLs = false;
 				if (needsPreloading) {

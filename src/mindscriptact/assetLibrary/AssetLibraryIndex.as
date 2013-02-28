@@ -8,7 +8,6 @@ import mindscriptact.assetLibrary.assets.SWFAsset;
 import mindscriptact.assetLibrary.assets.XMLAsset;
 import mindscriptact.assetLibrary.core.AssetDefinition;
 import mindscriptact.assetLibrary.core.AssetType;
-import mindscriptact.assetLibrary.event.AssetIndexEvent;
 import mindscriptact.assetLibrary.core.namespaces.assetlibrary;
 import mindscriptact.assetLibrary.core.xml.XMLDefinition;
 import mindscriptact.logmaster.DebugMan;
@@ -30,6 +29,7 @@ public class AssetLibraryIndex extends EventDispatcher {
 	internal var xmlFilesLoaded:int = 0;
 	//
 	internal var canAddPermanents:Boolean = true;
+	internal var libraryLaderLoadXmlFunction:Function;
 	
 	public function AssetLibraryIndex(errorHandler:Function) {
 		this.errorHandler = errorHandler;
@@ -117,7 +117,7 @@ public class AssetLibraryIndex extends EventDispatcher {
 		if (!xmlFileDefinitions[assetId]) {
 			xmlFileDefinitions[assetId] = new XMLDefinition(assetId);
 			xmlFilesTotal++;
-			dispatchEvent(new AssetIndexEvent(AssetIndexEvent.START_XML_LOAD, _assetIndex[assetId]));
+			libraryLaderLoadXmlFunction(_assetIndex[assetId]);
 		} else {
 			if ((_assetIndex[assetId] as AssetDefinition).filePath != xmlPath) {
 				errorHandler(Error("AssetLibraryIndex.addAssetsFromXML failed. Different XML definition with assetId:" + assetId + " exists."));
