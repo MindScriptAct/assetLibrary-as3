@@ -1,7 +1,7 @@
 package mindscriptact.assetLibrary.core {
-	
+
 /**
- * COMMENT
+ * Asset tyspes.
  * @author Raimundas Banevicius
  */
 public class AssetType {

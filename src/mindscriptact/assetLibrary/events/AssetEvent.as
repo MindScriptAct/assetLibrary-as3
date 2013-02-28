@@ -1,8 +1,8 @@
-package mindscriptact.assetLibrary.event {
+package mindscriptact.assetLibrary.events {
 import flash.events.Event;
 
 /**
- * COMMENT
+ * Asset loading event.
  * @author Raimundas Banevicius
  */
 public class AssetEvent extends Event {
@@ -16,7 +16,6 @@ public class AssetEvent extends Event {
 	/** progress of asset loading */
 	static public const PROGRESS:String = "assetLoadProgress";
 	
-	
 	/** Asset id if event is asset related. */
 	public var assetId:String;
 	//
@@ -28,7 +27,7 @@ public class AssetEvent extends Event {
 	public var bytesTotal:int = 0;
 	
 	/** current progress of loading progress. Number from 0 to 1 representing percentages. */
-	private var currentProgress:Number = 0;
+	public var currentProgress:Number = 0;
 	
 	public function AssetEvent(type:String, assetId:String, filesLoaded:int, filesQueued:int, filesInProgress:int, progress:Number, bytesLoaded:int = 0, bytesTotal:int = 0) {
 		super(type);

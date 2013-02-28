@@ -4,10 +4,12 @@ import mindscriptact.assetLibrary.core.AssetDefinition;
 import mindscriptact.assetLibrary.core.namespaces.assetlibrary;
 
 /**
- * COMMENT
+ * Asset URL loader
+ * @private
  * @author Raimundas Banevicius
  */
 public class AssetURLLoader extends URLLoader {
+	
 	assetlibrary var asssetDefinition:AssetDefinition;
 	
 	public function AssetURLLoader() {

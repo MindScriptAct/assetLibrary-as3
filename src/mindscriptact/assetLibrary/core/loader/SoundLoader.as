@@ -10,11 +10,14 @@ import mindscriptact.assetLibrary.core.AssetDefinition;
 import mindscriptact.assetLibrary.core.namespaces.assetlibrary;
 
 /**
- * ...
- * @author ...
+ * Sound loader
+ * @private
+ * @author Raimundas Banevicius
  */
 public class SoundLoader extends EventDispatcher {
+	
 	private var _sound:Sound;
+	
 	assetlibrary var asssetDefinition:AssetDefinition;
 	
 	public function SoundLoader() {

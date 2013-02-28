@@ -2,16 +2,17 @@ package mindscriptact.assetLibrary.core.sharedObject {
 import flash.net.SharedObject;
 import flash.utils.ByteArray;
 import flash.utils.getTimer;
-import mindscriptact.logmaster.DebugMan;
+
+//import mindscriptact.logmaster.DebugMan;
 
 /**
- * ...
+ * Local shared object storadge manager.
  * @author Raimundas Banevicius (raima156@yahoo.com)
  */
 public class AssetLibraryStoradge {
 	
 	public function AssetLibraryStoradge() {
-		trace("AssetLibraryStoradge.AssetLibraryStoradge");
+		//trace("AssetLibraryStoradge.AssetLibraryStoradge");
 	}
 	
 	public function canUseStore():Boolean {
@@ -26,13 +27,15 @@ public class AssetLibraryStoradge {
 		} catch (error:Error) {
 			//DebugMan.info("Error...Could not write SharedObject to disk, flushStatus:", flushStatus);
 		}
-		DebugMan.info(" !! canUseStoreCheck :" + (getTimer() - timeCheck));
+		//DebugMan.info(" !! canUseStoreCheck :" + (getTimer() - timeCheck));
 		return retVal;
 	}
 	
 	public function checkVersion(id:String, path:String):Boolean {
 		var retVal:Boolean = false;
 //		var mySharedObjectIndex:SharedObject = SharedObject.getLocal("__$$_Asset_Lybrary_Index");
+		
+		// TODO : implement
 		
 		return retVal;
 	}

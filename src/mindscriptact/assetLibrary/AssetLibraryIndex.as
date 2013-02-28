@@ -10,7 +10,6 @@ import mindscriptact.assetLibrary.core.AssetDefinition;
 import mindscriptact.assetLibrary.core.AssetType;
 import mindscriptact.assetLibrary.core.namespaces.assetlibrary;
 import mindscriptact.assetLibrary.core.xml.XMLDefinition;
-import mindscriptact.logmaster.DebugMan;
 
 /**
  * COMMENT
@@ -91,7 +90,7 @@ public class AssetLibraryIndex extends EventDispatcher {
 			var lastLetter:String = path.charAt(path.length - 1);
 			if (lastLetter != "/" && lastLetter != "\\") {
 				path += "/";
-				DebugMan.info("AssetLibraryIndex.addPathDefinition path should allways end with '/' or '\' character. '/' was added to the end of path:" + path);
+				//DebugMan.info("AssetLibraryIndex.addPathDefinition path should allways end with '/' or '\' character. '/' was added to the end of path:" + path);
 			}
 			pathIndex[pathId] = path;
 		} else {
@@ -107,7 +106,7 @@ public class AssetLibraryIndex extends EventDispatcher {
 	 */
 	public function addAssetsFromXML(xmlPath:String):void {
 		use namespace assetlibrary;
-		DebugMan.info("AssetLibraryIndex.addAssetsFromXML > xmlPath : " + xmlPath + ", assetId : " + assetId);
+		//DebugMan.info("AssetLibraryIndex.addAssetsFromXML > xmlPath : " + xmlPath + ", assetId : " + assetId);
 		//if (!assetId){
 		var assetId:String = "$_xmlDefinition" + xmlFilesTotal;
 		//}
@@ -131,7 +130,7 @@ public class AssetLibraryIndex extends EventDispatcher {
 	 * @param	assetId		asset id to be added to group.
 	 */
 	public function addOneAssetToGroup(groupId:String, assetId:String):void {
-		DebugMan.info("AssetLibraryIndex.addAssetToGroup > groupId : " + groupId + ", assetId : " + assetId);
+		//DebugMan.info("AssetLibraryIndex.addAssetToGroup > groupId : " + groupId + ", assetId : " + assetId);
 		if (!groupIndex[groupId]) {
 			groupIndex[groupId] = new Vector.<String>();
 		}
@@ -170,7 +169,7 @@ public class AssetLibraryIndex extends EventDispatcher {
 	
 	internal function addAssetDefinition(assetDefinition:AssetDefinition):void {
 		use namespace assetlibrary;
-		DebugMan.info("AssetLibraryIndex.addAssetDefinition > assetDefinition : " + assetDefinition);
+		//DebugMan.info("AssetLibraryIndex.addAssetDefinition > assetDefinition : " + assetDefinition);
 		if (!_assetIndex[assetDefinition.assetId]) {
 			if (assetDefinition.isPermanent && !canAddPermanents) {
 				errorHandler(Error("AssetLibraryIndex.addAssetDefinition failed : AssetId " + assetDefinition.assetId + " is permanent asset, you can add those only before starting permanent asset preload. If you want to disable this protection: use AssetLibrary.removePermanentAssetProtection();"));
@@ -194,7 +193,7 @@ public class AssetLibraryIndex extends EventDispatcher {
 					asset = new XMLAsset(assetDefinition.assetId);
 					break;
 				default: 
-					DebugMan.info("AssetLibraryLoader can't handle this type yet. Asset type:", assetDefinition.type);
+					//DebugMan.info("AssetLibraryLoader can't handle this type yet. Asset type:", assetDefinition.type);
 					break;
 			}
 			assetDefinition.asset = asset;

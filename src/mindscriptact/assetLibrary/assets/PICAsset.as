@@ -3,7 +3,7 @@ import flash.display.Bitmap;
 import flash.display.BitmapData;
 
 /**
- * Wraper for picture assets: jpg, png, gif
+ * Wraper for picture assets: jpg, png, gif files
  * @author Raimundas Banevicius
  */
 public class PICAsset extends AssetAbstract {

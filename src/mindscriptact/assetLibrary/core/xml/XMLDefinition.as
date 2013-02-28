@@ -1,7 +1,8 @@
 package mindscriptact.assetLibrary.core.xml {
 
 /**
- * ...
+ * Asset XML file definitien.
+ * @private
  * @author Deril
  */
 public class XMLDefinition {

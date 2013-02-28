@@ -3,7 +3,7 @@ import flash.system.ApplicationDomain;
 import mindscriptact.assetLibrary.core.namespaces.assetlibrary;
 
 /**
- * COMMENT
+ * Abstract asset to extends all other asset objects from.
  * @author Raimundas Banevicius
  */
 public class AssetAbstract {
@@ -20,6 +20,45 @@ public class AssetAbstract {
 	public function AssetAbstract(assetId:String) {
 		this._assetId = assetId;
 	}
+	
+	//----------------------------------
+	//     Asset api
+	//----------------------------------
+	
+	/**
+	 * Clear asset data.
+	 */
+	public function unload():void {
+		data = null;
+		content = null;
+		applicationDomain = null;
+		_isLoaded = false;
+	}
+	
+	/**
+	 * true - if asset is loaded.
+	 */
+	public function get isLoaded():Boolean {
+		return _isLoaded;
+	}
+	
+	/**
+	 * true - if asset is permanents
+	 */
+	public function get isPermanent():Boolean {
+		return _isPermanent;
+	}
+	
+	/**
+	 * Returns assetId.
+	 */
+	public function get assetId():String {
+		return _assetId;
+	}
+	
+	//----------------------------------
+	//     internal
+	//----------------------------------
 	
 	assetlibrary function setData(data:String):void {
 		//CONFIG::debug {
@@ -41,25 +80,6 @@ public class AssetAbstract {
 		this.applicationDomain = applicationDomain;
 		_isPermanent = isPermanent;
 		_isLoaded = true;
-	}
-	
-	public function unload():void {
-		data = null;
-		content = null;
-		applicationDomain = null;
-		_isLoaded = false;
-	}
-	
-	public function get isLoaded():Boolean {
-		return _isLoaded;
-	}
-	
-	public function get isPermanent():Boolean {
-		return _isPermanent;
-	}
-	
-	public function get assetId():String {
-		return _assetId;
 	}
 
 }

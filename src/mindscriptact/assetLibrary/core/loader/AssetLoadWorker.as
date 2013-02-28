@@ -7,15 +7,16 @@ import flash.events.SecurityErrorEvent;
 import flash.net.URLLoaderDataFormat;
 import flash.net.URLRequest;
 import flash.utils.ByteArray;
-import mindscriptact.assetLibrary.core.AssetDefinition;
 import mindscriptact.assetLibrary.AssetLibraryLoader;
-import mindscriptact.assetLibrary.event.AssetEvent;
+import mindscriptact.assetLibrary.core.AssetDefinition;
 import mindscriptact.assetLibrary.core.namespaces.assetlibrary;
+import mindscriptact.assetLibrary.events.AssetEvent;
 
 /**
  * Handles diferent loader censtruction, pregress and errrors.
- * Tracks of loader cound in use.
+ * Tracks of loader count in use.
  * Is not based on factory patern.
+ * @private
  * @author Raimundas Banevicius
  */
 public class AssetLoadWorker {
@@ -229,14 +230,14 @@ public class AssetLoadWorker {
 		getBinaryAssetLoader(loadItem).loadBytes(binary);
 	}
 	
-	assetlibrary function loadBinary(loadItem:AssetDefinition):void {
-		use namespace assetlibrary;
-		getBinaryUrlLoader(loadItem).load(new URLRequest(assetLibraryLoader.rootPath + loadItem.filePath));
-	}
-	
 	assetlibrary function loadText(loadItem:AssetDefinition):void {
 		use namespace assetlibrary;
 		getAssetUrlLoader(loadItem).load(new URLRequest(assetLibraryLoader.rootPath + loadItem.filePath));
+	}
+	
+	assetlibrary function loadBinary(loadItem:AssetDefinition):void {
+		use namespace assetlibrary;
+		getBinaryUrlLoader(loadItem).load(new URLRequest(assetLibraryLoader.rootPath + loadItem.filePath));
 	}
 	
 	assetlibrary function loadSound(loadItem:AssetDefinition):void {

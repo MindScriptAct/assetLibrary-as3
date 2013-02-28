@@ -6,21 +6,21 @@ import flash.utils.getTimer;
 import mindscriptact.assetLibrary.assets.XMLAsset;
 import mindscriptact.assetLibrary.core.AssetDefinition;
 import mindscriptact.assetLibrary.core.AssetType;
-import mindscriptact.assetLibrary.event.AssetEvent;
 import mindscriptact.assetLibrary.core.loader.AssetLoadWorker;
 import mindscriptact.assetLibrary.core.namespaces.assetlibrary;
 import mindscriptact.assetLibrary.core.sharedObject.AssetLibraryStoradge;
 import mindscriptact.assetLibrary.core.xml.AssetXmlParser;
-import mindscriptact.assetLibrary.event.AssetLoaderEvent;
+import mindscriptact.assetLibrary.events.AssetEvent;
+import mindscriptact.assetLibrary.events.AssetLoaderEvent;
 import mindscriptact.logmaster.DebugMan;
 
-[Event(name="assetXmlLoadingStarted",type="mindscriptact.assetLibrary.event.AssetLoaderEvent")]
-[Event(name="assetXmlLoaded",type="mindscriptact.assetLibrary.event.AssetLoaderEvent")]
-[Event(name="allPermanentAssetsLoaded",type="mindscriptact.assetLibrary.event.AssetLoaderEvent")]
+[Event(name="assetXmlLoadingStarted",type="mindscriptact.assetLibrary.events.AssetLoaderEvent")]
+[Event(name="assetXmlLoaded",type="mindscriptact.assetLibrary.events.AssetLoaderEvent")]
+[Event(name="allPermanentAssetsLoaded",type="mindscriptact.assetLibrary.events.AssetLoaderEvent")]
 
-[Event(name="assetLoadingStarted",type="mindscriptact.assetLibrary.event.AssetEvent")]
-[Event(name="assetLoaded",type="mindscriptact.assetLibrary.event.AssetEvent")]
-[Event(name="assetLoadProgress",type="mindscriptact.assetLibrary.event.AssetEvent")]
+[Event(name="assetLoadingStarted",type="mindscriptact.assetLibrary.events.AssetEvent")]
+[Event(name="assetLoaded",type="mindscriptact.assetLibrary.events.AssetEvent")]
+[Event(name="assetLoadProgress",type="mindscriptact.assetLibrary.events.AssetEvent")]
 
 /**
  * COMMENT

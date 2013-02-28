@@ -16,7 +16,7 @@ import mindscriptact.assetLibrary.assets.SWFAsset;
 import mindscriptact.assetLibrary.core.AssetDefinition;
 import mindscriptact.assetLibrary.core.namespaces.assetlibrary;
 import mindscriptact.assetLibrary.core.sharedObject.AssetLibraryStoradge;
-import mindscriptact.assetLibrary.core.unloadHelper.UnloadHelper;
+import mindscriptact.assetLibrary.core.unloadHelper.AssetLibraryUnloader;
 import mindscriptact.logmaster.DebugMan;
 
 /**
@@ -36,7 +36,7 @@ public class AssetLibrary {
 	
 	static private var assetLibraryLoader:AssetLibraryLoader = new AssetLibraryLoader(assetLibraryIndex, localStoradge, errorHandler);
 	
-	static private var unloadHelper:UnloadHelper = new UnloadHelper();
+	static private var assetUnloader:AssetLibraryUnloader = new AssetLibraryUnloader();
 	
 	/** Time interval for asset library to try and unload not needed assets in secconds.
 	 * By default it is 0 - autounload is disabled.
@@ -65,9 +65,8 @@ public class AssetLibrary {
 		return assetLibraryIndex;
 	}
 	
-	
 	/**
-	 * Removes permament asset protection. It will be possible to add permanents after initial load and 
+	 * Removes permament asset protection. It will be possible to add permanents after initial load and
 	 */
 	static public function removePermanentAssetProtection():void {
 		assetLibraryIndex.canAddPermanents = true;
@@ -135,7 +134,7 @@ public class AssetLibrary {
 		use namespace assetlibrary;
 		if (_autoUnloadIntervalTime != value) {
 			_autoUnloadIntervalTime = value;
-			unloadHelper.setUnloadIntervalTime(_autoUnloadIntervalTime);
+			assetUnloader.setUnloadIntervalTime(_autoUnloadIntervalTime);
 		}
 	}
 	
@@ -200,7 +199,7 @@ public class AssetLibrary {
 				assetDef.callBackFunctions.push(callbackFunction);
 				assetDef.callBackParams.push(callBackParams);
 				assetDef.keepTime = assetKeepTime;
-				unloadHelper.addAssetTime(assetId, assetKeepTime);
+				assetUnloader.addAssetTime(assetId, assetKeepTime);
 				assetLibraryLoader.loadAsset(assetDef);
 			} else {
 				errorHandler(Error("AssetLibrary.sendAssetToFunction can't find asset definition with assetId :" + assetId));

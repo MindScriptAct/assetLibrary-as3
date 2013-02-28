@@ -4,10 +4,12 @@ import mindscriptact.assetLibrary.core.AssetDefinition;
 import mindscriptact.assetLibrary.core.namespaces.assetlibrary;
 
 /**
- * COMMENT
+ * Asset loader
+ * @private
  * @author Raimundas Banevicius
  */
 public class AssetLoader extends Loader {
+	
 	assetlibrary var asssetDefinition:AssetDefinition;
 	
 	assetlibrary var isConverter:Boolean = false;

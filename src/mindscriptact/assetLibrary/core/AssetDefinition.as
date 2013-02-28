@@ -5,6 +5,7 @@ import mindscriptact.assetLibrary.core.namespaces.assetlibrary;
 
 /**
  * COMMENT
+ * @private
  * @author Raimundas Banevicius
  */
 public class AssetDefinition {

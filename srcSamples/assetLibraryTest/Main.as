@@ -8,8 +8,8 @@ import mindscriptact.assetLibrary.AssetLibraryIndex;
 import mindscriptact.assetLibrary.AssetLibraryLoader;
 import mindscriptact.assetLibrary.assets.PICAsset;
 import mindscriptact.assetLibrary.assets.SWFAsset;
-import mindscriptact.assetLibrary.event.AssetEvent;
-import mindscriptact.assetLibrary.event.AssetLoaderEvent;
+import mindscriptact.assetLibrary.events.AssetEvent;
+import mindscriptact.assetLibrary.events.AssetLoaderEvent;
 import mindscriptact.logmaster.DebugMan;
 
 /**

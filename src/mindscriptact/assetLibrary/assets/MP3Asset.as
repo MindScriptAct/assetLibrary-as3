@@ -30,6 +30,27 @@ public class MP3Asset extends AssetAbstract {
 		this.soundChannels.push(channel);
 	}
 	
+	/**
+	 * Stops all sounds, started from this asset.
+	 */
+	public function stopAllChannels():void {
+		while (soundChannels.length) {
+			soundChannels.pop().stop();
+		}
+	}
+	
+	/**
+	 * Get sound object.
+	 * @return	Sound object.
+	 */
+	public function getSound():Sound {
+		return content as Sound;
+	}
+	
+	//----------------------------------
+	//     internal
+	//----------------------------------
+	
 	private function handleSoundComplete(event:Event):void {
 		for (var i:int = 0; i < soundChannels.length; i++) {
 			if (soundChannels[i] == event.target) {
@@ -37,16 +58,6 @@ public class MP3Asset extends AssetAbstract {
 				soundChannels.splice(i, 1);
 			}
 		}
-	}
-	
-	public function stopAllChannels():void {
-		while (soundChannels.length) {
-			soundChannels.pop().stop();
-		}
-	}
-	
-	public function getSound():Sound {
-		return content as Sound;
 	}
 
 }

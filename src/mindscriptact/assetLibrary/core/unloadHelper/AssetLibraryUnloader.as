@@ -7,14 +7,16 @@ import mindscriptact.assetLibrary.AssetLibrary;
 import mindscriptact.assetLibrary.core.namespaces.assetlibrary;
 
 /**
- * ...
+ * Auto unload manager.
+ * @private
  * @author Deril
  */
-public class UnloadHelper {
+public class AssetLibraryUnloader {
+	
 	private var unloadTimer:Timer;
 	private var assetsForUnload:Dictionary;
 	
-	public function UnloadHelper() {
+	public function AssetLibraryUnloader() {
 		assetsForUnload = new Dictionary();
 	}
 	

@@ -10,14 +10,18 @@ public class XMLAsset extends AssetAbstract {
 		super(assetId);
 	}
 	
-	//public function getAssetContent(): {
-	//return content as DisplayObject;
-	//}
-	
+	/**
+	 * Get raw file data as String.
+	 * @return	data as String.
+	 */
 	public function getData():String {
 		return this.data;
 	}
 	
+	/**
+	 * Get data as XML object.
+	 * @return	xml objects.
+	 */
 	public function getXml():XML {
 		return new XML(this.data);
 	}

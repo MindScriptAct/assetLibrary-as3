@@ -4,7 +4,8 @@ import mindscriptact.assetLibrary.assets.XMLAsset;
 import mindscriptact.logmaster.DebugMan;
 
 /**
- * ...
+ * Asset xml file parser.
+ * @private
  * @author Deril
  */
 public class AssetXmlParser {
@@ -12,7 +13,6 @@ public class AssetXmlParser {
 	
 	public function AssetXmlParser(assetIndex:AssetLibraryIndex) {
 		this.assetIndex = assetIndex;
-	
 	}
 	
 	public function parseXML(asset:XMLAsset):void {
