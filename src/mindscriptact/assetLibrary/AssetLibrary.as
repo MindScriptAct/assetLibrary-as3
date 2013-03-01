@@ -6,6 +6,7 @@ import flash.display.SimpleButton;
 import flash.display.Sprite;
 import flash.media.Sound;
 import flash.media.SoundTransform;
+import flash.sampler.NewObjectSample;
 import flash.system.Security;
 import flash.system.SecurityPanel;
 import flash.utils.Dictionary;
@@ -220,6 +221,30 @@ public class AssetLibrary {
 			}
 			
 		}
+	}
+	
+	//----------------------------------
+	//     Dynamic asset getter
+	//----------------------------------
+	
+	static public function loadDynamicAsset(pathId:String, assetId:String, callbackFunction:Function, callBackParams:Array = null, assetKeepTime:int = int.MAX_VALUE):void {
+		use namespace assetlibrary;
+		
+		// check if path is dynamic.
+		var assetType:String = assetLibraryIndex.getPathType(pathId);
+		if (!assetType) {
+			errorHandler(Error("AssetLibrary.loadDynamicAsset can load only files from paths that have 'dynamicPathAssetType' parameter set with assetIndex.addPathDefinition() function. Failed with assetId :" + assetId));
+		}
+		
+		// check if definition exists, if not - created it.
+		var assetDefinition:AssetDefinition = assetLibraryIndex.getAssetDefinition(assetId);
+		if (!assetDefinition) {
+			assetLibraryIndex.addFileDefinition(assetId, assetId + "." + assetType, pathId);
+		}
+		
+		// load asset normaly
+		loadAsset(assetId, callbackFunction, callBackParams, assetKeepTime);
+	
 	}
 	
 	//----------------------------------

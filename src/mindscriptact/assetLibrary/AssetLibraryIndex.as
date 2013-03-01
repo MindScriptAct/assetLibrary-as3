@@ -19,6 +19,7 @@ public class AssetLibraryIndex extends EventDispatcher {
 	
 	private var _assetIndex:Dictionary = new Dictionary(); /** of AssetDefinition by String */
 	private var pathIndex:Dictionary = new Dictionary(); /** of String by String */
+	private var dynamicPathAssetTypes:Dictionary = new Dictionary(); /** of String by String */
 	private var groupIndex:Dictionary = new Dictionary(); /** of Vector.<String> by String */
 	//
 	private var xmlFileDefinitions:Dictionary = new Dictionary(); /** of XMLDefinition by String */
@@ -50,9 +51,9 @@ public class AssetLibraryIndex extends EventDispatcher {
 		if (!assetId) {
 			errorHandler(Error("AssetLibraryIndex.addFileDefinition failed : assetId must be defined." + "[assetId:" + assetId + " fileName:" + fileUrl + " assetType:" + assetType + " pathId:" + pathId + "]"));
 		}
-		if (!fileUrl) {
-			errorHandler(Error("AssetLibraryIndex.addFileDefinition failed : fileName must be defined." + "[assetId:" + assetId + " fileName:" + fileUrl + " assetType:" + assetType + " pathId:" + pathId + "]"));
-		}
+		//if (!fileUrl) {
+			//errorHandler(Error("AssetLibraryIndex.addFileDefinition failed : fileName must be defined." + "[assetId:" + assetId + " fileName:" + fileUrl + " assetType:" + assetType + " pathId:" + pathId + "]"));
+		//}
 		
 		// path handling
 		if (pathId) {
@@ -84,7 +85,7 @@ public class AssetLibraryIndex extends EventDispatcher {
 	 * @param	pathId	unique path ide
 	 * @param	path	path that will be linked with pathId
 	 */
-	public function addPathDefinition(pathId:String, path:String):void {
+	public function addPathDefinition(pathId:String, path:String, dynamicPathAssetType:String = null):void {
 		if (!pathIndex[pathId]) {
 			// ensure that path ends with "/" or "\" character.
 			var lastLetter:String = path.charAt(path.length - 1);
@@ -93,6 +94,9 @@ public class AssetLibraryIndex extends EventDispatcher {
 				//DebugMan.info("AssetLibraryIndex.addPathDefinition path should allways end with '/' or '\' character. '/' was added to the end of path:" + path);
 			}
 			pathIndex[pathId] = path;
+			if (dynamicPathAssetType) {
+				dynamicPathAssetTypes[pathId] = dynamicPathAssetType;
+			}
 		} else {
 			if (pathIndex[pathId] != path) {
 				errorHandler(Error("AssetLibraryIndex.addPathDefinition failed : path with same id:" + pathId + " can be defined only once."));
@@ -163,16 +167,20 @@ public class AssetLibraryIndex extends EventDispatcher {
 		return retVal;
 	}
 	
+	internal function getPathType(pathId:String):String {
+		return dynamicPathAssetTypes[pathId];
+	}
+	
 	//----------------------------------
 	//     internal functions for system use only.
 	//----------------------------------
 	
-	internal function addAssetDefinition(assetDefinition:AssetDefinition):void {
+	private function addAssetDefinition(assetDefinition:AssetDefinition):void {
 		use namespace assetlibrary;
 		//DebugMan.info("AssetLibraryIndex.addAssetDefinition > assetDefinition : " + assetDefinition);
 		if (!_assetIndex[assetDefinition.assetId]) {
 			if (assetDefinition.isPermanent && !canAddPermanents) {
-				errorHandler(Error("AssetLibraryIndex.addAssetDefinition failed : AssetId " + assetDefinition.assetId + " is permanent asset, you can add those only before starting permanent asset preload. If you want to disable this protection: use AssetLibrary.removePermanentAssetProtection();"));
+				errorHandler(Error("AssetLibraryIndex.addFileDefinition failed : AssetId " + assetDefinition.assetId + " is permanent asset, you can add those only before starting permanent asset preload. If you want to disable this protection: use AssetLibrary.removePermanentAssetProtection();"));
 			}
 			_assetIndex[assetDefinition.assetId] = assetDefinition;
 			//
@@ -200,7 +208,7 @@ public class AssetLibraryIndex extends EventDispatcher {
 		} else {
 			var currentAssetDefinition:AssetDefinition = _assetIndex[assetDefinition.assetId];
 			if (currentAssetDefinition.filePath != assetDefinition.filePath || currentAssetDefinition.isPermanent != assetDefinition.isPermanent) {
-				errorHandler(Error("AssetLibraryIndex.addAssetDefinition failed : AssetId " + assetDefinition.assetId + " is already taken, and new definiiton is diferent from already existing one. Unload it or use another assedId, or use same asset definition if you have same assetId in more then one place."));
+				errorHandler(Error("AssetLibraryIndex.addFileDefinition failed : AssetId " + assetDefinition.assetId + " is already taken, and new definiiton is diferent from already existing one. Unload it or use another assedId, or use same asset definition if you have same assetId in more then one place."));
 			}
 		}
 	}
