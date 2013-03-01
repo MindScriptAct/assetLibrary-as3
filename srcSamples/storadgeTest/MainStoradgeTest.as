@@ -1,6 +1,7 @@
 package storadgeTest {
 import com.bit101.components.PushButton;
 import flash.display.Bitmap;
+import flash.display.BitmapData;
 import flash.display.DisplayObject;
 import flash.display.Loader;
 import flash.display.Sprite;
@@ -8,6 +9,7 @@ import flash.events.Event;
 import flash.events.ProgressEvent;
 import flash.net.URLRequest;
 import flash.system.System;
+import flash.utils.Dictionary;
 import flash.utils.getTimer;
 import mindscriptact.assetLibrary.AssetLibrary;
 import mindscriptact.assetLibrary.AssetLibraryIndex;
@@ -70,7 +72,46 @@ public class MainStoradgeTest extends Sprite {
 		new PushButton(this, 50, 250, "1MB StandartLoad", handleNormalLoad1MB);
 		new PushButton(this, 150, 250, "20MB StandartLoad", handleNormalLoad20MB);
 		new PushButton(this, 250, 250, "AnimTest", handleNormalAnimLoad);
+		
+		new PushButton(this, 50, 300, "CreateDict Objects", handleCreateDictObj);
+		new PushButton(this, 150, 300, "Remove some objects", handleRemoveDictObj);
+		new PushButton(this, 250, 300, "Trace Dictionary", handleTraceDictObj);
+	}
 	
+	//----------------------------------
+	//     memory clean test
+	//----------------------------------
+	
+	private var testDict:Dictionary = new Dictionary(true);
+	
+	private var baseObj:BitmapData = new BitmapData(100, 100);
+	private var test1:Bitmap;
+	private var test2:Bitmap;
+	private var test3:Bitmap;
+	
+	private function handleCreateDictObj(event:Event):void {
+		testDict[baseObj] = "base"
+		test1 = new Bitmap(baseObj.clone());
+		testDict[test1] = "test1"
+		test2 = new Bitmap(baseObj.clone());
+		testDict[test2] = "test2"
+		test3 = new Bitmap(baseObj.clone());
+		testDict[test3] = "test3";
+	
+	}
+	
+	private function handleRemoveDictObj(event:Event):void {
+		baseObj = null;
+		test1 = null;
+		//test2 = null;
+		test3 = null;
+	}
+	
+	private function handleTraceDictObj(event:Event):void {
+		trace("testDict:");
+		for each (var key:Object in testDict) {
+			trace(" - " + key);
+		}
 	}
 	
 	//----------------------------------
