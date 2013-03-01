@@ -73,7 +73,7 @@ public class SwfTest extends Sprite {
 		testSound.play();
 		
 		// termporal load test.
-		AssetLibrary.sendAssetToFunction("swfTest", handleAsset);
+		AssetLibrary.loadAsset("swfTest", handleAsset);
 	
 	}
 	

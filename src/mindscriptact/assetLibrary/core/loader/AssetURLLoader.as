@@ -18,9 +18,9 @@ public class AssetURLLoader extends URLLoader {
 	
 	assetlibrary function dispose():void {
 		use namespace assetlibrary;
+		close();
 		asssetDefinition = null;
-		this.data = null;
-		this.close();
+		data = null;
 	}
 
 }

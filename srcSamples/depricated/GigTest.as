@@ -84,18 +84,18 @@ public class GigTest extends Sprite {
 	private function handleKeyPress(e:KeyboardEvent):void {
 		DebugMan.info("######################################################################");
 		switch (e.keyCode) {
-			case Keyboard.F1:timeShot = getTimer();DebugMan.info("Load action started for PicPack1...");AssetLibrary.sendAssetToFunction("PicPack1", handlePicPack);break;
-			case Keyboard.F2:timeShot = getTimer();DebugMan.info("Load action started for PicPack2...");AssetLibrary.sendAssetToFunction("PicPack2", handlePicPack);break;
-			case Keyboard.F3:timeShot = getTimer();DebugMan.info("Load action started for PicPack3...");AssetLibrary.sendAssetToFunction("PicPack3", handlePicPack);break;
-			case Keyboard.F4:timeShot = getTimer();DebugMan.info("Load action started for PicPack4...");AssetLibrary.sendAssetToFunction("PicPack4", handlePicPack);break;
-			case Keyboard.F5:timeShot = getTimer();DebugMan.info("Load action started for PicPack5...");AssetLibrary.sendAssetToFunction("PicPack5", handlePicPack);break;
-			case Keyboard.F6:timeShot = getTimer();DebugMan.info("Load action started for PicPack6...");AssetLibrary.sendAssetToFunction("PicPack6", handlePicPack);break;
-			case Keyboard.F7:timeShot = getTimer();DebugMan.info("Load action started for PicPack7...");AssetLibrary.sendAssetToFunction("PicPack7", handlePicPack);break;
-			case Keyboard.F8:timeShot = getTimer();DebugMan.info("Load action started for PicPack8...");AssetLibrary.sendAssetToFunction("PicPack8", handlePicPack);break;
-			case Keyboard.F9:timeShot = getTimer();DebugMan.info("Load action started for PicPack9...");AssetLibrary.sendAssetToFunction("PicPack9", handlePicPack);break;
-			case Keyboard.F10:timeShot = getTimer();DebugMan.info("Load action started for PicPack10...");AssetLibrary.sendAssetToFunction("PicPack10", handlePicPack);break;
-			case Keyboard.F11:timeShot = getTimer();DebugMan.info("Load action started for PicPack11...");AssetLibrary.sendAssetToFunction("PicPack11", handlePicPack);break;
-			case Keyboard.F12:timeShot = getTimer();DebugMan.info("Load action started for PicPack12...");AssetLibrary.sendAssetToFunction("PicPack12", handlePicPack);break;
+			case Keyboard.F1:timeShot = getTimer();DebugMan.info("Load action started for PicPack1...");AssetLibrary.loadAsset("PicPack1", handlePicPack);break;
+			case Keyboard.F2:timeShot = getTimer();DebugMan.info("Load action started for PicPack2...");AssetLibrary.loadAsset("PicPack2", handlePicPack);break;
+			case Keyboard.F3:timeShot = getTimer();DebugMan.info("Load action started for PicPack3...");AssetLibrary.loadAsset("PicPack3", handlePicPack);break;
+			case Keyboard.F4:timeShot = getTimer();DebugMan.info("Load action started for PicPack4...");AssetLibrary.loadAsset("PicPack4", handlePicPack);break;
+			case Keyboard.F5:timeShot = getTimer();DebugMan.info("Load action started for PicPack5...");AssetLibrary.loadAsset("PicPack5", handlePicPack);break;
+			case Keyboard.F6:timeShot = getTimer();DebugMan.info("Load action started for PicPack6...");AssetLibrary.loadAsset("PicPack6", handlePicPack);break;
+			case Keyboard.F7:timeShot = getTimer();DebugMan.info("Load action started for PicPack7...");AssetLibrary.loadAsset("PicPack7", handlePicPack);break;
+			case Keyboard.F8:timeShot = getTimer();DebugMan.info("Load action started for PicPack8...");AssetLibrary.loadAsset("PicPack8", handlePicPack);break;
+			case Keyboard.F9:timeShot = getTimer();DebugMan.info("Load action started for PicPack9...");AssetLibrary.loadAsset("PicPack9", handlePicPack);break;
+			case Keyboard.F10:timeShot = getTimer();DebugMan.info("Load action started for PicPack10...");AssetLibrary.loadAsset("PicPack10", handlePicPack);break;
+			case Keyboard.F11:timeShot = getTimer();DebugMan.info("Load action started for PicPack11...");AssetLibrary.loadAsset("PicPack11", handlePicPack);break;
+			case Keyboard.F12:timeShot = getTimer();DebugMan.info("Load action started for PicPack12...");AssetLibrary.loadAsset("PicPack12", handlePicPack);break;
 			case 49:DebugMan.info("unloading PicPack1...");AssetLibrary.unloadAsset("PicPack1");break;
 			case 50:DebugMan.info("unloading PicPack2...");AssetLibrary.unloadAsset("PicPack2");break;
 			case 51:DebugMan.info("unloading PicPack3...");AssetLibrary.unloadAsset("PicPack3");break;

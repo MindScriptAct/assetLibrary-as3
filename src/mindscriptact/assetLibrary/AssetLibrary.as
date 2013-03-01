@@ -91,7 +91,7 @@ public class AssetLibrary {
 		DebugMan.info("AssetLibraryIndex.loadGroupAssets > groupId : " + groupId);
 		var assetIds:Vector.<String> = assetLibraryIndex.getGroupAssets(groupId);
 		for (var i:int = 0; i < assetIds.length; i++) {
-			AssetLibrary.sendAssetToFunction(assetIds[i], handleAssetBlank);
+			AssetLibrary.loadAsset(assetIds[i], handleAssetBlank);
 		}
 	}
 	
@@ -185,7 +185,7 @@ public class AssetLibrary {
 	//     General asset getter
 	//----------------------------------
 	
-	static public function sendAssetToFunction(assetId:String, callbackFunction:Function, callBackParams:Array = null, assetKeepTime:int = int.MAX_VALUE):void {
+	static public function loadAsset(assetId:String, callbackFunction:Function, callBackParams:Array = null, assetKeepTime:int = int.MAX_VALUE):void {
 		use namespace assetlibrary;
 		if (!callBackParams) {
 			callBackParams = [];
@@ -468,7 +468,7 @@ public class AssetLibrary {
 			if (asset.isLoaded) {
 				asset.play(startTime, loops, sndTransform);
 			} else {
-				sendAssetToFunction(assetId, handleAssetBlank);
+				loadAsset(assetId, handleAssetBlank);
 			}
 		}
 	}
@@ -502,7 +502,7 @@ public class AssetLibrary {
 			if (asset.isLoaded) {
 				playSwfSound(assetId, lincageId, startTime, loops, sndTransform);
 			} else {
-				sendAssetToFunction(assetId, handleAssetBlank);
+				loadAsset(assetId, handleAssetBlank);
 			}
 		}
 	}

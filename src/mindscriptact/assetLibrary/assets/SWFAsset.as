@@ -1,4 +1,5 @@
 package mindscriptact.assetLibrary.assets {
+import flash.display.Bitmap;
 import flash.display.BitmapData;
 import flash.display.MovieClip;
 import flash.display.SimpleButton;
@@ -95,6 +96,23 @@ public class SWFAsset extends AssetAbstract {
 		}
 		return new lincageClass();
 	}
+	
+	/**
+	 * Gives instance of Bitmap object, created with BitmapData from library
+	 * @param	lincageId	object lincage id in swf file library
+	 * @return	instance of BitmapData taken from asset library, using lincageId, to use for Bitmap
+	 */
+	public function getBitmapFromBitmapData(lincageId:String):Bitmap {
+		if (!_isLoaded) {
+			throw Error("AssetSWF has no loaded content. assetID:" + assetId);
+		}
+		try {
+			var lincageClass:Class = applicationDomain.getDefinition(lincageId) as Class;
+		} catch (error:Error) {
+			throw Error("AssetSWF could not find class with lincageId:" + lincageId + " in assetID:" + assetId);
+		}
+		return new Bitmap(new lincageClass());
+	}	
 	
 	/**
 	 * Gives instance of Sound object from library

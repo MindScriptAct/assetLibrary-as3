@@ -20,9 +20,9 @@ public class AssetLoader extends Loader {
 	
 	assetlibrary function dispose():void {
 		use namespace assetlibrary;
+		//close();
 		asssetDefinition = null;
 		unload();
-		//close();
 	}
 
 }

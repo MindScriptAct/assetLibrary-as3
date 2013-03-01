@@ -13,7 +13,7 @@ public class MinimalLoad extends Sprite {
 		assetIndex.addFileDefinition("test1", "assets/simpleTest/test1.swf");
 		
 		// load asset and send it to function.
-		AssetLibrary.sendAssetToFunction("test1", handleTest1);
+		AssetLibrary.loadAsset("test1", handleTest1);
 	}
 	
 	private function handleTest1(asset:SWFAsset):void {

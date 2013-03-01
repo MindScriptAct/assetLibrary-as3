@@ -93,9 +93,9 @@ public class PicTest extends Sprite {
 		gifPic.y = 400;		
 		
 		// termporal load test.
-		AssetLibrary.sendAssetToFunction("jpgTest", handleJpgAsset, [0+350, 50]);
-		AssetLibrary.sendAssetToFunction("pngTest", handlePngAsset, [150+350, 200]);
-		AssetLibrary.sendAssetToFunction("gifTest", handleGifAsset, [300+350, 400]);
+		AssetLibrary.loadAsset("jpgTest", handleJpgAsset, [0+350, 50]);
+		AssetLibrary.loadAsset("pngTest", handlePngAsset, [150+350, 200]);
+		AssetLibrary.loadAsset("gifTest", handleGifAsset, [300+350, 400]);
 		
 	}
 

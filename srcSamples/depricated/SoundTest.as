@@ -51,7 +51,7 @@ public class SoundTest extends Sprite {
 		
 		AssetLibrary.playMP3("mp3Test");
 		AssetLibrary.playMP3NowOrNever("mp3BlaBla");
-		AssetLibrary.sendAssetToFunction("mp3Shredder", handleMp3);
+		AssetLibrary.loadAsset("mp3Shredder", handleMp3);
 		
 		this.stage.addEventListener(MouseEvent.CLICK, handleFirstStageClick);
 	}

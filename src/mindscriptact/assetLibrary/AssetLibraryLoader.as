@@ -44,7 +44,7 @@ public class AssetLibraryLoader extends EventDispatcher {
 	//
 	public var canUnloadPermanents:Boolean = false;
 	internal var handleStoradgeFail:Function = internalHandleStoradgeFail;
-	assetlibrary var _localStoradgeEnabled:Boolean;
+	assetlibrary var _localStoradgeEnabled:Boolean = false;
 	//
 	private var errorHandler:Function;
 	assetlibrary var rootPath:String = "";

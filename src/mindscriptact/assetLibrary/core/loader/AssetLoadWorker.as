@@ -1,5 +1,8 @@
 package mindscriptact.assetLibrary.core.loader {
+import flash.display.DisplayObject;
+import flash.display.DisplayObjectContainer;
 import flash.display.LoaderInfo;
+import flash.display.MovieClip;
 import flash.events.Event;
 import flash.events.IOErrorEvent;
 import flash.events.ProgressEvent;
@@ -9,6 +12,7 @@ import flash.net.URLRequest;
 import flash.utils.ByteArray;
 import mindscriptact.assetLibrary.AssetLibraryLoader;
 import mindscriptact.assetLibrary.core.AssetDefinition;
+import mindscriptact.assetLibrary.core.AssetType;
 import mindscriptact.assetLibrary.core.namespaces.assetlibrary;
 import mindscriptact.assetLibrary.events.AssetEvent;
 
@@ -276,8 +280,38 @@ public class AssetLoadWorker {
 		var assetLoader:AssetLoader = (event.target as LoaderInfo).loader as AssetLoader;
 		filesInProgress--;
 		assetLibraryLoader.handleLoadedContent(assetLoader.asssetDefinition, assetLoader.content, assetLoader.contentLoaderInfo.applicationDomain, false);
+		
+		if (assetLoader.asssetDefinition.type == AssetType.SWF) {
+			stopAnimations(assetLoader.content);
+		}
+		
 		//
 		disposeAssetLoader(assetLoader);
+	}
+	
+	private function stopAnimations(content:DisplayObject):void {
+		if (content is DisplayObjectContainer) {
+			if (content is MovieClip) {
+				(content as MovieClip).stop();
+			}
+			
+			var container:DisplayObjectContainer = content as DisplayObjectContainer;
+			
+			for (var i:int = 0; i < container.numChildren; i++) {
+				var child:DisplayObjectContainer = container.getChildAt(i) as DisplayObjectContainer;
+				
+				if (child != null) {
+					if (child is MovieClip) {
+						(child as MovieClip).stop();
+					}
+					
+					if (child.numChildren > 0) {
+						stopAnimations(child as DisplayObject);
+					}
+				}
+			}
+		}
+	
 	}
 	
 	private function handleTextLoad(event:Event):void {

@@ -37,9 +37,9 @@ public class AutoUnloadTest extends Sprite {
 		assetIndex.addFileDefinition("jpgSmiley", "smiley.jpg", "pictureDir");
 		assetIndex.addFileDefinition("gifSmiley", "smiley.gif", "pictureDir");
 		
-		AssetLibrary.sendAssetToFunction("pngSmiley", handlePic, [10, 10], 5);
-		AssetLibrary.sendAssetToFunction("jpgSmiley", handlePic, [200, 200], 15);
-		AssetLibrary.sendAssetToFunction("gifSmiley", handlePic, [350, 350], 50);
+		AssetLibrary.loadAsset("pngSmiley", handlePic, [10, 10], 5);
+		AssetLibrary.loadAsset("jpgSmiley", handlePic, [200, 200], 15);
+		AssetLibrary.loadAsset("gifSmiley", handlePic, [350, 350], 50);
 		
 		trace(getTimer() - startTest);
 		

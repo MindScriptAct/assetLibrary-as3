@@ -130,7 +130,7 @@ public class MainRemote extends Sprite {
 	private function handleAllLoadFinished(event:AssetEvent):void {
 		myTextField.text = event.filesLoaded + "/" + event.filesQueued + " >>> " + event.bytesLoaded + ":" + event.bytesTotal;
 		DebugMan.info("Main.handleAllLoadFinished > event : " + event);
-		AssetLibrary.sendAssetToFunction("RemoteTest", handleTest);
+		AssetLibrary.loadAsset("RemoteTest", handleTest);
 	}
 
 	private function handleTest(asset:SWFAsset):void {

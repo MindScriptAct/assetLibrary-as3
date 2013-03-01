@@ -115,9 +115,9 @@ public class MainStoradge extends Sprite {
 	 //*/
 
 
-	 	AssetLibrary.sendAssetToFunction("pngSmiley", handlePic); 
-		AssetLibrary.sendAssetToFunction("jpgSmiley", handlePic); 
-		AssetLibrary.sendAssetToFunction("gifSmiley", handlePic);
+	 	AssetLibrary.loadAsset("pngSmiley", handlePic); 
+		AssetLibrary.loadAsset("jpgSmiley", handlePic); 
+		AssetLibrary.loadAsset("gifSmiley", handlePic);
 
 	}
 
@@ -155,14 +155,14 @@ public class MainStoradge extends Sprite {
 	private function handleAllLoadFinished(event:AssetEvent):void {
 		//DebugMan.info("Main.handleAllLoadFinished > event : " + event);
 		//
-		AssetLibrary.sendAssetToFunction("test1", handleTest1);
+		AssetLibrary.loadAsset("test1", handleTest1);
 		//
 		var circle:Sprite = AssetLibrary.getSWFSprite("test2", "CircleA_SPR");
 		this.addChild(circle);
 		circle.x = 50;
 		circle.y = 50;
 		//
-		AssetLibrary.sendAssetToFunction("test3def", handleTest3);
+		AssetLibrary.loadAsset("test3def", handleTest3);
 		//
 		//AssetLibrary.restrictAccsessToNonPermanents = false;
 		//
@@ -173,7 +173,7 @@ public class MainStoradge extends Sprite {
 		//
 
 
-		AssetLibrary.sendAssetToFunction("test5", handleTest5);
+		AssetLibrary.loadAsset("test5", handleTest5);
 		//
 		var circle3:Sprite = AssetLibrary.getSWFSprite("test6", "CircleC_SPR");
 		this.addChild(circle3);
@@ -182,7 +182,7 @@ public class MainStoradge extends Sprite {
 		//
 		
 		
-		AssetLibrary.sendAssetToFunction("test7", handleTest7);
+		AssetLibrary.loadAsset("test7", handleTest7);
 		//
 		var circle4:Sprite = AssetLibrary.getSWFSprite("test8", "CircleD_SPR");
 		this.addChild(circle4);
