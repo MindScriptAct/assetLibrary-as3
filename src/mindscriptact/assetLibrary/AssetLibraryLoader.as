@@ -45,6 +45,8 @@ public class AssetLibraryLoader extends EventDispatcher {
 	public var canUnloadPermanents:Boolean = false;
 	internal var handleStoradgeFail:Function = internalHandleStoradgeFail;
 	assetlibrary var _localStoradgeEnabled:Boolean = false;
+	
+	private var _fakeMissingAssets:Boolean = false;
 	//
 	private var errorHandler:Function;
 	assetlibrary var rootPath:String = "";
@@ -186,6 +188,12 @@ public class AssetLibraryLoader extends EventDispatcher {
 	public function get localStoradgeEnabled():Boolean {
 		use namespace assetlibrary;
 		return _localStoradgeEnabled;
+	}
+	
+	internal function set fakeMissingAssets(value:Boolean):void {
+		use namespace assetlibrary;
+		_fakeMissingAssets = value;
+		assetLoadWorker.fakeMissingAssets = value;
 	}
 	
 	private function handleXmlLoadStart(assetDefinition:AssetDefinition):void {

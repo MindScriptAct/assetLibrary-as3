@@ -17,6 +17,8 @@ public class AssetAbstract {
 	protected var _isLoaded:Boolean = false;
 	protected var _isPermanent:Boolean = false;
 	
+	static protected var _fakeMissingAssets:Boolean = false;
+	
 	public function AssetAbstract(assetId:String) {
 		this._assetId = assetId;
 	}
@@ -59,6 +61,10 @@ public class AssetAbstract {
 	//----------------------------------
 	//     internal
 	//----------------------------------
+	
+	static assetlibrary function set fakeMissingAssets(value:Boolean):void {
+		_fakeMissingAssets = value;
+	}
 	
 	assetlibrary function setData(data:String):void {
 		//CONFIG::debug {

@@ -13,6 +13,7 @@ import flash.utils.ByteArray;
 import mindscriptact.assetLibrary.AssetLibraryLoader;
 import mindscriptact.assetLibrary.core.AssetDefinition;
 import mindscriptact.assetLibrary.core.AssetType;
+import mindscriptact.assetLibrary.core.fakeAssets.FakeAssetHelper;
 import mindscriptact.assetLibrary.core.namespaces.assetlibrary;
 import mindscriptact.assetLibrary.events.AssetEvent;
 
@@ -39,6 +40,8 @@ public class AssetLoadWorker {
 	private var assetLoadersInUse:Vector.<AssetLoader> = new Vector.<AssetLoader>();
 	private var urlLoadersInUse:Vector.<AssetURLLoader> = new Vector.<AssetURLLoader>();
 	private var soundLoadersInUse:Vector.<SoundLoader> = new Vector.<SoundLoader>();
+	//
+	assetlibrary var fakeMissingAssets:Boolean = false;
 	//
 	
 	assetlibrary var filesInProgress:int = 0;
@@ -362,7 +365,13 @@ public class AssetLoadWorker {
 		use namespace assetlibrary;
 		var assetLoader:AssetLoader = (event.target as LoaderInfo).loader as AssetLoader;
 		filesInProgress--;
-		assetLibraryLoader.handleLoadError(assetLoader.asssetDefinition, event.text);
+		
+		if (fakeMissingAssets) {
+			assetLibraryLoader.handleLoadedContent(assetLoader.asssetDefinition, FakeAssetHelper.fakeBitmap(assetLoader.asssetDefinition.assetId + "\n" + assetLoader.asssetDefinition.filePath) , assetLoader.contentLoaderInfo.applicationDomain, false);
+		} else {
+			assetLibraryLoader.handleLoadError(assetLoader.asssetDefinition, event.text);
+		}
+		
 		//
 		if (assetLoader.isConverter) {
 			disposeBinaryAssetLoader(assetLoader);
@@ -377,7 +386,6 @@ public class AssetLoadWorker {
 		filesInProgress--;
 		assetLibraryLoader.handleLoadError(assetUrlLoader.asssetDefinition, event.text);
 		//
-		//assetUrlLoader.dispose();
 		if (assetUrlLoader.dataFormat == URLLoaderDataFormat.BINARY) {
 			disposeBinaryUrlLoader(assetUrlLoader);
 		} else {

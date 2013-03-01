@@ -5,6 +5,7 @@ import flash.display.MovieClip;
 import flash.display.SimpleButton;
 import flash.display.Sprite;
 import flash.media.Sound;
+import mindscriptact.assetLibrary.core.fakeAssets.FakeAssetHelper;
 
 /**
  * Wraper for swf asset
@@ -24,7 +25,11 @@ public class SWFAsset extends AssetAbstract {
 	 */
 	public function getStageContent():MovieClip {
 		if ((content as MovieClip).stage != null) {
-			throw Error("AssetSWF content is already added to display list. You can't use it twice, remove first instance from display list. [assetId:" + assetId + "]");
+			if (_fakeMissingAssets) {
+				return FakeAssetHelper.fakeMovieClip(assetId);
+			} else {
+				throw Error("AssetSWF content is already added to display list. You can't use it twice, remove first instance from display list. [assetId:" + assetId + "]");
+			}
 		}
 		return content as MovieClip;
 	}
@@ -41,7 +46,11 @@ public class SWFAsset extends AssetAbstract {
 		try {
 			var lincageClass:Class = applicationDomain.getDefinition(lincageId) as Class;
 		} catch (error:Error) {
-			throw Error("AssetSWF could not find class with lincageId:" + lincageId + " in assetID:" + assetId);
+			if (_fakeMissingAssets) {
+				return FakeAssetHelper.fakeMovieClip(assetId + "\n" + lincageId);
+			} else {
+				throw Error("AssetSWF could not find class with lincageId:" + lincageId + " in assetID:" + assetId);
+			}
 		}
 		return new lincageClass();
 	}
@@ -58,7 +67,11 @@ public class SWFAsset extends AssetAbstract {
 		try {
 			var lincageClass:Class = applicationDomain.getDefinition(lincageId) as Class;
 		} catch (error:Error) {
-			throw Error("AssetSWF could not find class with lincageId:" + lincageId + " in assetID:" + assetId);
+			if (_fakeMissingAssets) {
+				return FakeAssetHelper.fakeSprite(assetId + "\n" + lincageId);
+			} else {
+				throw Error("AssetSWF could not find class with lincageId:" + lincageId + " in assetID:" + assetId);
+			}
 		}
 		return new lincageClass();
 	}
@@ -75,7 +88,11 @@ public class SWFAsset extends AssetAbstract {
 		try {
 			var lincageClass:Class = applicationDomain.getDefinition(lincageId) as Class;
 		} catch (error:Error) {
-			throw Error("AssetSWF could not find class with lincageId:" + lincageId + " in assetID:" + assetId);
+			if (_fakeMissingAssets) {
+				return FakeAssetHelper.fakeButton(assetId + "\n" + lincageId);
+			} else {
+				throw Error("AssetSWF could not find class with lincageId:" + lincageId + " in assetID:" + assetId);
+			}
 		}
 		return new lincageClass();
 	}
@@ -92,7 +109,12 @@ public class SWFAsset extends AssetAbstract {
 		try {
 			var lincageClass:Class = applicationDomain.getDefinition(lincageId) as Class;
 		} catch (error:Error) {
-			throw Error("AssetSWF could not find class with lincageId:" + lincageId + " in assetID:" + assetId);
+			if (_fakeMissingAssets) {
+				return FakeAssetHelper.fakeBitmapData(assetId + "\n" + lincageId);
+			} else {
+				
+				throw Error("AssetSWF could not find class with lincageId:" + lincageId + " in assetID:" + assetId);
+			}
 		}
 		return new lincageClass();
 	}
@@ -109,10 +131,14 @@ public class SWFAsset extends AssetAbstract {
 		try {
 			var lincageClass:Class = applicationDomain.getDefinition(lincageId) as Class;
 		} catch (error:Error) {
-			throw Error("AssetSWF could not find class with lincageId:" + lincageId + " in assetID:" + assetId);
+			if (_fakeMissingAssets) {
+				return FakeAssetHelper.fakeBitmap(assetId + "\n" + lincageId);
+			} else {
+				throw Error("AssetSWF could not find class with lincageId:" + lincageId + " in assetID:" + assetId);
+			}
 		}
 		return new Bitmap(new lincageClass());
-	}	
+	}
 	
 	/**
 	 * Gives instance of Sound object from library
@@ -126,7 +152,11 @@ public class SWFAsset extends AssetAbstract {
 		try {
 			var lincageClass:Class = applicationDomain.getDefinition(lincageId) as Class;
 		} catch (error:Error) {
-			throw Error("AssetSWF could not find class with lincageId:" + lincageId + " in assetID:" + assetId);
+			if (_fakeMissingAssets) {
+				// TODO : implement
+			} else {
+				throw Error("AssetSWF could not find class with lincageId:" + lincageId + " in assetID:" + assetId);
+			}
 		}
 		return new lincageClass();
 	}

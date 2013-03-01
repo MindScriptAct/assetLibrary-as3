@@ -14,6 +14,7 @@ import mindscriptact.assetLibrary.assets.MP3Asset;
 import mindscriptact.assetLibrary.assets.PICAsset;
 import mindscriptact.assetLibrary.assets.SWFAsset;
 import mindscriptact.assetLibrary.core.AssetDefinition;
+import mindscriptact.assetLibrary.core.fakeAssets.FakeAssetHelper;
 import mindscriptact.assetLibrary.core.namespaces.assetlibrary;
 import mindscriptact.assetLibrary.core.sharedObject.AssetLibraryStoradge;
 import mindscriptact.assetLibrary.core.unloadHelper.AssetLibraryUnloader;
@@ -37,6 +38,8 @@ public class AssetLibrary {
 	static private var assetLibraryLoader:AssetLibraryLoader = new AssetLibraryLoader(assetLibraryIndex, localStoradge, errorHandler);
 	
 	static private var assetUnloader:AssetLibraryUnloader = new AssetLibraryUnloader();
+	
+	static private var _fakeMissingAssets:Boolean = false;
 	
 	/** Time interval for asset library to try and unload not needed assets in secconds.
 	 * By default it is 0 - autounload is disabled.
@@ -181,6 +184,17 @@ public class AssetLibrary {
 		assetLibraryLoader.maxSimultaneousLoads = value;
 	}
 	
+	static public function get fakeMissingAssets():Boolean {
+		return _fakeMissingAssets;
+	}
+	
+	static public function set fakeMissingAssets(value:Boolean):void {
+		use namespace assetlibrary;
+		assetLibraryLoader.fakeMissingAssets = value;
+		_fakeMissingAssets = value;
+		AssetAbstract.fakeMissingAssets = value;
+	}
+	
 	//----------------------------------
 	//     General asset getter
 	//----------------------------------
@@ -313,7 +327,34 @@ public class AssetLibrary {
 							break;
 					}
 				} catch (error:Error) {
-					errorHandler(error);
+					if (_fakeMissingAssets) {
+						switch (type) {
+							case "STAGE": 
+								return FakeAssetHelper.fakeMovieClip(assetId + "\n" + lincageId + "\n" + type);
+								break;
+							case "MC": 
+								return FakeAssetHelper.fakeMovieClip(assetId + "\n" + lincageId + "\n" + type);
+								break;
+							case "SPR": 
+								return FakeAssetHelper.fakeSprite(assetId + "\n" + lincageId + "\n" + type);
+								break;
+							case "BTN": 
+								return FakeAssetHelper.fakeButton(assetId + "\n" + lincageId + "\n" + type);
+								break;
+							case "BD": 
+								return FakeAssetHelper.fakeBitmapData(assetId + "\n" + lincageId + "\n" + type);
+								break;
+							case "SND": 
+								//return asset.getSound(lincageId);
+								// TODO: implement
+								break;
+							default: 
+								trace("not handled case : ", type);
+								break;
+						}
+					} else {
+						errorHandler(error);
+					}
 				}
 			}
 		}
