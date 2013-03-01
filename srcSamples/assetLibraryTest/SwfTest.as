@@ -30,7 +30,7 @@ public class SwfTest extends Sprite {
 	private function init(event:Event = null):void {
 		removeEventListener(Event.ADDED_TO_STAGE, init);
 		// entry point
-		//DebugMan.info("Start");
+		//trace("Start");
 		
 		assetIndex = AssetLibrary.getIndex();
 		

@@ -85,21 +85,20 @@ public class AssetLibraryIndex extends EventDispatcher {
 	 * @param	pathId	unique path ide
 	 * @param	path	path that will be linked with pathId
 	 */
-	public function addPathDefinition(pathId:String, path:String, dynamicPathAssetType:String = null):void {
+	public function addPathDefinition(pathId:String, url:String, dynamicPathAssetType:String = null):void {
 		if (!pathIndex[pathId]) {
 			// ensure that path ends with "/" or "\" character.
-			var lastLetter:String = path.charAt(path.length - 1);
+			var lastLetter:String = url.charAt(url.length - 1);
 			if (lastLetter != "/" && lastLetter != "\\") {
-				path += "/";
-				//DebugMan.info("AssetLibraryIndex.addPathDefinition path should allways end with '/' or '\' character. '/' was added to the end of path:" + path);
+				url += "/";
 			}
-			pathIndex[pathId] = path;
+			pathIndex[pathId] = url;
 			if (dynamicPathAssetType) {
 				dynamicPathAssetTypes[pathId] = dynamicPathAssetType;
 			}
 		} else {
-			if (pathIndex[pathId] != path) {
-				errorHandler(Error("AssetLibraryIndex.addPathDefinition failed : path with same id:" + pathId + " can be defined only once."));
+			if (pathIndex[pathId] != url) {
+				errorHandler(Error("AssetLibraryIndex.addPathDefinition failed : url with same pathId:" + pathId + " can be defined only once."));
 			}
 		}
 	}
@@ -108,9 +107,8 @@ public class AssetLibraryIndex extends EventDispatcher {
 	 * Adds file, path, group definitiens from xml file. XML file is loaded and parsed automaticaly. To track loading progress use AssetLibraryLoader object.(You can get it AssetLibrary.getLoader());
 	 * @param	xmlPath		path of xml that holds
 	 */
-	public function addAssetsFromXML(xmlPath:String):void {
+	public function addDefinitionsFromXML(xmlPath:String):void {
 		use namespace assetlibrary;
-		//DebugMan.info("AssetLibraryIndex.addAssetsFromXML > xmlPath : " + xmlPath + ", assetId : " + assetId);
 		//if (!assetId){
 		var assetId:String = "$_xmlDefinition" + xmlFilesTotal;
 		//}
@@ -123,7 +121,7 @@ public class AssetLibraryIndex extends EventDispatcher {
 			libraryLaderLoadXmlFunction(_assetIndex[assetId]);
 		} else {
 			if ((_assetIndex[assetId] as AssetDefinition).filePath != xmlPath) {
-				errorHandler(Error("AssetLibraryIndex.addAssetsFromXML failed. Different XML definition with assetId:" + assetId + " exists."));
+				errorHandler(Error("AssetLibraryIndex.addDefinitionsFromXML failed. Different XML definition with assetId:" + assetId + " exists."));
 			}
 		}
 	}
@@ -134,7 +132,6 @@ public class AssetLibraryIndex extends EventDispatcher {
 	 * @param	assetId		asset id to be added to group.
 	 */
 	public function addOneAssetToGroup(groupId:String, assetId:String):void {
-		//DebugMan.info("AssetLibraryIndex.addAssetToGroup > groupId : " + groupId + ", assetId : " + assetId);
 		if (!groupIndex[groupId]) {
 			groupIndex[groupId] = new Vector.<String>();
 		}
@@ -147,7 +144,6 @@ public class AssetLibraryIndex extends EventDispatcher {
 	 * @param	assetIds	vector of asset ids to be added to group.
 	 */
 	public function addAssetsToGroup(groupId:String, assetIds:Vector.<String>):void {
-		//DebugMan.info("AssetLibraryIndex.addAssetsToGroup > groupId : " + groupId + ", assetIds : " + assetIds);
 		for (var i:int = 0; i < assetIds.length; i++) {
 			addOneAssetToGroup(groupId, assetIds[i]);
 		}
@@ -177,7 +173,6 @@ public class AssetLibraryIndex extends EventDispatcher {
 	
 	private function addAssetDefinition(assetDefinition:AssetDefinition):void {
 		use namespace assetlibrary;
-		//DebugMan.info("AssetLibraryIndex.addAssetDefinition > assetDefinition : " + assetDefinition);
 		if (!_assetIndex[assetDefinition.assetId]) {
 			if (assetDefinition.isPermanent && !canAddPermanents) {
 				errorHandler(Error("AssetLibraryIndex.addFileDefinition failed : AssetId " + assetDefinition.assetId + " is permanent asset, you can add those only before starting permanent asset preload. If you want to disable this protection: use AssetLibrary.removePermanentAssetProtection();"));
@@ -201,7 +196,7 @@ public class AssetLibraryIndex extends EventDispatcher {
 					asset = new XMLAsset(assetDefinition.assetId);
 					break;
 				default: 
-					//DebugMan.info("AssetLibraryLoader can't handle this type yet. Asset type:", assetDefinition.type);
+					trace("AssetLibraryLoader can't handle this type yet. Asset type:", assetDefinition.type);
 					break;
 			}
 			assetDefinition.asset = asset;

@@ -41,14 +41,14 @@ public class GigTest extends Sprite {
 		
 		AssetLibrary.clearLocalStoradge();
 		
-		DebugMan.info("using storadge :" +AssetLibrary.localStoradgeEnabled);
+		trace("using storadge :" +AssetLibrary.localStoradgeEnabled);
 		
 		stage.addEventListener(KeyboardEvent.KEY_UP, handleKeyPress);
 
 		
 		removeEventListener(Event.ADDED_TO_STAGE, init);
 		// entry point
-		//DebugMan.info("Start");
+		//trace("Start");
 
 		assetIndex = AssetLibrary.getIndex();
 
@@ -77,73 +77,73 @@ public class GigTest extends Sprite {
 	}
 	
 //	private function showInfoWindow():void {
-//		DebugMan.info("showInfoWindow");
+//		trace("showInfoWindow");
 //		AssetLibrary.forseOpenLocalStorageSettings();
 //	}
 	
 	private function handleKeyPress(e:KeyboardEvent):void {
-		DebugMan.info("######################################################################");
+		trace("######################################################################");
 		switch (e.keyCode) {
-			case Keyboard.F1:timeShot = getTimer();DebugMan.info("Load action started for PicPack1...");AssetLibrary.loadAsset("PicPack1", handlePicPack);break;
-			case Keyboard.F2:timeShot = getTimer();DebugMan.info("Load action started for PicPack2...");AssetLibrary.loadAsset("PicPack2", handlePicPack);break;
-			case Keyboard.F3:timeShot = getTimer();DebugMan.info("Load action started for PicPack3...");AssetLibrary.loadAsset("PicPack3", handlePicPack);break;
-			case Keyboard.F4:timeShot = getTimer();DebugMan.info("Load action started for PicPack4...");AssetLibrary.loadAsset("PicPack4", handlePicPack);break;
-			case Keyboard.F5:timeShot = getTimer();DebugMan.info("Load action started for PicPack5...");AssetLibrary.loadAsset("PicPack5", handlePicPack);break;
-			case Keyboard.F6:timeShot = getTimer();DebugMan.info("Load action started for PicPack6...");AssetLibrary.loadAsset("PicPack6", handlePicPack);break;
-			case Keyboard.F7:timeShot = getTimer();DebugMan.info("Load action started for PicPack7...");AssetLibrary.loadAsset("PicPack7", handlePicPack);break;
-			case Keyboard.F8:timeShot = getTimer();DebugMan.info("Load action started for PicPack8...");AssetLibrary.loadAsset("PicPack8", handlePicPack);break;
-			case Keyboard.F9:timeShot = getTimer();DebugMan.info("Load action started for PicPack9...");AssetLibrary.loadAsset("PicPack9", handlePicPack);break;
-			case Keyboard.F10:timeShot = getTimer();DebugMan.info("Load action started for PicPack10...");AssetLibrary.loadAsset("PicPack10", handlePicPack);break;
-			case Keyboard.F11:timeShot = getTimer();DebugMan.info("Load action started for PicPack11...");AssetLibrary.loadAsset("PicPack11", handlePicPack);break;
-			case Keyboard.F12:timeShot = getTimer();DebugMan.info("Load action started for PicPack12...");AssetLibrary.loadAsset("PicPack12", handlePicPack);break;
-			case 49:DebugMan.info("unloading PicPack1...");AssetLibrary.unloadAsset("PicPack1");break;
-			case 50:DebugMan.info("unloading PicPack2...");AssetLibrary.unloadAsset("PicPack2");break;
-			case 51:DebugMan.info("unloading PicPack3...");AssetLibrary.unloadAsset("PicPack3");break;
-			case 52:DebugMan.info("unloading PicPack4...");AssetLibrary.unloadAsset("PicPack4");break;
-			case 53:DebugMan.info("unloading PicPack5...");AssetLibrary.unloadAsset("PicPack5");break;
-			case 54:DebugMan.info("unloading PicPack6...");AssetLibrary.unloadAsset("PicPack6");break;
-			case 55:DebugMan.info("unloading PicPack7...");AssetLibrary.unloadAsset("PicPack7");break;
-			case 56:DebugMan.info("unloading PicPack8...");AssetLibrary.unloadAsset("PicPack8");break;
-			case 57:DebugMan.info("unloading PicPack9...");AssetLibrary.unloadAsset("PicPack9");break;
-			case 48:DebugMan.info("unloading PicPack10...");AssetLibrary.unloadAsset("PicPack10");break;
-			case 219:DebugMan.info("unloading PicPack11...");AssetLibrary.unloadAsset("PicPack11");break;
-			case 221:DebugMan.info("unloading PicPack12...");AssetLibrary.unloadAsset("PicPack12");break;
+			case Keyboard.F1:timeShot = getTimer();trace("Load action started for PicPack1...");AssetLibrary.loadAsset("PicPack1", handlePicPack);break;
+			case Keyboard.F2:timeShot = getTimer();trace("Load action started for PicPack2...");AssetLibrary.loadAsset("PicPack2", handlePicPack);break;
+			case Keyboard.F3:timeShot = getTimer();trace("Load action started for PicPack3...");AssetLibrary.loadAsset("PicPack3", handlePicPack);break;
+			case Keyboard.F4:timeShot = getTimer();trace("Load action started for PicPack4...");AssetLibrary.loadAsset("PicPack4", handlePicPack);break;
+			case Keyboard.F5:timeShot = getTimer();trace("Load action started for PicPack5...");AssetLibrary.loadAsset("PicPack5", handlePicPack);break;
+			case Keyboard.F6:timeShot = getTimer();trace("Load action started for PicPack6...");AssetLibrary.loadAsset("PicPack6", handlePicPack);break;
+			case Keyboard.F7:timeShot = getTimer();trace("Load action started for PicPack7...");AssetLibrary.loadAsset("PicPack7", handlePicPack);break;
+			case Keyboard.F8:timeShot = getTimer();trace("Load action started for PicPack8...");AssetLibrary.loadAsset("PicPack8", handlePicPack);break;
+			case Keyboard.F9:timeShot = getTimer();trace("Load action started for PicPack9...");AssetLibrary.loadAsset("PicPack9", handlePicPack);break;
+			case Keyboard.F10:timeShot = getTimer();trace("Load action started for PicPack10...");AssetLibrary.loadAsset("PicPack10", handlePicPack);break;
+			case Keyboard.F11:timeShot = getTimer();trace("Load action started for PicPack11...");AssetLibrary.loadAsset("PicPack11", handlePicPack);break;
+			case Keyboard.F12:timeShot = getTimer();trace("Load action started for PicPack12...");AssetLibrary.loadAsset("PicPack12", handlePicPack);break;
+			case 49:trace("unloading PicPack1...");AssetLibrary.unloadAsset("PicPack1");break;
+			case 50:trace("unloading PicPack2...");AssetLibrary.unloadAsset("PicPack2");break;
+			case 51:trace("unloading PicPack3...");AssetLibrary.unloadAsset("PicPack3");break;
+			case 52:trace("unloading PicPack4...");AssetLibrary.unloadAsset("PicPack4");break;
+			case 53:trace("unloading PicPack5...");AssetLibrary.unloadAsset("PicPack5");break;
+			case 54:trace("unloading PicPack6...");AssetLibrary.unloadAsset("PicPack6");break;
+			case 55:trace("unloading PicPack7...");AssetLibrary.unloadAsset("PicPack7");break;
+			case 56:trace("unloading PicPack8...");AssetLibrary.unloadAsset("PicPack8");break;
+			case 57:trace("unloading PicPack9...");AssetLibrary.unloadAsset("PicPack9");break;
+			case 48:trace("unloading PicPack10...");AssetLibrary.unloadAsset("PicPack10");break;
+			case 219:trace("unloading PicPack11...");AssetLibrary.unloadAsset("PicPack11");break;
+			case 221:trace("unloading PicPack12...");AssetLibrary.unloadAsset("PicPack12");break;
 			default:
 			break;
 		}
 	}
 	
 	private function handlePicPack(asset:SWFAsset):void {
-		DebugMan.info("GigTest.handlePicPack > asset loaded in ", (getTimer() - timeShot), "ms", "momery:",fpsCounter.mem);
+		trace("GigTest.handlePicPack > asset loaded in ", (getTimer() - timeShot), "ms", "momery:",fpsCounter.mem);
 	}
 
 
 
 //	private function handleLoadingProgress(event:AssetEvent):void {
-		//DebugMan.info("#>>>Main.handleLoadingProgress > event : " + event);
+		//trace("#>>>Main.handleLoadingProgress > event : " + event);
 //	}
 
 
 
 //	private function handleXMLLoadStartted(event:AssetEvent):void {
-		//DebugMan.info("Main.handleXMLLoadStartted > event : " + event);
+		//trace("Main.handleXMLLoadStartted > event : " + event);
 //	}
 
 //	private function handleXMLLoadFinished(e:AssetEvent):void {
-		//DebugMan.info("Main.handleXMLLoadFinished > e : " + e);
+		//trace("Main.handleXMLLoadFinished > e : " + e);
 //	}
 
 //	private function handleXmlsLoadedFinished(e:AssetEvent):void {
-		//DebugMan.info("Main.handleXmlsLoadedFinished > e : " + e);
+		//trace("Main.handleXmlsLoadedFinished > e : " + e);
 
 //	}
 
 //	private function handleLoadStarted(event:AssetEvent):void {
-		//DebugMan.info("Main.handleLoadStarted > event : " + event);
+		//trace("Main.handleLoadStarted > event : " + event);
 //	}
 
 //	private function handleLoadFinished(event:AssetEvent):void {
-		//DebugMan.info("Main.handleLoadFinished > event : " + event);
+		//trace("Main.handleLoadFinished > event : " + event);
 //	}
 	
 	

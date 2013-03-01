@@ -43,7 +43,6 @@ public class MainStoradgeTest extends Sprite {
 	private function init(event:Event = null):void {
 		removeEventListener(Event.ADDED_TO_STAGE, init);
 		// entry point
-		//DebugMan.info("Start");
 		
 		this.addChild(new Stats(120, 0, 0, false, true, true));
 		

@@ -29,7 +29,7 @@ public class MainRemote extends Sprite {
 	private function init(event:Event = null):void {
 		removeEventListener(Event.ADDED_TO_STAGE, init);
 		// entry point
-		DebugMan.info("Start");
+		trace("Start");
 
 		assetIndex = AssetLibrary.getIndex();
 
@@ -70,7 +70,7 @@ public class MainRemote extends Sprite {
 
 
 
-		assetIndex.addAssetsFromXML("temp/remoteDir/remoteFiles.xml?r=2");
+		assetIndex.addDefinitionsFromXML("temp/remoteDir/remoteFiles.xml?r=2");
 
 
 
@@ -91,36 +91,36 @@ public class MainRemote extends Sprite {
 
 
 	private function handleLoadingProgress(event:AssetEvent):void {
-		DebugMan.info("#>>>Main.handleLoadingProgress > event : " + event);
+		trace("#>>>Main.handleLoadingProgress > event : " + event);
 		myTextField.text = event.filesLoaded + "/" + event.filesQueued + " >>> " + event.bytesLoaded + ":" + event.bytesTotal;
 	}
 
 
 
 	private function handleXMLLoadStartted(event:AssetEvent):void {
-		DebugMan.info("Main.handleXMLLoadStartted > event : " + event);
+		trace("Main.handleXMLLoadStartted > event : " + event);
 		myTextField.text = event.filesLoaded + "/" + event.filesQueued + " >>> " + event.bytesLoaded + ":" + event.bytesTotal;
 	}
 
 	private function handleXMLLoadFinished(event:AssetEvent):void {
-		DebugMan.info("Main.handleXMLLoadFinished > event : " + event);
+		trace("Main.handleXMLLoadFinished > event : " + event);
 		myTextField.text = event.filesLoaded + "/" + event.filesQueued + " >>> " + event.bytesLoaded + ":" + event.bytesTotal;
 
 	}
 
 //	private function handleXmlsLoadedFinished(event:AssetEvent):void {
-//		DebugMan.info("Main.handleXmlsLoadedFinished > event : " + event);
+//		trace("Main.handleXmlsLoadedFinished > event : " + event);
 //		myTextField.text = event.filesLoaded + "/" + event.filesQueued + " >>> " + event.bytesLoaded + ":" + event.bytesTotal;
 //	}
 
 	private function handleLoadStarted(event:AssetEvent):void {
-		DebugMan.info("Main.handleLoadStarted > event : " + event);
+		trace("Main.handleLoadStarted > event : " + event);
 		myTextField.text = event.filesLoaded + "/" + event.filesQueued + " >>> " + event.bytesLoaded + ":" + event.bytesTotal;
 
 	}
 
 	private function handleLoadFinished(event:AssetEvent):void {
-		DebugMan.info("Main.handleLoadFinished > event : " + event);
+		trace("Main.handleLoadFinished > event : " + event);
 		myTextField.text = event.filesLoaded + "/" + event.filesQueued + " >>> " + event.bytesLoaded + ":" + event.bytesTotal;
 
 	}
@@ -129,12 +129,12 @@ public class MainRemote extends Sprite {
 
 	private function handleAllLoadFinished(event:AssetEvent):void {
 		myTextField.text = event.filesLoaded + "/" + event.filesQueued + " >>> " + event.bytesLoaded + ":" + event.bytesTotal;
-		DebugMan.info("Main.handleAllLoadFinished > event : " + event);
+		trace("Main.handleAllLoadFinished > event : " + event);
 		AssetLibrary.loadAsset("RemoteTest", handleTest);
 	}
 
 	private function handleTest(asset:SWFAsset):void {
-		DebugMan.info("Main.handleTest > asset : " + asset);
+		trace("Main.handleTest > asset : " + asset);
 
 		var testSprite:Sprite = asset.getSprite("WaterTigerSPR");
 		this.addChild(testSprite);

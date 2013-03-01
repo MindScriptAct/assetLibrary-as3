@@ -15,11 +15,11 @@ import mindscriptact.assetLibrary.assets.MP3Asset;
 import mindscriptact.assetLibrary.assets.PICAsset;
 import mindscriptact.assetLibrary.assets.SWFAsset;
 import mindscriptact.assetLibrary.core.AssetDefinition;
+import mindscriptact.assetLibrary.core.AssetType;
 import mindscriptact.assetLibrary.core.fakeAssets.FakeAssetHelper;
 import mindscriptact.assetLibrary.core.namespaces.assetlibrary;
 import mindscriptact.assetLibrary.core.sharedObject.AssetLibraryStoradge;
 import mindscriptact.assetLibrary.core.unloadHelper.AssetLibraryUnloader;
-import mindscriptact.logmaster.DebugMan;
 
 /**
  * Asset managment utility.
@@ -92,7 +92,6 @@ public class AssetLibrary {
 	}
 	
 	static public function loadGroupAssets(groupId:String):void {
-		DebugMan.info("AssetLibraryIndex.loadGroupAssets > groupId : " + groupId);
 		var assetIds:Vector.<String> = assetLibraryIndex.getGroupAssets(groupId);
 		for (var i:int = 0; i < assetIds.length; i++) {
 			AssetLibrary.loadAsset(assetIds[i], handleAssetBlank);
@@ -100,11 +99,9 @@ public class AssetLibrary {
 	}
 	
 	static private function handleAssetBlank(asset:AssetAbstract):void {
-		DebugMan.info("AssetLibrary.handleAssetBlank > asset : " + asset.assetId);
 	}
 	
 	static public function unloadGroupAssets(groupId:String):void {
-		DebugMan.info("AssetLibraryIndex.unloadGroupAssets > groupId : " + groupId);
 		var assetIds:Vector.<String> = assetLibraryIndex.getGroupAssets(groupId);
 		for (var i:int = 0; i < assetIds.length; i++) {
 			AssetLibrary.unloadAsset(assetIds[i]);
@@ -200,6 +197,13 @@ public class AssetLibrary {
 	//     General asset getter
 	//----------------------------------
 	
+	/**
+	 * Funcion will load and send asset object to callbackFunction function.
+	 * @param	assetId				assetId used to indentify asset.
+	 * @param	callbackFunction	Funcion that will get asset object as parameter then it is loaded, or instantly if it is cached.
+	 * @param	callBackParams		Aditional parameters that can be sent to callback function.
+	 * @param	assetKeepTime		Defines how long asset must be kept in cache in secconds.
+	 */
 	static public function loadAsset(assetId:String, callbackFunction:Function, callBackParams:Array = null, assetKeepTime:int = int.MAX_VALUE):void {
 		use namespace assetlibrary;
 		if (!callBackParams) {
@@ -227,7 +231,16 @@ public class AssetLibrary {
 	//     Dynamic asset getter
 	//----------------------------------
 	
-	static public function loadDynamicAsset(pathId:String, assetId:String, callbackFunction:Function, callBackParams:Array = null, assetKeepTime:int = int.MAX_VALUE):void {
+	/**
+	 * Function to load asset dynamicaly. Asset does not need to be defined. pothId - must be defined and it must have 'dynamicPathAssetType' set. All suported types are in AssetType class.
+	 * @param	pathId				path id for defined path for dinamyc files, this path MUST have 'dynamicPathAssetType' set. All suported types are in AssetType class.
+	 * @param	assetId				assetId used to indentify asset.
+	 * @param	callbackFunction	Funcion that will get asset object as parameter then it is loaded, or instantly if it is cached.
+	 * @param	callBackParams		Aditional parameters that can be sent to callback function.
+	 * @param	assetKeepTime		Defines how long asset must be kept in cache in secconds.
+	 * @param	fileName			If fileName is not provided -  assetId is used as filename. Best practice is to keep assetId the same as fileName, but if it can't be done you have to provide actial fileName.
+	 */
+	static public function loadDynamicAsset(pathId:String, assetId:String, callbackFunction:Function, callBackParams:Array = null, assetKeepTime:int = int.MAX_VALUE, fileName:String = null):void {
 		use namespace assetlibrary;
 		
 		// check if path is dynamic.
@@ -236,10 +249,14 @@ public class AssetLibrary {
 			errorHandler(Error("AssetLibrary.loadDynamicAsset can load only files from paths that have 'dynamicPathAssetType' parameter set with assetIndex.addPathDefinition() function. Failed with assetId :" + assetId));
 		}
 		
+		if (!fileName) {
+			fileName = assetId;
+		}
+		
 		// check if definition exists, if not - created it.
 		var assetDefinition:AssetDefinition = assetLibraryIndex.getAssetDefinition(assetId);
 		if (!assetDefinition) {
-			assetLibraryIndex.addFileDefinition(assetId, assetId + "." + assetType, pathId);
+			assetLibraryIndex.addFileDefinition(assetId, fileName + "." + assetType, pathId);
 		}
 		
 		// load asset normaly

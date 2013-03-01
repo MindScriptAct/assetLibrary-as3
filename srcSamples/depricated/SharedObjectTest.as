@@ -31,19 +31,19 @@ public class SharedObjectTest extends Sprite {
 
 		var testTime:int = getTimer();
 		convertToMovieClip(assetLibrarStogarde.get("aaaaaaaaaaaha", "") as ByteArray);
-		DebugMan.info("GET : ", (getTimer() - testTime));
+		trace("GET : ", (getTimer() - testTime));
 
 	}
 
 	private function handleFileLoad(event:Event):void {
-		DebugMan.info("SharedObjectTest.handleFileLoad > event : " + event);
+		trace("SharedObjectTest.handleFileLoad > event : " + event);
 		//this.addChild(event)
 
 		convertToMovieClip((event.target as URLLoader).data as ByteArray);
 
 		var testTime:int = getTimer();
 		assetLibrarStogarde.store("aaaaaaaaaaaha","", (event.target as URLLoader).data as ByteArray);
-		DebugMan.info("STORE : ", (getTimer() - testTime));
+		trace("STORE : ", (getTimer() - testTime));
 	}
 
 	private function convertToMovieClip(data:ByteArray):void {
@@ -53,7 +53,7 @@ public class SharedObjectTest extends Sprite {
 	}
 
 	private function onConvertFinished(event:Event):void {
-		DebugMan.info("SharedObjectTest.onConvertFinished > event : " + event);
+		trace("SharedObjectTest.onConvertFinished > event : " + event);
 		this.addChild((event.target as LoaderInfo).content);
 	}
 

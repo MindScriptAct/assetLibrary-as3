@@ -9,7 +9,6 @@ import flash.events.Event;
 import flash.events.IOErrorEvent;
 import flash.events.ProgressEvent;
 import flash.utils.getDefinitionByName;
-import mindscriptact.logmaster.DebugMan;
 
 /**
  * Small preloader for main aplication swf file loading.
@@ -53,7 +52,7 @@ public class Preloader extends MovieClip {
 	}
 
 	private function ioError(e:IOErrorEvent):void {
-		DebugMan.info(e.text);
+		trace(e.text);
 	}
 
 	private function progress(e:ProgressEvent):void {

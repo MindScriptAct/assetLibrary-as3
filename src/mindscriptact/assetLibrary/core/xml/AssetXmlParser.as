@@ -1,7 +1,6 @@
 package mindscriptact.assetLibrary.core.xml {
 import mindscriptact.assetLibrary.AssetLibraryIndex;
 import mindscriptact.assetLibrary.assets.XMLAsset;
-import mindscriptact.logmaster.DebugMan;
 
 /**
  * Asset xml file parser.
@@ -16,7 +15,6 @@ public class AssetXmlParser {
 	}
 	
 	public function parseXML(asset:XMLAsset):void {
-		DebugMan.info("AssetXmlParser.parseXML > asset : " + asset);
 		var assetXml:XML = new XML(asset.getData());
 		// path's
 		var elementCount:int = assetXml.path.length();
@@ -38,17 +36,17 @@ public class AssetXmlParser {
 	}
 	
 	private function parsePath(pathXml:XML, groupId:String = null):void {
-		assetIndex.addPathDefinition(pathXml.@id, pathXml.@url);
+		assetIndex.addPathDefinition(pathXml.@pathId, pathXml.@url, pathXml.@dynamicPathAssetType);
 		// files in path's
 		var elementCount:int = pathXml.file.length();
 		for (var f:int = 0; f < elementCount; f++) {
-			parseFileXml(pathXml.file[f], pathXml.@id, groupId);
+			parseFileXml(pathXml.file[f], pathXml.@pathId, groupId);
 		}
 		// groups in path's
 		if (!groupId) {
 			elementCount = pathXml.group.length();
 			for (var g:int = 0; g < elementCount; g++) {
-				parseGroup(pathXml.group[g], pathXml.@id);
+				parseGroup(pathXml.group[g], pathXml.@pathId);
 			}
 		}
 	

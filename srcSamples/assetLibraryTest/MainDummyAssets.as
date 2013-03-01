@@ -30,7 +30,7 @@ public class MainDummyAssets extends Sprite {
 	private function init(event:Event = null):void {
 		removeEventListener(Event.ADDED_TO_STAGE, init);
 		// entry point
-		//DebugMan.info("Start");
+		//trace("Start");
 
 		assetIndex = AssetLibrary.getIndex();
 
@@ -78,9 +78,9 @@ public class MainDummyAssets extends Sprite {
 		
 		
 
-		assetIndex.addAssetsFromXML("xml/mainAssets.xml");
-		assetIndex.addAssetsFromXML("xmlMore/secondaryAssets.xml");
-		assetIndex.addAssetsFromXML("xmlMore/unloadAssets.xml");
+		assetIndex.addDefinitionsFromXML("xml/mainAssets.xml");
+		assetIndex.addDefinitionsFromXML("xmlMore/secondaryAssets.xml");
+		assetIndex.addDefinitionsFromXML("xmlMore/unloadAssets.xml");
 
 
 		assetLoader.preloadPermanents();
@@ -115,35 +115,35 @@ public class MainDummyAssets extends Sprite {
 
 
 	private function handleLoadingProgress(event:AssetEvent):void {
-		DebugMan.info("#>>>Main.handleLoadingProgress > event : " + event);
+		trace("#>>>Main.handleLoadingProgress > event : " + event);
 	}
 
 
 
 	private function handleXMLLoadStartted(event:AssetLoaderEvent):void {
-		DebugMan.info("Main.handleXMLLoadStartted > event : " + event);
+		trace("Main.handleXMLLoadStartted > event : " + event);
 	}
 
 	private function handleXMLLoadFinished(event:AssetLoaderEvent):void {
-		DebugMan.info("Main.handleXMLLoadFinished > event : " + event);
+		trace("Main.handleXMLLoadFinished > event : " + event);
 	}
 
 //	private function handleXmlsLoadedFinished(event:AssetEvent):void {
-//		DebugMan.info("Main.handleXmlsLoadedFinished > event : " + event);
+//		trace("Main.handleXmlsLoadedFinished > event : " + event);
 //	}
 
 	private function handleLoadStarted(event:AssetEvent):void {
-		DebugMan.info("Main.handleLoadStarted > event : " + event);
+		trace("Main.handleLoadStarted > event : " + event);
 	}
 
 	private function handleLoadFinished(event:AssetEvent):void {
-		DebugMan.info("Main.handleLoadFinished > event : " + event);
+		trace("Main.handleLoadFinished > event : " + event);
 	}
 
 
 
 	private function handleAllLoadFinished(event:AssetLoaderEvent):void {
-		////DebugMan.info("Main.handleAllLoadFinished > event : " + event);
+		////trace("Main.handleAllLoadFinished > event : " + event);
 		//
 		AssetLibrary.loadAsset("test1", handleTest1);
 		//
@@ -182,7 +182,7 @@ public class MainDummyAssets extends Sprite {
 	}
 
 	private function handleTest1(asset:SWFAsset):void {
-		////DebugMan.info("Main.handleTest1 > asset : " + asset);
+		////trace("Main.handleTest1 > asset : " + asset);
 
 		var anim:MovieClip = asset.getMovieClip("-AnimMC");
 		this.addChild(anim);
@@ -196,7 +196,7 @@ public class MainDummyAssets extends Sprite {
 	}
 
 	private function handleTest3(asset:SWFAsset):void {
-		////DebugMan.info("Main.handleTest3 > asset : " + asset);
+		////trace("Main.handleTest3 > asset : " + asset);
 		var testSprite:Sprite = asset.getSprite("-SquareB_SPR");
 		this.addChild(testSprite);
 		testSprite.x = 300;
@@ -204,7 +204,7 @@ public class MainDummyAssets extends Sprite {
 	}
 
 	private function handleTest7(asset:SWFAsset):void {
-		////DebugMan.info("Main.handleTest7 > asset : " + asset);
+		////trace("Main.handleTest7 > asset : " + asset);
 		var testSprite:Sprite = asset.getSprite("-SquareD_SPR");
 		this.addChild(testSprite);
 		testSprite.x = 700;
@@ -212,7 +212,7 @@ public class MainDummyAssets extends Sprite {
 	}
 	
 	private function handleTest5(asset:SWFAsset):void {
-		////DebugMan.info("Main.handleTest5 > asset : " + asset);
+		////trace("Main.handleTest5 > asset : " + asset);
 		var testSprite:Sprite = asset.getSprite("-SquareC_SPR");
 		this.addChild(testSprite);
 		testSprite.x = 500;
@@ -246,7 +246,7 @@ public class MainDummyAssets extends Sprite {
 	}
 
 //	private function testSomeStuff():void {
-		////DebugMan.info("Main.testSomeStuff");
+		////trace("Main.testSomeStuff");
 		
 		
 		/*
@@ -279,7 +279,7 @@ public class MainDummyAssets extends Sprite {
 		/*
 		var testTime:int = getTimer();
 		var asset:AssetMP3 = ShareDemo.get("littleSound") as AssetMP3;
-		//DebugMan.info("geting took : ", (getTimer() - testTime));
+		//trace("geting took : ", (getTimer() - testTime));
 		asset.play();
 		//*/
 		
@@ -287,13 +287,13 @@ public class MainDummyAssets extends Sprite {
 //	}
 	
 //	private function handleSound(asset:MP3Asset):void {
-		//DebugMan.info("Main.handleSound > asset : " + asset);
+		//trace("Main.handleSound > asset : " + asset);
 		
 //		asset.play();
 //	}
 	
 	private function handlePic(asset:PICAsset):void {
-		//DebugMan.info("Main.handlePic > asset : " + asset);
+		//trace("Main.handlePic > asset : " + asset);
 		
 		var bitMap:Bitmap = asset.getBitmap();
 		this.addChild(bitMap);

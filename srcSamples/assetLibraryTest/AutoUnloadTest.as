@@ -46,7 +46,7 @@ public class AutoUnloadTest extends Sprite {
 	}
 	
 	private function handlePic(asset:PICAsset, xPos:int, yPos:int):void {
-		//DebugMan.info("Main.handlePic > asset : " + asset);
+		//trace("Main.handlePic > asset : " + asset);
 		
 		var bitMap:Bitmap = asset.getBitmap();
 		this.addChild(bitMap);

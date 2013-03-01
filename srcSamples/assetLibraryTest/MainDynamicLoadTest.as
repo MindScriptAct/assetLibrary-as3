@@ -11,7 +11,7 @@ import mindscriptact.assetLibrary.assets.SWFAsset;
 import mindscriptact.assetLibrary.core.AssetType;
 import mindscriptact.assetLibrary.events.AssetEvent;
 import mindscriptact.assetLibrary.events.AssetLoaderEvent;
-import mindscriptact.logmaster.DebugMan;
+
 
 /**
  * Application initial point. PureMVC starter.
@@ -31,7 +31,7 @@ public class MainDynamicLoadTest extends Sprite {
 	private function init(event:Event = null):void {
 		removeEventListener(Event.ADDED_TO_STAGE, init);
 		// entry point
-		//DebugMan.info("Start");
+		//trace("Start");
 		
 		assetIndex = AssetLibrary.getIndex();
 		
@@ -67,34 +67,34 @@ public class MainDynamicLoadTest extends Sprite {
 	}
 	
 	private function handleLoadingProgress(event:AssetEvent):void {
-		DebugMan.info("#>>>MainDynamicLoadTest.handleLoadingProgress > event : " + event);
+		trace("#>>>MainDynamicLoadTest.handleLoadingProgress > event : " + event);
 	}
 	
 	private function handleXMLLoadStartted(event:AssetLoaderEvent):void {
-		DebugMan.info("MainDynamicLoadTest.handleXMLLoadStartted > event : " + event);
+		trace("MainDynamicLoadTest.handleXMLLoadStartted > event : " + event);
 	}
 	
 	private function handleXMLLoadFinished(event:AssetLoaderEvent):void {
-		DebugMan.info("MainDynamicLoadTest.handleXMLLoadFinished > event : " + event);
+		trace("MainDynamicLoadTest.handleXMLLoadFinished > event : " + event);
 	}
 	
 //	private function handleXmlsLoadedFinished(event:AssetEvent):void {
-//		DebugMan.info("Main.handleXmlsLoadedFinished > event : " + event);
+//		trace("Main.handleXmlsLoadedFinished > event : " + event);
 //	}
 	
 	private function handleLoadStarted(event:AssetEvent):void {
-		//DebugMan.info("Main.handleLoadStarted > event : " + event);
+		//trace("Main.handleLoadStarted > event : " + event);
 	}
 	
 	private function handleLoadFinished(event:AssetEvent):void {
-		//DebugMan.info("Main.handleLoadFinished > event : " + event);
+		//trace("Main.handleLoadFinished > event : " + event);
 	}
 	
 	private function handleAllLoadFinished(event:AssetLoaderEvent):void {
 	}
 	
 	private function handleTest1(asset:SWFAsset):void {
-		////DebugMan.info("Main.handleTest1 > asset : " + asset);
+		////trace("Main.handleTest1 > asset : " + asset);
 		
 		var anim:MovieClip = asset.getMovieClip("AnimMC");
 		this.addChild(anim);
@@ -109,7 +109,7 @@ public class MainDynamicLoadTest extends Sprite {
 	
 	private function handleTest2(asset:SWFAsset):void {
 		trace("MainDynamicLoadTest.handleTest2 > asset : " + asset);
-		////DebugMan.info("Main.handleTest3 > asset : " + asset);
+		////trace("Main.handleTest3 > asset : " + asset);
 		//var testSprite:Sprite = asset.getSprite("SquareB_SPR");
 		//this.addChild(testSprite);
 		//testSprite.x = 300;

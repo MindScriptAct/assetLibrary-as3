@@ -25,9 +25,9 @@ public class AssetLibraryStoradge {
 			flushStatus = mySharedObjectIndex.flush();
 			retVal = true;
 		} catch (error:Error) {
-			//DebugMan.info("Error...Could not write SharedObject to disk, flushStatus:", flushStatus);
+			//trace("Error...Could not write SharedObject to disk, flushStatus:", flushStatus);
 		}
-		//DebugMan.info(" !! canUseStoreCheck :" + (getTimer() - timeCheck));
+		//trace(" !! canUseStoreCheck :" + (getTimer() - timeCheck));
 		return retVal;
 	}
 	

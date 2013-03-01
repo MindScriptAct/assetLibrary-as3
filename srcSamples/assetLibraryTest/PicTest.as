@@ -29,7 +29,7 @@ public class PicTest extends Sprite {
 		// entry point
 		
 		this.addChild(new Stats());
-		//DebugMan.info("Start");
+		//trace("Start");
 
 		assetIndex = AssetLibrary.getIndex();
 

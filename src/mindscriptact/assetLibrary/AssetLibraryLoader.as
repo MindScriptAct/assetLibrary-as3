@@ -12,7 +12,6 @@ import mindscriptact.assetLibrary.core.sharedObject.AssetLibraryStoradge;
 import mindscriptact.assetLibrary.core.xml.AssetXmlParser;
 import mindscriptact.assetLibrary.events.AssetEvent;
 import mindscriptact.assetLibrary.events.AssetLoaderEvent;
-import mindscriptact.logmaster.DebugMan;
 
 [Event(name="assetXmlLoadingStarted",type="mindscriptact.assetLibrary.events.AssetLoaderEvent")]
 [Event(name="assetXmlLoaded",type="mindscriptact.assetLibrary.events.AssetLoaderEvent")]
@@ -77,7 +76,6 @@ public class AssetLibraryLoader extends EventDispatcher {
 	public function preloadPermanents():void {
 		if (!isPreloadingXMLs) {
 			var filesForPreloading:Vector.<AssetDefinition> = assetLibraryIndex.getAssetsForPreloading();
-			DebugMan.info("filesForPreloading : " + filesForPreloading);
 			for (var i:int = 0; i < filesForPreloading.length; i++) {
 				loadAsset(filesForPreloading[i]);
 			}
@@ -93,7 +91,6 @@ public class AssetLibraryLoader extends EventDispatcher {
 	
 	internal function loadAsset(item:AssetDefinition):void {
 		use namespace assetlibrary;
-		//DebugMan.info("AssetLibraryLoader.loadAsset > item : " + item);
 		filesQueue.push(item);
 		//
 		this.totalFiles++;
@@ -132,7 +129,6 @@ public class AssetLibraryLoader extends EventDispatcher {
 					} else {
 						testTime = getTimer();
 						var binary:ByteArray = localStoradge.get(loadItem.assetId, loadItem.filePath);
-						DebugMan.info(" >> binary file retreved !:", (getTimer() - testTime), "data exists:", (binary != null));
 						testTime = getTimer();
 						if (binary) {
 							assetLoadWorker.loadStoradgeBytes(loadItem, binary);
@@ -148,7 +144,7 @@ public class AssetLibraryLoader extends EventDispatcher {
 					assetLoadWorker.loadSound(loadItem);
 					break;
 				default: 
-					DebugMan.info("WARNING : type is not handled.", loadItem.type);
+					trace("WARNING : type is not handled.", loadItem.type);
 					break;
 			}
 			// start simultaneous loads if able.
@@ -197,7 +193,7 @@ public class AssetLibraryLoader extends EventDispatcher {
 	}
 	
 	private function handleXmlLoadStart(assetDefinition:AssetDefinition):void {
-		//DebugMan.info("AssetLibraryLoader.handleXmlLoadStart > event : " + event.assetDefinition.assetId);
+		//trace("AssetLibraryLoader.handleXmlLoadStart > event : " + event.assetDefinition.assetId);
 		isPreloadingXMLs = true;
 		loadAsset(assetDefinition);
 	}
@@ -212,13 +208,13 @@ public class AssetLibraryLoader extends EventDispatcher {
 	
 	assetlibrary function handleBinaryDataLoad(asssetDefinition:AssetDefinition, data:ByteArray):void {
 		use namespace assetlibrary;
-		DebugMan.info(" @@ binary file loaded:", getTimer() - testTime);
+		trace(" @@ binary file loaded:", getTimer() - testTime);
 		testTime = getTimer();
 		//
 		if (!localStoradge.store(asssetDefinition.assetId, asssetDefinition.filePath, data)) {
 			errorHandler(Error("Storing assit to local SharedObject failed." + " [assetId:" + asssetDefinition.assetId + "] [assetPath:" + asssetDefinition.filePath + "]"));
 		}
-		DebugMan.info(" << binary file stored:", getTimer() - testTime);
+		trace(" << binary file stored:", getTimer() - testTime);
 		testTime = getTimer();
 		//		
 		assetLoadWorker.loadStoradgeBytes(asssetDefinition, data);
@@ -229,9 +225,9 @@ public class AssetLibraryLoader extends EventDispatcher {
 		use namespace assetlibrary;
 		// benchmarking
 		if (binaryLoad) {
-			DebugMan.info(" ## binary file converted to object:", getTimer() - testTime);
+			trace(" ## binary file converted to object:", getTimer() - testTime);
 		} else {
-			DebugMan.info(" $$ normal load", getTimer() - testTime);
+			trace(" $$ normal load", getTimer() - testTime);
 		}
 		this.lodedFiles++;
 		//
@@ -244,7 +240,7 @@ public class AssetLibraryLoader extends EventDispatcher {
 	assetlibrary function handleTextContent(asssetDefinition:AssetDefinition, data:String):void {
 		use namespace assetlibrary;
 		//
-		DebugMan.info("!!! AssetLibraryLoader.handleTextContent");
+		trace("!!! AssetLibraryLoader.handleTextContent");
 		//
 		this.lodedFiles++;
 		//
