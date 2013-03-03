@@ -9,7 +9,7 @@ import mindscriptact.assetLibrary.AssetLibraryLoader;
 import mindscriptact.assetLibrary.assets.PICAsset;
 import mindscriptact.assetLibrary.assets.SWFAsset;
 import mindscriptact.assetLibrary.event.AssetEvent;
-import mindscriptact.assetLibrary.core.sharedObject.AssetLibraryStoradge;
+import mindscriptact.assetLibrary.core.sharedObject.AssetLibraryStorage;
 import mindscriptact.logmaster.DebugMan;
 
 /**
@@ -17,12 +17,12 @@ import mindscriptact.logmaster.DebugMan;
  * @author Raimundas Banevicius
  */
 //[Frame(factoryClass="assetLibraryTest.Preloader")]
-public class MainStoradge extends Sprite {
+public class MainStorage extends Sprite {
 	private var assetIndex:AssetLibraryIndex;
 	private var assetLoader:AssetLibraryLoader;
-	private var assetLibrarStogarde : AssetLibraryStoradge;
+	private var assetLibrarStogarde : AssetLibraryStorage;
 
-	public function MainStoradge():void {
+	public function MainStorage():void {
 		if (stage)
 			init();
 		else
@@ -38,13 +38,13 @@ public class MainStoradge extends Sprite {
 
 		assetLoader = AssetLibrary.getLoader();
 		
-		AssetLibrary.localStoradgeEnabled = true;
+		AssetLibrary.useLocalStorage = true;
 
 		//var asset:AssetSWF = new AssetSWF();		
 		//assetIndex.addAsset(asset);
 
 
-		assetLibrarStogarde = new AssetLibraryStoradge();
+		assetLibrarStogarde = new AssetLibraryStorage();
 
 		//
 		assetLoader.addEventListener(AssetEvent.XML_LOADING_STARTED, handleXMLLoadStartted);

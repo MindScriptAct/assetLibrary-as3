@@ -7,7 +7,7 @@ package depricated {
 	import flash.net.URLLoaderDataFormat;
 	import flash.utils.ByteArray;
 	import flash.utils.getTimer;
-	import mindscriptact.assetLibrary.core.sharedObject.AssetLibraryStoradge;
+	import mindscriptact.assetLibrary.core.sharedObject.AssetLibraryStorage;
 	import mindscriptact.logmaster.DebugMan;
 
 /**
@@ -15,7 +15,7 @@ package depricated {
  * @author ...
  */
 public class SharedObjectTest extends Sprite {
-	private var assetLibrarStogarde : AssetLibraryStoradge;
+	private var assetLibrarStogarde : AssetLibraryStorage;
 
 	public function SharedObjectTest(){
 		var loader:URLLoader = new URLLoader();
@@ -26,7 +26,7 @@ public class SharedObjectTest extends Sprite {
 
 		//loader.load(new URLRequest("assets/sharedObjectTest/test.swf"));
 
-		assetLibrarStogarde = new AssetLibraryStoradge();
+		assetLibrarStogarde = new AssetLibraryStorage();
 
 
 		var testTime:int = getTimer();

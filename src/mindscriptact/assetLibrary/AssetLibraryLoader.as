@@ -2,16 +2,14 @@ package mindscriptact.assetLibrary {
 import flash.events.EventDispatcher;
 import flash.system.ApplicationDomain;
 import flash.utils.ByteArray;
-import flash.utils.getTimer;
 import mindscriptact.assetLibrary.assets.XMLAsset;
 import mindscriptact.assetLibrary.core.AssetDefinition;
 import mindscriptact.assetLibrary.core.AssetType;
-import mindscriptact.assetLibrary.core.loader.AssetLoadWorker;
-import mindscriptact.assetLibrary.core.namespaces.assetlibrary;
-import mindscriptact.assetLibrary.core.sharedObject.AssetLibraryStoradge;
+import mindscriptact.assetLibrary.core.localStorage.AssetLibraryStorage;
 import mindscriptact.assetLibrary.core.xml.AssetXmlParser;
 import mindscriptact.assetLibrary.events.AssetEvent;
 import mindscriptact.assetLibrary.events.AssetLoaderEvent;
+import mindscriptact.assetLibrary.core.namespaces.assetlibrary;
 
 [Event(name="assetXmlLoadingStarted",type="mindscriptact.assetLibrary.events.AssetLoaderEvent")]
 [Event(name="assetXmlLoaded",type="mindscriptact.assetLibrary.events.AssetLoaderEvent")]
@@ -28,7 +26,8 @@ import mindscriptact.assetLibrary.events.AssetLoaderEvent;
 public class AssetLibraryLoader extends EventDispatcher {
 	
 	private var assetLibraryIndex:AssetLibraryIndex;
-	private var localStoradge:AssetLibraryStoradge;
+	
+	internal var storageManager:AssetLibraryStorage;
 	//
 	private var assetLoadWorker:AssetLoadWorker;
 	//
@@ -42,15 +41,19 @@ public class AssetLibraryLoader extends EventDispatcher {
 	private var needsPreloading:Boolean = false;
 	//
 	public var canUnloadPermanents:Boolean = false;
-	internal var handleStoradgeFail:Function = internalHandleStoradgeFail;
-	assetlibrary var _localStoradgeEnabled:Boolean = false;
+	
+	internal var handleStorageFail:Function = internalHandleStorageFail;
+	
+	assetlibrary var _useLocalStorage:Boolean = false;
 	
 	private var _fakeMissingAssets:Boolean = false;
 	//
 	private var errorHandler:Function;
-	assetlibrary var rootPath:String = "";
+	
 	//
-	public var testTime:int;
+	static internal var rootPath:String = "";
+	//
+	//public var testTime:int;
 	assetlibrary var maxSimultaneousLoads:int = 3;
 	//
 	//
@@ -61,9 +64,8 @@ public class AssetLibraryLoader extends EventDispatcher {
 	assetlibrary var totalXMLFiles:int = 0;
 	
 	//
-	public function AssetLibraryLoader(assetLibraryIndex:AssetLibraryIndex, localStoradge:AssetLibraryStoradge, errorHandler:Function) {
+	public function AssetLibraryLoader(assetLibraryIndex:AssetLibraryIndex, errorHandler:Function) {
 		this.assetLibraryIndex = assetLibraryIndex;
-		this.localStoradge = localStoradge;
 		this.assetLibraryIndex.libraryLaderLoadXmlFunction = handleXmlLoadStart;
 		//
 		this.errorHandler = errorHandler;
@@ -88,6 +90,19 @@ public class AssetLibraryLoader extends EventDispatcher {
 			needsPreloading = true;
 		}
 	}
+	
+	public function get isLoading():Boolean {
+		return _isLoading;
+	}
+	
+	public function get localStorageEnabled():Boolean {
+		use namespace assetlibrary;
+		return _useLocalStorage;
+	}
+	
+	//----------------------------------
+	//     INTERNAL
+	//----------------------------------
 	
 	internal function loadAsset(item:AssetDefinition):void {
 		use namespace assetlibrary;
@@ -117,21 +132,21 @@ public class AssetLibraryLoader extends EventDispatcher {
 				case AssetType.PNG: 
 				case AssetType.GIF: 
 					var loadNarmaly:Boolean = true;
-					if (_localStoradgeEnabled) {
-						if (localStoradge.canUseStore()) {
+					if (_useLocalStorage) {
+						if (storageManager.canUseStore()) {
 							loadNarmaly = false;
 						} else {
-							handleStoradgeFail();
+							handleStorageFail();
 						}
 					}
 					if (loadNarmaly) {
 						assetLoadWorker.loadNormally(loadItem);
 					} else {
-						testTime = getTimer();
-						var binary:ByteArray = localStoradge.get(loadItem.assetId, loadItem.filePath);
-						testTime = getTimer();
+						//testTime = getTimer();
+						var binary:ByteArray = storageManager.get(loadItem.assetId, loadItem.filePath);
+						//testTime = getTimer();
 						if (binary) {
-							assetLoadWorker.loadStoradgeBytes(loadItem, binary);
+							assetLoadWorker.loadStorageBytes(loadItem, binary);
 						} else {
 							assetLoadWorker.loadBinary(loadItem);
 						}
@@ -177,15 +192,6 @@ public class AssetLibraryLoader extends EventDispatcher {
 		this.totalFiles = 0;
 	}
 	
-	public function get isLoading():Boolean {
-		return _isLoading;
-	}
-	
-	public function get localStoradgeEnabled():Boolean {
-		use namespace assetlibrary;
-		return _localStoradgeEnabled;
-	}
-	
 	internal function set fakeMissingAssets(value:Boolean):void {
 		use namespace assetlibrary;
 		_fakeMissingAssets = value;
@@ -198,8 +204,8 @@ public class AssetLibraryLoader extends EventDispatcher {
 		loadAsset(assetDefinition);
 	}
 	
-	private function internalHandleStoradgeFail():void {
-		errorHandler(Error("AssitLibrary failed to store data localy, and handleStoradgeFail is not set.(Maybe its disabled compleatly.) Use AssetLibrary.setStoradgeFailHandler(handlerFunction);"));
+	private function internalHandleStorageFail():void {
+		errorHandler(Error("AssitLibrary failed to store data localy(Maybe it is disabled)"));
 	}
 	
 	//----------------------------------
@@ -208,27 +214,27 @@ public class AssetLibraryLoader extends EventDispatcher {
 	
 	assetlibrary function handleBinaryDataLoad(asssetDefinition:AssetDefinition, data:ByteArray):void {
 		use namespace assetlibrary;
-		trace(" @@ binary file loaded:", getTimer() - testTime);
-		testTime = getTimer();
+		//trace(" @@ binary file loaded:", getTimer() - testTime);
+		//testTime = getTimer();
 		//
-		if (!localStoradge.store(asssetDefinition.assetId, asssetDefinition.filePath, data)) {
+		if (!storageManager.store(asssetDefinition.assetId, asssetDefinition.filePath, data)) {
 			errorHandler(Error("Storing assit to local SharedObject failed." + " [assetId:" + asssetDefinition.assetId + "] [assetPath:" + asssetDefinition.filePath + "]"));
 		}
-		trace(" << binary file stored:", getTimer() - testTime);
-		testTime = getTimer();
+		//trace(" << binary file stored:", getTimer() - testTime);
+		//testTime = getTimer();
 		//		
-		assetLoadWorker.loadStoradgeBytes(asssetDefinition, data);
+		assetLoadWorker.loadStorageBytes(asssetDefinition, data);
 	}
 	
 	//TODO : remove parameter binaryLoad, then benchmarking is no longer needed.
 	assetlibrary function handleLoadedContent(asssetDefinition:AssetDefinition, content:Object, applicationDomain:ApplicationDomain, binaryLoad:Boolean = false):void {
 		use namespace assetlibrary;
 		// benchmarking
-		if (binaryLoad) {
-			trace(" ## binary file converted to object:", getTimer() - testTime);
-		} else {
-			trace(" $$ normal load", getTimer() - testTime);
-		}
+		//if (binaryLoad) {
+		//trace(" ## binary file converted to object:", getTimer() - testTime);
+		//} else {
+		//trace(" $$ normal load", getTimer() - testTime);
+		//}
 		this.lodedFiles++;
 		//
 		asssetDefinition.setAssetContent(content, applicationDomain);

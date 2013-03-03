@@ -1,24 +1,13 @@
 package mindscriptact.assetLibrary {
-import flash.display.Bitmap;
-import flash.display.BitmapData;
-import flash.display.MovieClip;
-import flash.display.SimpleButton;
-import flash.display.Sprite;
-import flash.media.Sound;
-import flash.media.SoundTransform;
-import flash.sampler.NewObjectSample;
-import flash.system.Security;
-import flash.system.SecurityPanel;
-import flash.utils.Dictionary;
-import mindscriptact.assetLibrary.assets.AssetAbstract;
-import mindscriptact.assetLibrary.assets.MP3Asset;
-import mindscriptact.assetLibrary.assets.PICAsset;
-import mindscriptact.assetLibrary.assets.SWFAsset;
-import mindscriptact.assetLibrary.core.AssetDefinition;
-import mindscriptact.assetLibrary.core.AssetType;
+import flash.display.*;
+import flash.media.*;
+import flash.system.*;
+import flash.utils.*;
+import mindscriptact.assetLibrary.assets.*;
+import mindscriptact.assetLibrary.core.*;
 import mindscriptact.assetLibrary.core.fakeAssets.FakeAssetHelper;
+import mindscriptact.assetLibrary.core.localStorage.AssetLibraryStorage;
 import mindscriptact.assetLibrary.core.namespaces.assetlibrary;
-import mindscriptact.assetLibrary.core.sharedObject.AssetLibraryStoradge;
 import mindscriptact.assetLibrary.core.unloadHelper.AssetLibraryUnloader;
 
 /**
@@ -27,110 +16,101 @@ import mindscriptact.assetLibrary.core.unloadHelper.AssetLibraryUnloader;
  */
 public class AssetLibrary {
 	
-	/** If set to true - trying to get not permanent asset dirrectly will throw an error. */
-	static private var canGetNonPermanentsDirectly:Boolean = true;
-	
+	/**
+	 * Function to handle all general errors.
+	 * @private */
 	static private var errorHandler:Function = throwError;
 	
+	/**
+	 * Asset index.
+	 * @private */
 	static private var assetLibraryIndex:AssetLibraryIndex = new AssetLibraryIndex(errorHandler);
 	
-	static private var localStoradge:AssetLibraryStoradge = new AssetLibraryStoradge();
+	/**
+	 * Library asset loader.
+	 * @private */
+	static private var assetLibraryLoader:AssetLibraryLoader = new AssetLibraryLoader(assetLibraryIndex, errorHandler);
 	
-	static private var assetLibraryLoader:AssetLibraryLoader = new AssetLibraryLoader(assetLibraryIndex, localStoradge, errorHandler);
-	
+	/**
+	 * Lybrary asset automatic usloader.
+	 * @private */
 	static private var assetUnloader:AssetLibraryUnloader = new AssetLibraryUnloader();
 	
+	/** If set to true - trying to get not permanent asset dirrectly will throw an error.
+	 * @private */
+	static private var canGetNonPermanentsDirectly:Boolean = true;
+	
+	/**
+	 * If set to true - Asset lybrary will fake missing assets.
+	 * @private */
 	static private var _fakeMissingAssets:Boolean = false;
 	
 	/** Time interval for asset library to try and unload not needed assets in secconds.
 	 * By default it is 0 - autounload is disabled.
-	 * @prdivate */
+	 * @private */
 	static private var _autoUnloadIntervalTime:int = 0;
 	
 	//----------------------------------
 	//     System
 	//----------------------------------
 	
-	static public function loadList(list:Vector.<AssetDefinition>):void {
-		use namespace assetlibrary;
-		for (var i:int = 0; i < list.length; i++) {
-			var item:AssetDefinition = list[i];
-			if (item.isPermanent) {
-				assetLibraryLoader.loadAsset(item);
-			}
-		}
-	}
-	
-	static public function getLoader():AssetLibraryLoader {
-		return assetLibraryLoader;
-	}
-	
+	/**
+	 * Get AssetLibraryIndex object. It is used to define your files, paths, groups.
+	 * @return	AssetLibraryIndex object.
+	 */
 	static public function getIndex():AssetLibraryIndex {
 		return assetLibraryIndex;
 	}
 	
 	/**
-	 * Removes permament asset protection. It will be possible to add permanents after initial load and
+	 * Get AssetLibraryLoader object. Is is used to listen for loader events. (AssetEvent and AssetLoaderEvent)
+	 * @return	AssetLibraryLoader object.
 	 */
-	static public function removePermanentAssetProtection():void {
-		assetLibraryIndex.canAddPermanents = true;
-		assetLibraryLoader.canUnloadPermanents = true;
-	}
-	
-	static public function unloadAsset(assetId:String):void {
-		var asset:AssetAbstract = assetLibraryIndex.getAsset(assetId);
-		if (asset) {
-			if (asset.isPermanent && !assetLibraryLoader.canUnloadPermanents) {
-				errorHandler(Error("AssetLibrary.unloadAsset can't unload assetId:" + assetId + " because it is permanent asset. If you want to disable this protection: use AssetLibrary.removePermanentAssetProtection();"));
-			}
-			asset.unload();
-		}
-	}
-	
-	static private function throwError(error:Error):void {
-		throw error;
-	}
-	
-	static public function loadGroupAssets(groupId:String):void {
-		var assetIds:Vector.<String> = assetLibraryIndex.getGroupAssets(groupId);
-		for (var i:int = 0; i < assetIds.length; i++) {
-			AssetLibrary.loadAsset(assetIds[i], handleAssetBlank);
-		}
-	}
-	
-	static private function handleAssetBlank(asset:AssetAbstract):void {
-	}
-	
-	static public function unloadGroupAssets(groupId:String):void {
-		var assetIds:Vector.<String> = assetLibraryIndex.getGroupAssets(groupId);
-		for (var i:int = 0; i < assetIds.length; i++) {
-			AssetLibrary.unloadAsset(assetIds[i]);
-		}
-	}
-	
-	static public function unloadAllNonPermanents():void {
-		use namespace assetlibrary;
-		var assetIndex:Dictionary = assetLibraryIndex.assetIndex;
-		for each (var assetDefinition:AssetDefinition in assetIndex) {
-			if (!assetDefinition.isPermanent && assetDefinition.isLoaded) {
-				assetDefinition.asset.unload();
-			}
-		}
-	}
-	
-	static public function setRootPath(rootPath:String):void {
-		use namespace assetlibrary;
-		assetLibraryLoader.rootPath = rootPath;
+	static public function getLoader():AssetLibraryLoader {
+		return assetLibraryLoader;
 	}
 	
 	//----------------------------------
-	//     auto unload handlisg
+	//     AssetLibrary options
 	//----------------------------------
 	
-	static public function get autoUnloadIntervalTime():int {
-		return _autoUnloadIntervalTime;
+	/**
+	 * If set to true - permament asset protection is removed. It will be possible to add permanents after initial permanent asset load and will be posible to unload permanent assets.
+	 */
+	static public function set isPermanentsProtected(value:Boolean):void {
+		assetLibraryIndex.canAddPermanents = !value;
+		assetLibraryLoader.canUnloadPermanents = !value;
 	}
 	
+	static public function get isPermanentsProtected():Boolean {
+		return !assetLibraryIndex.canAddPermanents;
+	}
+	
+	/**
+	 * Enables use of local storage to cash loaded assets.
+	 */
+	static public function set useLocalStorage(value:Boolean):void {
+		use namespace assetlibrary;
+		if (value) {
+			if (!assetLibraryLoader._useLocalStorage) {
+				assetLibraryLoader.storageManager = new AssetLibraryStorage();
+			}
+		} else {
+			if (assetLibraryLoader._useLocalStorage) {
+				assetLibraryLoader.storageManager = null;
+			}
+		}
+		assetLibraryLoader._useLocalStorage = value;
+	}
+	
+	static public function get useLocalStorage():Boolean {
+		use namespace assetlibrary;
+		return assetLibraryLoader._useLocalStorage;
+	}
+	
+	/**
+	 * Time interval in secconds for assets to be automaticaly unloaded.
+	 */
 	static public function set autoUnloadIntervalTime(value:int):void {
 		use namespace assetlibrary;
 		if (_autoUnloadIntervalTime != value) {
@@ -139,41 +119,18 @@ public class AssetLibrary {
 		}
 	}
 	
-	//----------------------------------
-	//     Local storadge controls
-	//----------------------------------
-	
-	static public function set localStoradgeEnabled(value:Boolean):void {
-		use namespace assetlibrary;
-		assetLibraryLoader._localStoradgeEnabled = value;
+	static public function get autoUnloadIntervalTime():int {
+		return _autoUnloadIntervalTime;
 	}
-	
-	static public function get localStoradgeEnabled():Boolean {
-		use namespace assetlibrary;
-		return assetLibraryLoader._localStoradgeEnabled;
-	}
-	
-	static public function clearLocalStoradge():void {
-		// TODO : implement.
-	}
-	
-	static public function setStoradgeFailHandler(handleStoradgeFail:Function):void {
-		assetLibraryLoader.handleStoradgeFail = handleStoradgeFail;
-	}
-	
-	static public function forseOpenLocalStorageSettings():void {
-		Security.showSettings(SecurityPanel.LOCAL_STORAGE);
-	}
-	
-	//----------------------------------
-	//     
-	//----------------------------------
 	
 	static public function get maxSimultaneousLoads():int {
 		use namespace assetlibrary;
 		return assetLibraryLoader.maxSimultaneousLoads;
 	}
 	
+	/**
+	 *	Count of maximum simultaneous loadings. Default is 3. Minimum is 1.
+	 */
 	static public function set maxSimultaneousLoads(value:int):void {
 		use namespace assetlibrary;
 		if (value < 1) {
@@ -182,10 +139,14 @@ public class AssetLibrary {
 		assetLibraryLoader.maxSimultaneousLoads = value;
 	}
 	
-	static public function get fakeMissingAssets():Boolean {
-		return _fakeMissingAssets;
+	static public function get maxSimultaneousLoads():int {
+		use namespace assetlibrary;
+		return assetLibraryLoader.maxSimultaneousLoads;
 	}
 	
+	/**
+	 *	If set to true - assetLibrary will fake missing assets instead of throwing an error.
+	 */
 	static public function set fakeMissingAssets(value:Boolean):void {
 		use namespace assetlibrary;
 		assetLibraryLoader.fakeMissingAssets = value;
@@ -193,8 +154,12 @@ public class AssetLibrary {
 		AssetAbstract.fakeMissingAssets = value;
 	}
 	
+	static public function get fakeMissingAssets():Boolean {
+		return _fakeMissingAssets;
+	}
+	
 	//----------------------------------
-	//     General asset getter
+	//     General asset loading and handling with callBack function.
 	//----------------------------------
 	
 	/**
@@ -227,8 +192,43 @@ public class AssetLibrary {
 		}
 	}
 	
+	/**
+	 * Unload asset to free used memory.
+	 * @param	assetId		assetId used to indentify asset.
+	 */
+	static public function unloadAsset(assetId:String):void {
+		var asset:AssetAbstract = assetLibraryIndex.getAsset(assetId);
+		if (asset) {
+			if (asset.isPermanent && !assetLibraryLoader.canUnloadPermanents) {
+				errorHandler(Error("AssetLibrary.unloadAsset can't unload assetId:" + assetId + " because it is permanent asset. If you want to disable this protection: use AssetLibrary.removePermanentAssetProtection();"));
+			}
+			asset.unload();
+		}
+	}
+	
+	/**
+	 * Unleods all non permanent assets.
+	 * If permanent asset protection is removed - permanent assets unloaded too.
+	 */
+	static public function unloadAllAssets():void {
+		use namespace assetlibrary;
+		var canUnloadPermanents:Boolean = assetLibraryLoader.canUnloadPermanents;
+		var assetIndex:Dictionary = assetLibraryIndex.assetIndex;
+		for each (var assetDefinition:AssetDefinition in assetIndex) {
+			if (assetDefinition.isLoaded) {
+				if (assetDefinition.isPermanent) {
+					if (canUnloadPermanents) {
+						assetDefinition.asset.unload();
+					}
+				} else {
+					assetDefinition.asset.unload();
+				}
+			}
+		}
+	}
+	
 	//----------------------------------
-	//     Dynamic asset getter
+	//     Dynamic asset loading
 	//----------------------------------
 	
 	/**
@@ -265,7 +265,47 @@ public class AssetLibrary {
 	}
 	
 	//----------------------------------
-	//     SWF asset getter
+	//     group handling
+	//----------------------------------
+	
+	static public function loadGroupAssets(groupId:String):void {
+		var assetIds:Vector.<String> = assetLibraryIndex.getGroupAssets(groupId);
+		for (var i:int = 0; i < assetIds.length; i++) {
+			AssetLibrary.loadAsset(assetIds[i], handleAssetBlank);
+		}
+	}
+	
+	static public function unloadGroupAssets(groupId:String):void {
+		var assetIds:Vector.<String> = assetLibraryIndex.getGroupAssets(groupId);
+		for (var i:int = 0; i < assetIds.length; i++) {
+			AssetLibrary.unloadAsset(assetIds[i]);
+		}
+	}
+	
+	//----------------------------------
+	//     Local Storage controls
+	//----------------------------------
+	
+	static public function clearLocalStorage():void {
+		// TODO : implement.
+	}
+	
+	static public function setLocalStorageFailHandler(handleStorageFail:Function):void {
+		assetLibraryLoader.handleStorageFail = handleStorageFail;
+	}
+	
+	static public function forseOpenLocalStorageSettings():void {
+		Security.showSettings(SecurityPanel.LOCAL_STORAGE);
+	}
+	
+	//--------------------------------------------------------------------------
+	//
+	//      Permanent asset getters
+	//
+	//--------------------------------------------------------------------------
+	
+	//----------------------------------
+	//     SWF asset getters
 	//----------------------------------
 	
 	/**
@@ -335,7 +375,8 @@ public class AssetLibrary {
 		return AssetLibrary.getSWFStuff(assetId, lincageId, "SND") as Sound;
 	}
 	
-	/* General function to get SWF asset stuff. */
+	/** General function to get SWF asset stuff.
+	 * @private */
 	static private function getSWFStuff(assetId:String, lincageId:String, type:String):Object {
 		var asset:SWFAsset = assetLibraryIndex.getAsset(assetId) as SWFAsset;
 		if (!asset) {
@@ -389,6 +430,7 @@ public class AssetLibrary {
 							case "SND": 
 								//return asset.getSound(lincageId);
 								// TODO: implement
+								trace("not handled case : ", type);
 								break;
 							default: 
 								trace("not handled case : ", type);
@@ -588,6 +630,17 @@ public class AssetLibrary {
 				loadAsset(assetId, handleAssetBlank);
 			}
 		}
+	}
+	
+	//----------------------------------
+	//     INTERNAL
+	//----------------------------------
+	
+	static private function throwError(error:Error):void {
+		throw error;
+	}
+	
+	static private function handleAssetBlank(asset:AssetAbstract):void {
 	}
 
 }

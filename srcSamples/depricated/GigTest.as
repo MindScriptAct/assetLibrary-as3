@@ -36,12 +36,12 @@ public class GigTest extends Sprite {
 		
 //		var testtt:Loader = new Loader();
 		
-		AssetLibrary.localStoradgeEnabled = true;
-		//AssetLibrary.setStoradgeFailHandler(showInfoWindow);
+		AssetLibrary.useLocalStorage = true;
+		//AssetLibrary.setStorageFailHandler(showInfoWindow);
 		
-		AssetLibrary.clearLocalStoradge();
+		AssetLibrary.clearLocalStorage();
 		
-		trace("using storadge :" +AssetLibrary.localStoradgeEnabled);
+		trace("using Storage :" +AssetLibrary.useLocalStorage);
 		
 		stage.addEventListener(KeyboardEvent.KEY_UP, handleKeyPress);
 

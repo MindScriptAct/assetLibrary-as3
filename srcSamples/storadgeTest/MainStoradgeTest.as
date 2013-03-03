@@ -1,4 +1,4 @@
-package storadgeTest {
+package StorageTest {
 import com.bit101.components.PushButton;
 import flash.display.Bitmap;
 import flash.display.BitmapData;
@@ -22,7 +22,7 @@ import utils.debug.Stats;
  * Application initial point. PureMVC starter.
  * @author Raimundas Banevicius
  */
-public class MainStoradgeTest extends Sprite {
+public class MainStorageTest extends Sprite {
 	private var assetIndex:AssetLibraryIndex;
 	private var assetLoader:AssetLibraryLoader;
 	private var startInitialLoad:int;
@@ -33,7 +33,7 @@ public class MainStoradgeTest extends Sprite {
 	static public const ANIM_MC:String = "animTick";
 	static public const TEST_PIC:String = "test";
 	
-	public function MainStoradgeTest():void {
+	public function MainStorageTest():void {
 		if (stage)
 			init();
 		else
@@ -198,7 +198,7 @@ public class MainStoradgeTest extends Sprite {
 	}
 	
 	private function handleEnableSOUse(event:Event):void {
-		AssetLibrary.localStoradgeEnabled = true;
+		AssetLibrary.useLocalStorage = true;
 	}
 	
 	private function handleShowSoSettings(event:Event):void {
@@ -206,7 +206,7 @@ public class MainStoradgeTest extends Sprite {
 	}
 	
 	private function handleStartLoad(event:Event):void {
-		trace("MainStoradgeTest.handleStartLoad > event : " + event);
+		trace("MainStorageTest.handleStartLoad > event : " + event);
 		
 		startInitialLoad = getTimer();
 		

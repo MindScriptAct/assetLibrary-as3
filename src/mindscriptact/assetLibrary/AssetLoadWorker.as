@@ -1,4 +1,4 @@
-package mindscriptact.assetLibrary.core.loader {
+package mindscriptact.assetLibrary {
 import flash.display.DisplayObject;
 import flash.display.DisplayObjectContainer;
 import flash.display.LoaderInfo;
@@ -14,6 +14,9 @@ import mindscriptact.assetLibrary.AssetLibraryLoader;
 import mindscriptact.assetLibrary.core.AssetDefinition;
 import mindscriptact.assetLibrary.core.AssetType;
 import mindscriptact.assetLibrary.core.fakeAssets.FakeAssetHelper;
+import mindscriptact.assetLibrary.core.loader.AssetLoader;
+import mindscriptact.assetLibrary.core.loader.AssetURLLoader;
+import mindscriptact.assetLibrary.core.loader.SoundLoader;
 import mindscriptact.assetLibrary.core.namespaces.assetlibrary;
 import mindscriptact.assetLibrary.events.AssetEvent;
 
@@ -230,26 +233,26 @@ public class AssetLoadWorker {
 	
 	assetlibrary function loadNormally(loadItem:AssetDefinition):void {
 		use namespace assetlibrary;
-		getAssetLoader(loadItem).load(new URLRequest(assetLibraryLoader.rootPath + loadItem.filePath));
+		getAssetLoader(loadItem).load(new URLRequest(AssetLibraryLoader.rootPath + loadItem.filePath));
 	}
 	
-	assetlibrary function loadStoradgeBytes(loadItem:AssetDefinition, binary:ByteArray):void {
+	assetlibrary function loadStorageBytes(loadItem:AssetDefinition, binary:ByteArray):void {
 		getBinaryAssetLoader(loadItem).loadBytes(binary);
 	}
 	
 	assetlibrary function loadText(loadItem:AssetDefinition):void {
 		use namespace assetlibrary;
-		getAssetUrlLoader(loadItem).load(new URLRequest(assetLibraryLoader.rootPath + loadItem.filePath));
+		getAssetUrlLoader(loadItem).load(new URLRequest(AssetLibraryLoader.rootPath + loadItem.filePath));
 	}
 	
 	assetlibrary function loadBinary(loadItem:AssetDefinition):void {
 		use namespace assetlibrary;
-		getBinaryUrlLoader(loadItem).load(new URLRequest(assetLibraryLoader.rootPath + loadItem.filePath));
+		getBinaryUrlLoader(loadItem).load(new URLRequest(AssetLibraryLoader.rootPath + loadItem.filePath));
 	}
 	
 	assetlibrary function loadSound(loadItem:AssetDefinition):void {
 		use namespace assetlibrary;
-		getSoundLoader(loadItem).load(new URLRequest(assetLibraryLoader.rootPath + loadItem.filePath));
+		getSoundLoader(loadItem).load(new URLRequest(AssetLibraryLoader.rootPath + loadItem.filePath));
 	}
 	
 	//----------------------------------

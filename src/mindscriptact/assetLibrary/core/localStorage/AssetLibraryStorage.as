@@ -1,4 +1,4 @@
-package mindscriptact.assetLibrary.core.sharedObject {
+package mindscriptact.assetLibrary.core.localStorage {
 import flash.net.SharedObject;
 import flash.utils.ByteArray;
 import flash.utils.getTimer;
@@ -6,13 +6,13 @@ import flash.utils.getTimer;
 //import mindscriptact.logmaster.DebugMan;
 
 /**
- * Local shared object storadge manager.
+ * Local shared object Storage manager.
  * @author Raimundas Banevicius (raima156@yahoo.com)
  */
-public class AssetLibraryStoradge {
+public class AssetLibraryStorage {
 	
-	public function AssetLibraryStoradge() {
-		//trace("AssetLibraryStoradge.AssetLibraryStoradge");
+	public function AssetLibraryStorage() {
+		//trace("AssetLibraryStorage.AssetLibraryStorage");
 	}
 	
 	public function canUseStore():Boolean {

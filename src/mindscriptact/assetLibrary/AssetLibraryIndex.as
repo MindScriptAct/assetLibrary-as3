@@ -1,11 +1,7 @@
 package mindscriptact.assetLibrary {
 import flash.events.EventDispatcher;
 import flash.utils.Dictionary;
-import mindscriptact.assetLibrary.assets.AssetAbstract;
-import mindscriptact.assetLibrary.assets.MP3Asset;
-import mindscriptact.assetLibrary.assets.PICAsset;
-import mindscriptact.assetLibrary.assets.SWFAsset;
-import mindscriptact.assetLibrary.assets.XMLAsset;
+import mindscriptact.assetLibrary.assets.*;
 import mindscriptact.assetLibrary.core.AssetDefinition;
 import mindscriptact.assetLibrary.core.AssetType;
 import mindscriptact.assetLibrary.core.namespaces.assetlibrary;
@@ -35,6 +31,10 @@ public class AssetLibraryIndex extends EventDispatcher {
 		this.errorHandler = errorHandler;
 	}
 	
+	static public function setRootPath(rootPath:String):void {
+		AssetLibraryLoader.rootPath = rootPath;
+	}
+	
 	/**
 	 * Adds file definition for later us.
 	 * @param	assetId		unique file id to use for adressing the file
@@ -52,7 +52,7 @@ public class AssetLibraryIndex extends EventDispatcher {
 			errorHandler(Error("AssetLibraryIndex.addFileDefinition failed : assetId must be defined." + "[assetId:" + assetId + " fileName:" + fileUrl + " assetType:" + assetType + " pathId:" + pathId + "]"));
 		}
 		//if (!fileUrl) {
-			//errorHandler(Error("AssetLibraryIndex.addFileDefinition failed : fileName must be defined." + "[assetId:" + assetId + " fileName:" + fileUrl + " assetType:" + assetType + " pathId:" + pathId + "]"));
+		//errorHandler(Error("AssetLibraryIndex.addFileDefinition failed : fileName must be defined." + "[assetId:" + assetId + " fileName:" + fileUrl + " assetType:" + assetType + " pathId:" + pathId + "]"));
 		//}
 		
 		// path handling
@@ -175,7 +175,7 @@ public class AssetLibraryIndex extends EventDispatcher {
 		use namespace assetlibrary;
 		if (!_assetIndex[assetDefinition.assetId]) {
 			if (assetDefinition.isPermanent && !canAddPermanents) {
-				errorHandler(Error("AssetLibraryIndex.addFileDefinition failed : AssetId " + assetDefinition.assetId + " is permanent asset, you can add those only before starting permanent asset preload. If you want to disable this protection: use AssetLibrary.removePermanentAssetProtection();"));
+				errorHandler(Error("AssetLibraryIndex.addFileDefinition failed : AssetId " + assetDefinition.assetId + " is permanent asset, you can add those only before starting permanent asset preload. If you want to disable this protection - set AssetLibrary.isPermanentsProtected = false;"));
 			}
 			_assetIndex[assetDefinition.assetId] = assetDefinition;
 			//
