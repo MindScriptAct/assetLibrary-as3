@@ -67,7 +67,7 @@ public class Main extends Sprite {
 
 
 
-		assetIndex.addAssetsToGroup("allFiles", Vector.<String>(["test1", "test2", "test3def", "test4def"]));
+		assetIndex.addAssetArrayToGroup("allFiles", ["test1", "test2", "test3def", "test4def"]);
 
 		
 		assetIndex.addPathDefinition("versionDir", "assets/versionTest/");

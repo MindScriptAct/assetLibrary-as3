@@ -93,7 +93,7 @@ public class AssetXmlParser {
 		assetIndex.addFileDefinition(fileXml.@assetId, fileXml.@fileName, pathId, permanent, urlParams, assetType);
 		//
 		if (!groupId) {
-			assetIndex.addOneAssetToGroup(groupId, fileXml.@assetId);
+			assetIndex.addAssetToGroup(groupId, fileXml.@assetId);
 		}
 	}
 

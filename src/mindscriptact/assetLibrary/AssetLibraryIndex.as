@@ -13,7 +13,7 @@ import mindscriptact.assetLibrary.core.xml.XMLDefinition;
  */
 public class AssetLibraryIndex extends EventDispatcher {
 	
-	private var _assetIndex:Dictionary = new Dictionary(); /** of AssetDefinition by String */
+	private var assetIndex:Dictionary = new Dictionary(); /** of AssetDefinition by String */
 	private var pathIndex:Dictionary = new Dictionary(); /** of String by String */
 	private var dynamicPathAssetTypes:Dictionary = new Dictionary(); /** of String by String */
 	private var groupIndex:Dictionary = new Dictionary(); /** of Vector.<String> by String */
@@ -32,6 +32,7 @@ public class AssetLibraryIndex extends EventDispatcher {
 	}
 	
 	static public function setRootPath(rootPath:String):void {
+		use namespace assetlibrary;
 		AssetLibraryLoader.rootPath = rootPath;
 	}
 	
@@ -118,20 +119,24 @@ public class AssetLibraryIndex extends EventDispatcher {
 		if (!xmlFileDefinitions[assetId]) {
 			xmlFileDefinitions[assetId] = new XMLDefinition(assetId);
 			xmlFilesTotal++;
-			libraryLaderLoadXmlFunction(_assetIndex[assetId]);
+			libraryLaderLoadXmlFunction(assetIndex[assetId]);
 		} else {
-			if ((_assetIndex[assetId] as AssetDefinition).filePath != xmlPath) {
+			if ((assetIndex[assetId] as AssetDefinition).filePath != xmlPath) {
 				errorHandler(Error("AssetLibraryIndex.addDefinitionsFromXML failed. Different XML definition with assetId:" + assetId + " exists."));
 			}
 		}
 	}
+	
+	//----------------------------------
+	//     groups
+	//----------------------------------
 	
 	/**
 	 * Add one assetId to groupId. Groups are used to load or unload group af assets. (asset ids cant be removed from groups, if you have a need - create 2 diferent groups.)
 	 * @param	groupId		unique group id.
 	 * @param	assetId		asset id to be added to group.
 	 */
-	public function addOneAssetToGroup(groupId:String, assetId:String):void {
+	public function addAssetToGroup(groupId:String, assetId:String):void {
 		if (!groupIndex[groupId]) {
 			groupIndex[groupId] = new Vector.<String>();
 		}
@@ -143,22 +148,26 @@ public class AssetLibraryIndex extends EventDispatcher {
 	 * @param	groupId		unique group id.
 	 * @param	assetIds	vector of asset ids to be added to group.
 	 */
-	public function addAssetsToGroup(groupId:String, assetIds:Vector.<String>):void {
+	public function addAssetArrayToGroup(groupId:String, assetIds:Array):void {
 		for (var i:int = 0; i < assetIds.length; i++) {
-			addOneAssetToGroup(groupId, assetIds[i]);
+			addAssetToGroup(groupId, assetIds[i]);
 		}
 	}
+	
+	//----------------------------------
+	//     INTERNAL
+	//----------------------------------
 	
 	/**
 	 * Checks if asset with specified id is already loaded.
 	 * @param	assetId		asset id to check if its loaded
 	 * @return	true if specified asset is loaded.
 	 */
-	public function assetIsLoaded(assetId:String):Boolean {
+	internal function assetIsLoaded(assetId:String):Boolean {
 		use namespace assetlibrary;
 		var retVal:Boolean = false;
-		if (_assetIndex[assetId]) {
-			retVal = (_assetIndex[assetId] as AssetDefinition).isLoaded;
+		if (assetIndex[assetId]) {
+			retVal = (assetIndex[assetId] as AssetDefinition).isLoaded;
 		}
 		return retVal;
 	}
@@ -167,17 +176,13 @@ public class AssetLibraryIndex extends EventDispatcher {
 		return dynamicPathAssetTypes[pathId];
 	}
 	
-	//----------------------------------
-	//     internal functions for system use only.
-	//----------------------------------
-	
 	private function addAssetDefinition(assetDefinition:AssetDefinition):void {
 		use namespace assetlibrary;
-		if (!_assetIndex[assetDefinition.assetId]) {
+		if (!assetIndex[assetDefinition.assetId]) {
 			if (assetDefinition.isPermanent && !canAddPermanents) {
 				errorHandler(Error("AssetLibraryIndex.addFileDefinition failed : AssetId " + assetDefinition.assetId + " is permanent asset, you can add those only before starting permanent asset preload. If you want to disable this protection - set AssetLibrary.isPermanentsProtected = false;"));
 			}
-			_assetIndex[assetDefinition.assetId] = assetDefinition;
+			assetIndex[assetDefinition.assetId] = assetDefinition;
 			//
 			var asset:AssetAbstract;
 			switch (assetDefinition.type) {
@@ -201,7 +206,7 @@ public class AssetLibraryIndex extends EventDispatcher {
 			}
 			assetDefinition.asset = asset;
 		} else {
-			var currentAssetDefinition:AssetDefinition = _assetIndex[assetDefinition.assetId];
+			var currentAssetDefinition:AssetDefinition = assetIndex[assetDefinition.assetId];
 			if (currentAssetDefinition.filePath != assetDefinition.filePath || currentAssetDefinition.isPermanent != assetDefinition.isPermanent) {
 				errorHandler(Error("AssetLibraryIndex.addFileDefinition failed : AssetId " + assetDefinition.assetId + " is already taken, and new definiiton is diferent from already existing one. Unload it or use another assedId, or use same asset definition if you have same assetId in more then one place."));
 			}
@@ -210,8 +215,8 @@ public class AssetLibraryIndex extends EventDispatcher {
 	
 	internal function getAssetDefinition(assetId:String):AssetDefinition {
 		use namespace assetlibrary;
-		if (_assetIndex[assetId]) {
-			return _assetIndex[assetId];
+		if (assetIndex[assetId]) {
+			return assetIndex[assetId];
 		} else {
 			return null;
 		}
@@ -219,17 +224,17 @@ public class AssetLibraryIndex extends EventDispatcher {
 	
 	internal function getAsset(assetId:String):AssetAbstract {
 		use namespace assetlibrary;
-		if (!_assetIndex[assetId]) {
+		if (!assetIndex[assetId]) {
 			errorHandler(Error("AssetLibraryIndex.getAsset failed. Asset with assetId:" + assetId + " is not created."));
 			return null;
 		}
-		return (_assetIndex[assetId] as AssetDefinition).asset;
+		return (assetIndex[assetId] as AssetDefinition).asset;
 	}
 	
 	internal function getAssetsForPreloading():Vector.<AssetDefinition> {
 		use namespace assetlibrary;
 		var retVal:Vector.<AssetDefinition> = new Vector.<AssetDefinition>();
-		for each (var assetDefinition:AssetDefinition in _assetIndex) {
+		for each (var assetDefinition:AssetDefinition in assetIndex) {
 			if (!assetDefinition.isLoaded && assetDefinition.isPermanent) {
 				retVal.push(assetDefinition);
 			}
@@ -247,7 +252,7 @@ public class AssetLibraryIndex extends EventDispatcher {
 	internal function getAllSoundAssets():Vector.<MP3Asset> {
 		use namespace assetlibrary;
 		var retVal:Vector.<MP3Asset> = new Vector.<MP3Asset>();
-		for each (var assetDefinition:AssetDefinition in _assetIndex) {
+		for each (var assetDefinition:AssetDefinition in assetIndex) {
 			if (assetDefinition.asset && assetDefinition.asset is MP3Asset) {
 				retVal.push(assetDefinition.asset);
 			}
@@ -255,8 +260,8 @@ public class AssetLibraryIndex extends EventDispatcher {
 		return retVal;
 	}
 	
-	internal function get assetIndex():Dictionary {
-		return _assetIndex;
+	internal function getAssetIndex():Dictionary {
+		return assetIndex;
 	}
 
 }

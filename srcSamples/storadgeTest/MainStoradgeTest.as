@@ -1,4 +1,4 @@
-package StorageTest {
+package storadgeTest {
 import com.bit101.components.PushButton;
 import flash.display.Bitmap;
 import flash.display.BitmapData;

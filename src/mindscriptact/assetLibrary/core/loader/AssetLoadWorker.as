@@ -1,4 +1,4 @@
-package mindscriptact.assetLibrary {
+package mindscriptact.assetLibrary.core.loader {
 import flash.display.DisplayObject;
 import flash.display.DisplayObjectContainer;
 import flash.display.LoaderInfo;

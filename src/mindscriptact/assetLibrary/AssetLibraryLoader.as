@@ -5,6 +5,7 @@ import flash.utils.ByteArray;
 import mindscriptact.assetLibrary.assets.XMLAsset;
 import mindscriptact.assetLibrary.core.AssetDefinition;
 import mindscriptact.assetLibrary.core.AssetType;
+import mindscriptact.assetLibrary.core.loader.AssetLoadWorker;
 import mindscriptact.assetLibrary.core.localStorage.AssetLibraryStorage;
 import mindscriptact.assetLibrary.core.xml.AssetXmlParser;
 import mindscriptact.assetLibrary.events.AssetEvent;
@@ -51,7 +52,7 @@ public class AssetLibraryLoader extends EventDispatcher {
 	private var errorHandler:Function;
 	
 	//
-	static internal var rootPath:String = "";
+	static assetlibrary var rootPath:String = "";
 	//
 	//public var testTime:int;
 	assetlibrary var maxSimultaneousLoads:int = 3;
@@ -93,11 +94,6 @@ public class AssetLibraryLoader extends EventDispatcher {
 	
 	public function get isLoading():Boolean {
 		return _isLoading;
-	}
-	
-	public function get localStorageEnabled():Boolean {
-		use namespace assetlibrary;
-		return _useLocalStorage;
 	}
 	
 	//----------------------------------

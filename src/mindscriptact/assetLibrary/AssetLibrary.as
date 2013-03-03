@@ -123,11 +123,6 @@ public class AssetLibrary {
 		return _autoUnloadIntervalTime;
 	}
 	
-	static public function get maxSimultaneousLoads():int {
-		use namespace assetlibrary;
-		return assetLibraryLoader.maxSimultaneousLoads;
-	}
-	
 	/**
 	 *	Count of maximum simultaneous loadings. Default is 3. Minimum is 1.
 	 */
@@ -213,7 +208,7 @@ public class AssetLibrary {
 	static public function unloadAllAssets():void {
 		use namespace assetlibrary;
 		var canUnloadPermanents:Boolean = assetLibraryLoader.canUnloadPermanents;
-		var assetIndex:Dictionary = assetLibraryIndex.assetIndex;
+		var assetIndex:Dictionary = assetLibraryIndex.getAssetIndex();
 		for each (var assetDefinition:AssetDefinition in assetIndex) {
 			if (assetDefinition.isLoaded) {
 				if (assetDefinition.isPermanent) {
@@ -225,6 +220,15 @@ public class AssetLibrary {
 				}
 			}
 		}
+	}
+	
+	/**
+	 * Checks if asset is loaded.
+	 * @param	assetId		assetId used to indentify asset.
+	 * @return		returns true if asset is already loaded.
+	 */
+	static public function assetIsLoaded(assetId:String):Boolean {
+		return assetLibraryIndex.assetIsLoaded(assetId);
 	}
 	
 	//----------------------------------
