@@ -26,13 +26,13 @@ public class AssetDefinition {
 	//
 	private var _keepTime:int = int.MAX_VALUE;
 	
-	public function AssetDefinition(assetId:String, filePath:String, type:String, permanent:Boolean = false) {
+	public function AssetDefinition(assetId:String, filePath:String, type:String, isPermanent:Boolean = false) {
 		use namespace assetlibrary;
 		this.assetId = assetId;
 		//
 		this.filePath = filePath;
 		this.type = type;
-		this.isPermanent = permanent;
+		this.isPermanent = isPermanent;
 	}
 	
 	assetlibrary function setAssetData(data:String):void {

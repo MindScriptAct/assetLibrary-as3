@@ -77,12 +77,12 @@ public class AssetXmlParser {
 			}
 		}
 		
-		var permanent:Boolean = false;
+		var isPermanent:Boolean = false;
 		var urlParams:String = null;
 		var assetType:String = null;
 		
-		if (String(fileXml.@permanent) != "") {
-			permanent = (fileXml.@permanent == "true");
+		if (String(fileXml.@isPermanent) != "") {
+			isPermanent = (fileXml.@isPermanent == "true");
 		}
 		if (String(fileXml.@urlParams) != "") {
 			urlParams = fileXml.@urlParams;
@@ -90,7 +90,7 @@ public class AssetXmlParser {
 		if (String(fileXml.@assetType) != "") {
 			assetType = fileXml.@assetType;
 		}
-		assetIndex.addFileDefinition(fileXml.@assetId, fileXml.@fileUrl, pathId, permanent, urlParams, assetType);
+		assetIndex.addFileDefinition(fileXml.@assetId, fileXml.@fileUrl, pathId, isPermanent, urlParams, assetType);
 		//
 		if (!groupId) {
 			assetIndex.addAssetToGroup(groupId, fileXml.@assetId);

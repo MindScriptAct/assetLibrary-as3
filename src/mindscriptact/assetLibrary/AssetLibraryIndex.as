@@ -41,11 +41,11 @@ public class AssetLibraryIndex extends EventDispatcher {
 	 * @param	assetId		unique file id to use for adressing the file
 	 * @param	fileUrl		full path to the file or just name if you use pathId
 	 * @param	pathId		pathId of path definition for location there this file is.
-	 * @param	permanent	Treat file as pernament asset, or temporal.
+	 * @param	isPermanent	Treat file as pernament asset, or temporal.
 	 * @param	urlParams	url parameters that must be used then file is loaded.
 	 * @param	assetType	if you use not standart file extention, you can define asset type here, if extention is standart AssetLybrary automaticaly sets the type.
 	 */
-	public function addFileDefinition(assetId:String, fileUrl:String, pathId:String = null, permanent:Boolean = false, urlParams:String = null, assetType:String = null):void {
+	public function addFileDefinition(assetId:String, fileUrl:String, pathId:String = null, isPermanent:Boolean = false, urlParams:String = null, assetType:String = null):void {
 		use namespace assetlibrary;
 		var filePath:String = "";
 		// error checking.
@@ -78,7 +78,7 @@ public class AssetLibraryIndex extends EventDispatcher {
 			filePath += urlParams;
 		}
 		
-		addAssetDefinition(new AssetDefinition(assetId, filePath, assetType, permanent));
+		addAssetDefinition(new AssetDefinition(assetId, filePath, assetType, isPermanent));
 	}
 	
 	/**
