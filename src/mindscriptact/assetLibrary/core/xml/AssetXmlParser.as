@@ -56,7 +56,7 @@ public class AssetXmlParser {
 		// files in group's
 		var elementCount:int = groupXml.file.length();
 		for (var f:int = 0; f < elementCount; f++) {
-			if (String(groupXml.@fileName) != "" && String(groupXml.@assetType) != "") {
+			if (String(groupXml.@fileUrl) != "" && String(groupXml.@assetType) != "") {
 				parseFileXml(groupXml.file[f], pathId, groupXml.@groupId);
 			}
 		}
@@ -90,7 +90,7 @@ public class AssetXmlParser {
 		if (String(fileXml.@assetType) != "") {
 			assetType = fileXml.@assetType;
 		}
-		assetIndex.addFileDefinition(fileXml.@assetId, fileXml.@fileName, pathId, permanent, urlParams, assetType);
+		assetIndex.addFileDefinition(fileXml.@assetId, fileXml.@fileUrl, pathId, permanent, urlParams, assetType);
 		//
 		if (!groupId) {
 			assetIndex.addAssetToGroup(groupId, fileXml.@assetId);

@@ -50,11 +50,11 @@ public class AssetLibraryIndex extends EventDispatcher {
 		var filePath:String = "";
 		// error checking.
 		if (!assetId) {
-			errorHandler(Error("AssetLibraryIndex.addFileDefinition failed : assetId must be defined." + "[assetId:" + assetId + " fileName:" + fileUrl + " assetType:" + assetType + " pathId:" + pathId + "]"));
+			errorHandler(Error("AssetLibraryIndex.addFileDefinition failed : assetId must be defined." + "[assetId:" + assetId + " fileUrl:" + fileUrl + " assetType:" + assetType + " pathId:" + pathId + "]"));
 		}
-		//if (!fileUrl) {
-		//errorHandler(Error("AssetLibraryIndex.addFileDefinition failed : fileName must be defined." + "[assetId:" + assetId + " fileName:" + fileUrl + " assetType:" + assetType + " pathId:" + pathId + "]"));
-		//}
+		if (!fileUrl) {
+			errorHandler(Error("AssetLibraryIndex.addFileDefinition failed : fileUrl must be defined." + "[assetId:" + assetId + " fileUrl:" + fileUrl + " assetType:" + assetType + " pathId:" + pathId + "]"));
+		}
 		
 		// path handling
 		if (pathId) {
@@ -68,7 +68,7 @@ public class AssetLibraryIndex extends EventDispatcher {
 		
 		// extentien handling
 		if (!assetType) {
-			//errorHandler(Error("AssetLibraryIndex.addFileDefinition failed : assetType must be defined." + "[assetId:" + assetId + " fileName:" + fileName + " assetType:" + assetType + " pathId:" + pathId + "]"));
+			//errorHandler(Error("AssetLibraryIndex.addFileDefinition failed : assetType must be defined." + "[assetId:" + assetId + " fileUrl:" + fileUrl + " assetType:" + assetType + " pathId:" + pathId + "]"));
 			var nameSplit:Array = fileUrl.split(".");
 			assetType = nameSplit[nameSplit.length - 1];
 		}
