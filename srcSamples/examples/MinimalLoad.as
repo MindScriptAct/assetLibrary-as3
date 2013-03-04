@@ -2,7 +2,7 @@ package examples {
 import flash.display.Sprite;
 import mindscriptact.assetLibrary.AssetLibrary;
 import mindscriptact.assetLibrary.AssetLibraryIndex;
-import mindscriptact.assetLibrary.assets.SWFAsset;
+import mindscriptact.assetLibrary.assets.SwfAsset;
 
 public class MinimalLoad extends Sprite {
 	
@@ -16,7 +16,7 @@ public class MinimalLoad extends Sprite {
 		AssetLibrary.loadAsset("test1", handleTest1);
 	}
 	
-	private function handleTest1(asset:SWFAsset):void {
+	private function handleTest1(asset:SwfAsset):void {
 		// get instance of object linked in asset library.
 		var testSprite:Sprite = asset.getSprite("SquareA_SPR");
 		this.addChild(testSprite);

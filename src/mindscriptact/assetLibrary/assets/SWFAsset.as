@@ -11,9 +11,9 @@ import mindscriptact.assetLibrary.core.fakeAssets.FakeAssetHelper;
  * Wraper for swf asset
  * @author Raimundas Banevicius
  */
-public class SWFAsset extends AssetAbstract {
+public class SwfAsset extends AssetAbstract {
 	
-	public function SWFAsset(assetId:String) {
+	public function SwfAsset(assetId:String) {
 		super(assetId);
 	}
 	
@@ -153,7 +153,7 @@ public class SWFAsset extends AssetAbstract {
 			var lincageClass:Class = applicationDomain.getDefinition(lincageId) as Class;
 		} catch (error:Error) {
 			if (_fakeMissingAssets) {
-				// TODO : implement
+				return FakeAssetHelper.fakeSound();
 			} else {
 				throw Error("AssetSWF could not find class with lincageId:" + lincageId + " in assetID:" + assetId);
 			}

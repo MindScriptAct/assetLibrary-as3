@@ -5,7 +5,7 @@ import flash.events.Event;
 import flash.utils.getTimer;
 import mindscriptact.assetLibrary.AssetLibrary;
 import mindscriptact.assetLibrary.AssetLibraryIndex;
-import mindscriptact.assetLibrary.assets.PICAsset;
+import mindscriptact.assetLibrary.assets.PicAsset;
 
 /**
  * Application initial point. PureMVC starter.
@@ -45,7 +45,7 @@ public class AutoUnloadTest extends Sprite {
 		
 	}
 	
-	private function handlePic(asset:PICAsset, xPos:int, yPos:int):void {
+	private function handlePic(asset:PicAsset, xPos:int, yPos:int):void {
 		//trace("Main.handlePic > asset : " + asset);
 		
 		var bitMap:Bitmap = asset.getBitmap();

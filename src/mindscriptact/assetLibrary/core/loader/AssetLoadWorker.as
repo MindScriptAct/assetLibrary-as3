@@ -401,7 +401,12 @@ public class AssetLoadWorker {
 		use namespace assetlibrary;
 		var soundLoader:SoundLoader = event.target as SoundLoader;
 		filesInProgress--;
-		assetLibraryLoader.handleLoadError(soundLoader.asssetDefinition, event.text);
+		
+		if (fakeMissingAssets) {
+			assetLibraryLoader.handleLoadedContent(soundLoader.asssetDefinition, FakeAssetHelper.fakeSound(), null);
+		} else {
+			assetLibraryLoader.handleLoadError(soundLoader.asssetDefinition, event.text);
+		}
 		//
 		disposeSoundLoader(soundLoader);
 	}

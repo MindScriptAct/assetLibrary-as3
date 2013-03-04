@@ -6,7 +6,7 @@ import flash.text.TextFormat;
 import mindscriptact.assetLibrary.AssetLibrary;
 import mindscriptact.assetLibrary.AssetLibraryIndex;
 import mindscriptact.assetLibrary.AssetLibraryLoader;
-import mindscriptact.assetLibrary.assets.SWFAsset;
+import mindscriptact.assetLibrary.assets.SwfAsset;
 import mindscriptact.assetLibrary.event.AssetEvent;
 import mindscriptact.logmaster.DebugMan;
 
@@ -133,7 +133,7 @@ public class MainRemote extends Sprite {
 		AssetLibrary.loadAsset("RemoteTest", handleTest);
 	}
 
-	private function handleTest(asset:SWFAsset):void {
+	private function handleTest(asset:SwfAsset):void {
 		trace("Main.handleTest > asset : " + asset);
 
 		var testSprite:Sprite = asset.getSprite("WaterTigerSPR");

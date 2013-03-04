@@ -3,14 +3,15 @@ import flash.display.Bitmap;
 import flash.display.MovieClip;
 import flash.display.Sprite;
 import flash.events.Event;
+import flash.events.MouseEvent;
 import mindscriptact.assetLibrary.AssetLibrary;
 import mindscriptact.assetLibrary.AssetLibraryIndex;
 import mindscriptact.assetLibrary.AssetLibraryLoader;
-import mindscriptact.assetLibrary.assets.PICAsset;
-import mindscriptact.assetLibrary.assets.SWFAsset;
+import mindscriptact.assetLibrary.assets.Mp3Asset;
+import mindscriptact.assetLibrary.assets.PicAsset;
+import mindscriptact.assetLibrary.assets.SwfAsset;
 import mindscriptact.assetLibrary.events.AssetEvent;
 import mindscriptact.assetLibrary.events.AssetLoaderEvent;
-import mindscriptact.logmaster.DebugMan;
 
 /**
  * Application initial point. PureMVC starter.
@@ -68,7 +69,7 @@ public class MainDummyAssets extends Sprite {
 
 
 
-		assetIndex.addAssetsToGroup("allFiles", Vector.<String>(["test1", "test2", "test3def", "test4def"]));
+		assetIndex.addAssetArrayToGroup("allFiles", ["test1", "test2", "test3def", "test4def"]);
 
 		
 		assetIndex.addPathDefinition("versionDir", "assets/versionTest/");
@@ -109,7 +110,22 @@ public class MainDummyAssets extends Sprite {
 	 	AssetLibrary.loadAsset("pngSmiley", handlePic); 
 		AssetLibrary.loadAsset("jpgSmiley", handlePic); 
 		AssetLibrary.loadAsset("gifSmiley", handlePic);
+		
+		AssetLibrary.loadAsset("nin_the_warning", handleSound);
 
+		
+		this.stage.addEventListener(MouseEvent.CLICK, handleStageClick);
+		
+		
+	}
+	
+	private function handleStageClick(event:MouseEvent):void {
+		AssetLibrary.loadAsset("nin_the_warning", handleSound);
+	}
+	
+	private function handleSound(asset:Mp3Asset):void {
+		trace( "MainDummyAssets.handleSound > asset : " + asset );
+		asset.play();
 	}
 
 
@@ -181,7 +197,7 @@ public class MainDummyAssets extends Sprite {
 		//
 	}
 
-	private function handleTest1(asset:SWFAsset):void {
+	private function handleTest1(asset:SwfAsset):void {
 		////trace("Main.handleTest1 > asset : " + asset);
 
 		var anim:MovieClip = asset.getMovieClip("-AnimMC");
@@ -195,7 +211,7 @@ public class MainDummyAssets extends Sprite {
 		testSprite.y = 100;
 	}
 
-	private function handleTest3(asset:SWFAsset):void {
+	private function handleTest3(asset:SwfAsset):void {
 		////trace("Main.handleTest3 > asset : " + asset);
 		var testSprite:Sprite = asset.getSprite("-SquareB_SPR");
 		this.addChild(testSprite);
@@ -203,7 +219,7 @@ public class MainDummyAssets extends Sprite {
 		testSprite.y = 100;
 	}
 
-	private function handleTest7(asset:SWFAsset):void {
+	private function handleTest7(asset:SwfAsset):void {
 		////trace("Main.handleTest7 > asset : " + asset);
 		var testSprite:Sprite = asset.getSprite("-SquareD_SPR");
 		this.addChild(testSprite);
@@ -211,7 +227,7 @@ public class MainDummyAssets extends Sprite {
 		testSprite.y = 100;
 	}
 	
-	private function handleTest5(asset:SWFAsset):void {
+	private function handleTest5(asset:SwfAsset):void {
 		////trace("Main.handleTest5 > asset : " + asset);
 		var testSprite:Sprite = asset.getSprite("-SquareC_SPR");
 		this.addChild(testSprite);
@@ -286,13 +302,13 @@ public class MainDummyAssets extends Sprite {
 //		AssetLibrary.sendAssetToFunction("nin_the_warning", handleSound);
 //	}
 	
-//	private function handleSound(asset:MP3Asset):void {
+//	private function handleSound(asset:Mp3Asset):void {
 		//trace("Main.handleSound > asset : " + asset);
 		
 //		asset.play();
 //	}
 	
-	private function handlePic(asset:PICAsset):void {
+	private function handlePic(asset:PicAsset):void {
 		//trace("Main.handlePic > asset : " + asset);
 		
 		var bitMap:Bitmap = asset.getBitmap();

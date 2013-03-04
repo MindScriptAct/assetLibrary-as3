@@ -1,6 +1,6 @@
 package mindscriptact.assetLibrary.core.xml {
 import mindscriptact.assetLibrary.AssetLibraryIndex;
-import mindscriptact.assetLibrary.assets.XMLAsset;
+import mindscriptact.assetLibrary.assets.XmlAsset;
 
 /**
  * Asset xml file parser.
@@ -14,7 +14,7 @@ public class AssetXmlParser {
 		this.assetIndex = assetIndex;
 	}
 	
-	public function parseXML(asset:XMLAsset):void {
+	public function parseXML(asset:XmlAsset):void {
 		var assetXml:XML = new XML(asset.getData());
 		// path's
 		var elementCount:int = assetXml.path.length();

@@ -382,7 +382,7 @@ public class AssetLibrary {
 	/** General function to get SWF asset stuff.
 	 * @private */
 	static private function getSWFStuff(assetId:String, lincageId:String, type:String):Object {
-		var asset:SWFAsset = assetLibraryIndex.getAsset(assetId) as SWFAsset;
+		var asset:SwfAsset = assetLibraryIndex.getAsset(assetId) as SwfAsset;
 		if (!asset) {
 			errorHandler(Error("AssetLibrary can't find SWF asset with assetId :" + assetId));
 		} else {
@@ -432,9 +432,7 @@ public class AssetLibrary {
 								return FakeAssetHelper.fakeBitmapData(assetId + "\n" + lincageId + "\n" + type);
 								break;
 							case "SND": 
-								//return asset.getSound(lincageId);
-								// TODO: implement
-								trace("not handled case : ", type);
+								return FakeAssetHelper.fakeSound();
 								break;
 							default: 
 								trace("not handled case : ", type);
@@ -463,7 +461,7 @@ public class AssetLibrary {
 	 * @return	Bitmap instance with picture of PIC asset
 	 */
 	static public function getPICBitmap(assetId:String):Bitmap {
-		var asset:PICAsset = assetLibraryIndex.getAsset(assetId) as PICAsset;
+		var asset:PicAsset = assetLibraryIndex.getAsset(assetId) as PicAsset;
 		if (!asset) {
 			errorHandler(Error("AssetLibrary can't find PIC asset with assetId :" + assetId));
 		} else {
@@ -485,7 +483,7 @@ public class AssetLibrary {
 	 * @return	Bitmap instance with picture of PIC asset
 	 */
 	static public function getPICClonedBitmap(assetId:String):Bitmap {
-		var asset:PICAsset = assetLibraryIndex.getAsset(assetId) as PICAsset;
+		var asset:PicAsset = assetLibraryIndex.getAsset(assetId) as PicAsset;
 		if (!asset) {
 			errorHandler(Error("AssetLibrary can't find PIC asset with assetId :" + assetId));
 		} else {
@@ -508,7 +506,7 @@ public class AssetLibrary {
 	 * @return	Sound instance
 	 */
 	static public function getMP3Sound(assetId:String):Sound {
-		var asset:MP3Asset = assetLibraryIndex.getAsset(assetId) as MP3Asset;
+		var asset:Mp3Asset = assetLibraryIndex.getAsset(assetId) as Mp3Asset;
 		if (!asset) {
 			errorHandler(Error("AssetLibrary can't find MP3 asset with assetId :" + assetId));
 		} else {
@@ -536,7 +534,7 @@ public class AssetLibrary {
 	 * @param	sndTransform	The initial SoundTransform object assigned to the sound channel.
 	 */
 	static public function playMP3(assetId:String, startTime:Number = 0, loops:int = 0, sndTransform:SoundTransform = null):void {
-		var asset:MP3Asset = assetLibraryIndex.getAsset(assetId) as MP3Asset;
+		var asset:Mp3Asset = assetLibraryIndex.getAsset(assetId) as Mp3Asset;
 		if (!asset) {
 			errorHandler(Error("AssetLibrary can't find MP3 asset with assetId :" + assetId));
 		} else {
@@ -554,7 +552,7 @@ public class AssetLibrary {
 	 * @param	assetId		Id of asset in assetIndex
 	 */
 	static public function stopMP3Channels(assetId:String):void {
-		var asset:MP3Asset = assetLibraryIndex.getAsset(assetId) as MP3Asset;
+		var asset:Mp3Asset = assetLibraryIndex.getAsset(assetId) as Mp3Asset;
 		if (!asset) {
 			errorHandler(Error("AssetLibrary can't find MP3 asset with assetId :" + assetId));
 		} else {
@@ -571,7 +569,7 @@ public class AssetLibrary {
 	 * Only sounds started with AssetLibrary can be stoped this way.
 	 */
 	static public function stopAllMP3Sounds():void {
-		var soundAssets:Vector.<MP3Asset> = assetLibraryIndex.getAllSoundAssets();
+		var soundAssets:Vector.<Mp3Asset> = assetLibraryIndex.getAllSoundAssets();
 		for (var i:int = 0; i < soundAssets.length; i++) {
 			soundAssets[i].stopAllChannels();
 		}
@@ -590,7 +588,7 @@ public class AssetLibrary {
 	 * @param	sndTransform	The initial SoundTransform object assigned to the sound channel.
 	 */
 	static public function playMP3NowOrNever(assetId:String, startTime:Number = 0, loops:int = 0, sndTransform:SoundTransform = null):void {
-		var asset:MP3Asset = assetLibraryIndex.getAsset(assetId) as MP3Asset;
+		var asset:Mp3Asset = assetLibraryIndex.getAsset(assetId) as Mp3Asset;
 		if (!asset) {
 			errorHandler(Error("AssetLibrary can't find MP3 asset with assetId :" + assetId));
 		} else {
@@ -624,7 +622,7 @@ public class AssetLibrary {
 	 * @param	sndTransform	The initial SoundTransform object assigned to the sound channel.
 	 */
 	static public function playSwfSoundNowOrNever(assetId:String, lincageId:String, startTime:Number = 0, loops:int = 0, sndTransform:SoundTransform = null):void {
-		var asset:SWFAsset = assetLibraryIndex.getAsset(assetId) as SWFAsset;
+		var asset:SwfAsset = assetLibraryIndex.getAsset(assetId) as SwfAsset;
 		if (!asset) {
 			errorHandler(Error("AssetLibrary can't find SWF asset with assetId :" + assetId));
 		} else {

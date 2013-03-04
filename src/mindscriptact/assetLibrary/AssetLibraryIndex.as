@@ -187,18 +187,18 @@ public class AssetLibraryIndex extends EventDispatcher {
 			var asset:AssetAbstract;
 			switch (assetDefinition.type) {
 				case AssetType.SWF: 
-					asset = new SWFAsset(assetDefinition.assetId);
+					asset = new SwfAsset(assetDefinition.assetId);
 					break;
 				case AssetType.JPG: 
 				case AssetType.PNG: 
 				case AssetType.GIF: 
-					asset = new PICAsset(assetDefinition.assetId);
+					asset = new PicAsset(assetDefinition.assetId);
 					break;
 				case AssetType.MP3: 
-					asset = new MP3Asset(assetDefinition.assetId);
+					asset = new Mp3Asset(assetDefinition.assetId);
 					break;
 				case AssetType.XML: 
-					asset = new XMLAsset(assetDefinition.assetId);
+					asset = new XmlAsset(assetDefinition.assetId);
 					break;
 				default: 
 					trace("AssetLibraryLoader can't handle this type yet. Asset type:", assetDefinition.type);
@@ -249,11 +249,11 @@ public class AssetLibraryIndex extends EventDispatcher {
 		return groupIndex[groupId];
 	}
 	
-	internal function getAllSoundAssets():Vector.<MP3Asset> {
+	internal function getAllSoundAssets():Vector.<Mp3Asset> {
 		use namespace assetlibrary;
-		var retVal:Vector.<MP3Asset> = new Vector.<MP3Asset>();
+		var retVal:Vector.<Mp3Asset> = new Vector.<Mp3Asset>();
 		for each (var assetDefinition:AssetDefinition in assetIndex) {
-			if (assetDefinition.asset && assetDefinition.asset is MP3Asset) {
+			if (assetDefinition.asset && assetDefinition.asset is Mp3Asset) {
 				retVal.push(assetDefinition.asset);
 			}
 		}

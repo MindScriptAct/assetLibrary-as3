@@ -4,9 +4,9 @@ package mindscriptact.assetLibrary.assets {
  * Wraper for XML asset
  * @author Raimundas Banevicius
  */
-public class XMLAsset extends AssetAbstract {
+public class XmlAsset extends AssetAbstract {
 	
-	public function XMLAsset(assetId:String) {
+	public function XmlAsset(assetId:String) {
 		super(assetId);
 	}
 	

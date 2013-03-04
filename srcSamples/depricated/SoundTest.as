@@ -5,7 +5,7 @@ import flash.events.MouseEvent;
 import mindscriptact.assetLibrary.AssetLibrary;
 import mindscriptact.assetLibrary.AssetLibraryIndex;
 import mindscriptact.assetLibrary.AssetLibraryLoader;
-import mindscriptact.assetLibrary.assets.MP3Asset;
+import mindscriptact.assetLibrary.assets.Mp3Asset;
 import mindscriptact.assetLibrary.event.AssetEvent;
 
 /**
@@ -70,7 +70,7 @@ public class SoundTest extends Sprite {
 		AssetLibrary.stopAllMP3Sounds();
 	}
 	
-	private function handleMp3(asset:MP3Asset):void {
+	private function handleMp3(asset:Mp3Asset):void {
 		asset.play(0, 5);
 	}
 }

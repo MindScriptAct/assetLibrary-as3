@@ -14,8 +14,8 @@ import flash.utils.getTimer;
 import mindscriptact.assetLibrary.AssetLibrary;
 import mindscriptact.assetLibrary.AssetLibraryIndex;
 import mindscriptact.assetLibrary.AssetLibraryLoader;
-import mindscriptact.assetLibrary.assets.PICAsset;
-import mindscriptact.assetLibrary.assets.SWFAsset;
+import mindscriptact.assetLibrary.assets.PicAsset;
+import mindscriptact.assetLibrary.assets.SwfAsset;
 import utils.debug.Stats;
 
 /**
@@ -121,7 +121,7 @@ public class MainStorageTest extends Sprite {
 		AssetLibrary.loadAsset(TEST_PIC, handleDoNothingWithPic);
 	}
 	
-	private function handleDoNothingWithPic(asset:PICAsset):void {
+	private function handleDoNothingWithPic(asset:PicAsset):void {
 	}
 	
 	private function handlePicUnload(event:Event):void {
@@ -140,7 +140,7 @@ public class MainStorageTest extends Sprite {
 		AssetLibrary.loadAsset(ANIM_MC, handleDoNothingWithSwf);
 	}
 	
-	private function handleDoNothingWithSwf(asset:SWFAsset):void {
+	private function handleDoNothingWithSwf(asset:SwfAsset):void {
 	}
 	
 	//----------------------------------
@@ -213,7 +213,7 @@ public class MainStorageTest extends Sprite {
 		AssetLibrary.loadAsset(BIG20MB, handleSwfLoaded);
 	}
 	
-	private function handleSwfLoaded(asset:SWFAsset):void {
+	private function handleSwfLoaded(asset:SwfAsset):void {
 		
 		trace("Loaded in " + (getTimer() - startInitialLoad));
 		startInitialLoad = getTimer();

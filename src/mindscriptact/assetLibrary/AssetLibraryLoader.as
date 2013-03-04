@@ -2,7 +2,7 @@ package mindscriptact.assetLibrary {
 import flash.events.EventDispatcher;
 import flash.system.ApplicationDomain;
 import flash.utils.ByteArray;
-import mindscriptact.assetLibrary.assets.XMLAsset;
+import mindscriptact.assetLibrary.assets.XmlAsset;
 import mindscriptact.assetLibrary.core.AssetDefinition;
 import mindscriptact.assetLibrary.core.AssetType;
 import mindscriptact.assetLibrary.core.loader.AssetLoadWorker;
@@ -249,7 +249,7 @@ public class AssetLibraryLoader extends EventDispatcher {
 		asssetDefinition.setAssetData(data);
 		//
 		if (isPreloadingXMLs && asssetDefinition.isAssetXmlFile) {
-			xmlAssetParser.parseXML(asssetDefinition.asset as XMLAsset);
+			xmlAssetParser.parseXML(asssetDefinition.asset as XmlAsset);
 			assetLibraryIndex.xmlFilesLoaded++;
 			this.dispatchEvent(new AssetLoaderEvent(AssetLoaderEvent.XML_LOADED, asssetDefinition.assetId, this.lodedFiles, this.totalFiles, assetLoadWorker.filesInProgress, assetLoadWorker.getProgress()));
 			if (assetLibraryIndex.xmlFilesLoaded == assetLibraryIndex.xmlFilesTotal) {

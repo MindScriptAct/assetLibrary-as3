@@ -6,7 +6,7 @@ import flash.events.Event;
 import mindscriptact.assetLibrary.AssetLibrary;
 import mindscriptact.assetLibrary.AssetLibraryIndex;
 import mindscriptact.assetLibrary.AssetLibraryLoader;
-import mindscriptact.assetLibrary.assets.PICAsset;
+import mindscriptact.assetLibrary.assets.PicAsset;
 import mindscriptact.assetLibrary.event.AssetEvent;
 
 /**
@@ -99,7 +99,7 @@ public class PicTest extends Sprite {
 		
 	}
 
-	private function handleJpgAsset(asset:PICAsset, posX:int, posY:int):void {
+	private function handleJpgAsset(asset:PicAsset, posX:int, posY:int):void {
 		// original pic was modified. modifications should be visible in all copies. 
 		var pic:Bitmap = asset.getBitmap();
 		this.addChild(pic);
@@ -112,7 +112,7 @@ public class PicTest extends Sprite {
 		picClone.y = posY;		
 	}
 	
-	private function handlePngAsset(asset:PICAsset, posX:int, posY:int):void {
+	private function handlePngAsset(asset:PicAsset, posX:int, posY:int):void {
 		var pic:Bitmap = asset.getBitmap();
 		this.addChild(pic);
 		pic.x = posX;
@@ -123,7 +123,7 @@ public class PicTest extends Sprite {
 		pic.bitmapData.draw(testRectangle);
 	}	
 	
-	private function handleGifAsset(asset:PICAsset, posX:int, posY:int):void {
+	private function handleGifAsset(asset:PicAsset, posX:int, posY:int):void {
 		var pic:Bitmap = asset.getClonedBitmap();
 		this.addChild(pic);
 		pic.x = posX;

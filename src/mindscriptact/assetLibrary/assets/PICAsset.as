@@ -6,9 +6,9 @@ import flash.display.BitmapData;
  * Wraper for picture assets: jpg, png, gif files
  * @author Raimundas Banevicius
  */
-public class PICAsset extends AssetAbstract {
+public class PicAsset extends AssetAbstract {
 	
-	public function PICAsset(assetId:String) {
+	public function PicAsset(assetId:String) {
 		super(assetId);
 	}
 	

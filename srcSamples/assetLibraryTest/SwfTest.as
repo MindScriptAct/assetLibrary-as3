@@ -9,7 +9,7 @@ import flash.media.Sound;
 import mindscriptact.assetLibrary.AssetLibrary;
 import mindscriptact.assetLibrary.AssetLibraryIndex;
 import mindscriptact.assetLibrary.AssetLibraryLoader;
-import mindscriptact.assetLibrary.assets.SWFAsset;
+import mindscriptact.assetLibrary.assets.SwfAsset;
 import mindscriptact.assetLibrary.event.AssetEvent;
 
 /**
@@ -77,7 +77,7 @@ public class SwfTest extends Sprite {
 	
 	}
 	
-	private function handleAsset(asset:SWFAsset):void {
+	private function handleAsset(asset:SwfAsset):void {
 		
 		this.removeChild(stageContent); // Can't use stage content second time without removing already used one.
 		

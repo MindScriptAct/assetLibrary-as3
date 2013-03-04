@@ -8,10 +8,10 @@ import flash.media.SoundTransform;
  * Wraper for .mp3 sound asset
  * @author Raimundas Banevicius
  */
-public class MP3Asset extends AssetAbstract {
+public class Mp3Asset extends AssetAbstract {
 	private var soundChannels:Vector.<SoundChannel> = new Vector.<SoundChannel>();
 	
-	public function MP3Asset(assetId:String) {
+	public function Mp3Asset(assetId:String) {
 		super(assetId);
 	}
 	

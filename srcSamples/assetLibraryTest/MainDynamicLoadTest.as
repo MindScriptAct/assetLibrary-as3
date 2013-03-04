@@ -6,8 +6,8 @@ import flash.events.Event;
 import mindscriptact.assetLibrary.AssetLibrary;
 import mindscriptact.assetLibrary.AssetLibraryIndex;
 import mindscriptact.assetLibrary.AssetLibraryLoader;
-import mindscriptact.assetLibrary.assets.PICAsset;
-import mindscriptact.assetLibrary.assets.SWFAsset;
+import mindscriptact.assetLibrary.assets.PicAsset;
+import mindscriptact.assetLibrary.assets.SwfAsset;
 import mindscriptact.assetLibrary.core.AssetType;
 import mindscriptact.assetLibrary.events.AssetEvent;
 import mindscriptact.assetLibrary.events.AssetLoaderEvent;
@@ -93,7 +93,7 @@ public class MainDynamicLoadTest extends Sprite {
 	private function handleAllLoadFinished(event:AssetLoaderEvent):void {
 	}
 	
-	private function handleTest1(asset:SWFAsset):void {
+	private function handleTest1(asset:SwfAsset):void {
 		////trace("Main.handleTest1 > asset : " + asset);
 		
 		var anim:MovieClip = asset.getMovieClip("AnimMC");
@@ -107,7 +107,7 @@ public class MainDynamicLoadTest extends Sprite {
 		testSprite.y = 100;
 	}
 	
-	private function handleTest2(asset:SWFAsset):void {
+	private function handleTest2(asset:SwfAsset):void {
 		trace("MainDynamicLoadTest.handleTest2 > asset : " + asset);
 		////trace("Main.handleTest3 > asset : " + asset);
 		//var testSprite:Sprite = asset.getSprite("SquareB_SPR");

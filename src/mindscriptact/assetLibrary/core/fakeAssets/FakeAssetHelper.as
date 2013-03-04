@@ -6,6 +6,8 @@ import flash.display.MovieClip;
 import flash.display.Shape;
 import flash.display.SimpleButton;
 import flash.display.Sprite;
+import flash.events.SampleDataEvent;
+import flash.media.Sound;
 import flash.text.TextField;
 import flash.text.TextFormat;
 
@@ -127,6 +129,44 @@ public class FakeAssetHelper {
 		}
 		
 		return retVal;
+	}
+	
+	static public function fakeSound():Sound {
+		if (!fakeSoundObj) {
+			createFakeSound();
+		}
+		return fakeSoundObj;
+	}
+	
+	static private var fakeSoundposition:int = 0;
+	static private var fakeSoundObj:Sound;
+	static private var fakeSoundSamples:Vector.<Number>;
+	
+	static private function createFakeSound():void {
+		fakeSoundObj = new Sound();
+		fakeSoundObj.addEventListener(SampleDataEvent.SAMPLE_DATA, onSampleData);
+		fakeSoundSamples = new Vector.<Number>();
+		var amp:Number = 1.0;
+		var i:int = 0;
+		var mult:Number = 1800 / 44100 * Math.PI * 2;
+		while (amp > 0.01) {
+			fakeSoundSamples[i] = Math.sin(i * mult) * amp;
+			amp *= 0.9998;
+			i++;
+		}
+		fakeSoundSamples.length = i;
+	}
+	
+	static private function onSampleData(event:SampleDataEvent):void {
+		for (var i:int = 0; i < 2048; i++) {
+			if (fakeSoundposition >= fakeSoundSamples.length) {
+				fakeSoundposition = 0;
+				return;
+			}
+			event.data.writeFloat(fakeSoundSamples[fakeSoundposition]);
+			event.data.writeFloat(fakeSoundSamples[fakeSoundposition]);
+			fakeSoundposition++;
+		}
 	}
 
 }

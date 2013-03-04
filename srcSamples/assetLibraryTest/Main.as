@@ -6,8 +6,8 @@ import flash.events.Event;
 import mindscriptact.assetLibrary.AssetLibrary;
 import mindscriptact.assetLibrary.AssetLibraryIndex;
 import mindscriptact.assetLibrary.AssetLibraryLoader;
-import mindscriptact.assetLibrary.assets.PICAsset;
-import mindscriptact.assetLibrary.assets.SWFAsset;
+import mindscriptact.assetLibrary.assets.PicAsset;
+import mindscriptact.assetLibrary.assets.SwfAsset;
 import mindscriptact.assetLibrary.core.AssetType;
 import mindscriptact.assetLibrary.events.AssetEvent;
 import mindscriptact.assetLibrary.events.AssetLoaderEvent;
@@ -180,7 +180,7 @@ public class Main extends Sprite {
 		//
 	}
 
-	private function handleTest1(asset:SWFAsset):void {
+	private function handleTest1(asset:SwfAsset):void {
 		////trace("Main.handleTest1 > asset : " + asset);
 
 		var anim:MovieClip = asset.getMovieClip("AnimMC");
@@ -194,7 +194,7 @@ public class Main extends Sprite {
 		testSprite.y = 100;
 	}
 
-	private function handleTest3(asset:SWFAsset):void {
+	private function handleTest3(asset:SwfAsset):void {
 		////trace("Main.handleTest3 > asset : " + asset);
 		var testSprite:Sprite = asset.getSprite("SquareB_SPR");
 		this.addChild(testSprite);
@@ -202,7 +202,7 @@ public class Main extends Sprite {
 		testSprite.y = 100;
 	}
 
-	private function handleTest7(asset:SWFAsset):void {
+	private function handleTest7(asset:SwfAsset):void {
 		////trace("Main.handleTest7 > asset : " + asset);
 		var testSprite:Sprite = asset.getSprite("SquareD_SPR");
 		this.addChild(testSprite);
@@ -210,7 +210,7 @@ public class Main extends Sprite {
 		testSprite.y = 100;
 	}
 	
-	private function handleTest5(asset:SWFAsset):void {
+	private function handleTest5(asset:SwfAsset):void {
 		////trace("Main.handleTest5 > asset : " + asset);
 		var testSprite:Sprite = asset.getSprite("SquareC_SPR");
 		this.addChild(testSprite);
@@ -285,13 +285,13 @@ public class Main extends Sprite {
 //		AssetLibrary.sendAssetToFunction("nin_the_warning", handleSound);
 //	}
 	
-//	private function handleSound(asset:MP3Asset):void {
+//	private function handleSound(asset:Mp3Asset):void {
 		//trace("Main.handleSound > asset : " + asset);
 		
 //		asset.play();
 //	}
 	
-	private function handlePic(asset:PICAsset):void {
+	private function handlePic(asset:PicAsset):void {
 		//trace("Main.handlePic > asset : " + asset);
 		
 		var bitMap:Bitmap = asset.getBitmap();

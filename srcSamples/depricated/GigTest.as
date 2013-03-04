@@ -7,7 +7,7 @@ import flash.utils.getTimer;
 import mindscriptact.assetLibrary.AssetLibrary;
 import mindscriptact.assetLibrary.AssetLibraryIndex;
 import mindscriptact.assetLibrary.AssetLibraryLoader;
-import mindscriptact.assetLibrary.assets.SWFAsset;
+import mindscriptact.assetLibrary.assets.SwfAsset;
 import mindscriptact.logmaster.DebugMan;
 
 /**
@@ -113,7 +113,7 @@ public class GigTest extends Sprite {
 		}
 	}
 	
-	private function handlePicPack(asset:SWFAsset):void {
+	private function handlePicPack(asset:SwfAsset):void {
 		trace("GigTest.handlePicPack > asset loaded in ", (getTimer() - timeShot), "ms", "momery:",fpsCounter.mem);
 	}
 
