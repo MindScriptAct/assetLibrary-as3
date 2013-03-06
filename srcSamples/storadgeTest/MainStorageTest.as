@@ -58,6 +58,11 @@ public class MainStorageTest extends Sprite {
 		new PushButton(this, 150, 150, "Enable SO use", handleEnableSOUse);
 		new PushButton(this, 250, 150, "Force GC", handleForceGC);
 		new PushButton(this, 355, 150, "Force cashe clean", handleCachClean);
+		new PushButton(this, 460, 150, "Force 1 MB storage", handle1MBstorage);		
+		new PushButton(this, 560, 150, "Force 10 MB storage", handle10MBstorage);		
+		new PushButton(this, 660, 150, "Force 11 MB storage", handle11MBstorage);		
+		
+		
 		
 		new PushButton(this, 50, 200, "Load&Add pics", handleStartLoad);
 		new PushButton(this, 150, 200, "Remove pics", handleRemovePics);
@@ -76,6 +81,21 @@ public class MainStorageTest extends Sprite {
 		new PushButton(this, 50, 300, "CreateDict Objects", handleCreateDictObj);
 		new PushButton(this, 150, 300, "Remove some objects", handleRemoveDictObj);
 		new PushButton(this, 250, 300, "Trace Dictionary", handleTraceDictObj);
+	}
+	
+	private function handle1MBstorage(event:Event):void {
+		AssetLibrary.requestStorageSpace(handleAllowed, 1);
+	}
+	private function handle10MBstorage(event:Event):void {
+		AssetLibrary.requestStorageSpace(handleAllowed, 10);
+	}	
+	private function handle11MBstorage(event:Event):void {
+		AssetLibrary.requestStorageSpace(handleAllowed, 11);
+	}	
+	
+	private function handleAllowed(isAllowed:Boolean):void {
+		trace( "MainStorageTest.handleAllowed > isAllowed : " + isAllowed );
+		
 	}
 	
 	private function handleCachClean(event:Event):void {

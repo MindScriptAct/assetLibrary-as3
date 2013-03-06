@@ -2,6 +2,7 @@ package mindscriptact.assetLibrary {
 import flash.events.EventDispatcher;
 import flash.system.ApplicationDomain;
 import flash.utils.ByteArray;
+import flash.utils.Dictionary;
 import mindscriptact.assetLibrary.assets.XmlAsset;
 import mindscriptact.assetLibrary.core.AssetDefinition;
 import mindscriptact.assetLibrary.core.AssetType;
@@ -105,7 +106,7 @@ public class AssetLibraryLoader extends EventDispatcher {
 			errorHandler(new Error("To enable Flash local storage you must provide projectid. Project web url or project name should work just fine."));
 		}
 		useLocalStorage = true;
-		storageManager = new AssetLibraryStorage(projectId);
+		storageManager = new AssetLibraryStorage(projectId, errorHandler);
 	
 	}
 	
@@ -219,16 +220,18 @@ public class AssetLibraryLoader extends EventDispatcher {
 	}
 	
 	internal function clearLocalStorage(projectId:String):void {
-		if (projectId) {
-			AssetLibraryStorage.clearStorage(projectId);
-		} else {
-			if (storageManager) {
-				AssetLibraryStorage.clearStorage();
-			} else {
-				errorHandler(Error("Local storage is not enabled. If you want to clear other then currently enabled storage, please provide 'projectId'."));
+		if (storageManager) {
+			use namespace assetlibrary;
+			if (!projectId) {
+				projectId = AssetLibraryStorage.getProjectId();
 			}
+			var assetIndex:Dictionary = assetLibraryIndex.getAssetIndex();
+			for each (var asset:AssetDefinition in assetIndex) {
+				AssetLibraryStorage.clearSharedObject(projectId + "_" + asset.assetId);
+			}
+		} else {
+			errorHandler(Error("Local storage is not enabled. If you want to clear not enabled storage please provide 'projectId'."));
 		}
-	
 	}
 	
 	//----------------------------------

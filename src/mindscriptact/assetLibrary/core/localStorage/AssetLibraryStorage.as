@@ -1,5 +1,7 @@
 package mindscriptact.assetLibrary.core.localStorage {
+import flash.events.NetStatusEvent;
 import flash.net.SharedObject;
+import flash.net.SharedObjectFlushStatus;
 import flash.utils.ByteArray;
 import flash.utils.getTimer;
 
@@ -13,21 +15,28 @@ public class AssetLibraryStorage {
 	
 	static private var projectId:String;
 	
-	public function AssetLibraryStorage(projectId:String) {
+	static private var handleUserAction:Function;
+	
+	static private var mySharedObjectIndex:SharedObject;
+	
+	private var errorHandler:Function;
+	
+	public function AssetLibraryStorage(projectId:String, errorHandler:Function) {
 		AssetLibraryStorage.projectId = projectId;
+		this.errorHandler = errorHandler;
+		mySharedObjectIndex = SharedObject.getLocal(projectId + "_Asset_Lybrary");
 	}
 	
 	public function canUseStore():Boolean {
 		var retVal:Boolean = false;
 		var timeCheck:int = getTimer();
-		var mySharedObjectIndex:SharedObject = SharedObject.getLocal(projectId + "_Asset_Lybrary");
 		mySharedObjectIndex.data.__$$_can_Use_Check = 1;
 		var flushStatus:String = null;
 		try {
 			flushStatus = mySharedObjectIndex.flush();
 			retVal = true;
 		} catch (error:Error) {
-			//trace("Error...Could not write SharedObject to disk, flushStatus:", flushStatus);
+			errorHandler(new Error("AssetLibraryStorage could not write SharedObject to disk, flushStatus:", flushStatus));
 		}
 		//trace(" !! canUseStoreCheck :" + (getTimer() - timeCheck));
 		return retVal;
@@ -45,8 +54,7 @@ public class AssetLibraryStorage {
 	public function store(id:String, path:String, byteData:ByteArray):Boolean {
 		var retVal:Boolean = true;
 		// Create/get a shared-objects
-		var mySharedObjectIndex:SharedObject = SharedObject.getLocal(projectId + "_Asset_Lybrary");
-		var mySharedObject:SharedObject = SharedObject.getLocal(id);
+		var mySharedObject:SharedObject = SharedObject.getLocal(projectId + "_" + id);
 		// Store data
 		mySharedObject.data.byteArray = byteData;
 		mySharedObjectIndex.data[id] = path;
@@ -64,9 +72,7 @@ public class AssetLibraryStorage {
 	public function get(id:String, path:String):ByteArray {
 		var retVal:ByteArray;
 		
-		var mySharedObjectIndex:SharedObject = SharedObject.getLocal(projectId + "_Asset_Lybrary");
-		
-		var mySharedObject:SharedObject = SharedObject.getLocal(id);
+		var mySharedObject:SharedObject = SharedObject.getLocal(projectId + "_" + id);
 		if (mySharedObjectIndex.data[id] == path) {
 			retVal = mySharedObject.data.byteArray as ByteArray;
 		} else {
@@ -78,14 +84,52 @@ public class AssetLibraryStorage {
 		return retVal;
 	}
 	
-	static public function clearStorage(projectId:String = null):void {
-		var mySharedObjectIndex:SharedObject;
-		if (projectId) {
+	static public function clearSharedObject(objectName:String):void {
+		var sharedObject:SharedObject = SharedObject.getLocal(objectName);
+		sharedObject.clear();
+	}
+	
+	static public function getProjectId():String {
+		return projectId;
+	}
+	
+	static public function requestStorageSpace(size:Number):void {
+		if (!mySharedObjectIndex) {
 			mySharedObjectIndex = SharedObject.getLocal(projectId + "_Asset_Lybrary");
-		} else {
-			mySharedObjectIndex = SharedObject.getLocal(AssetLibraryStorage.projectId + "_Asset_Lybrary");
 		}
-		mySharedObjectIndex.clear();
+		
+		var flushStatus:String = null;
+		try {
+			flushStatus = mySharedObjectIndex.flush(size * 1024 * 1024);
+		} catch (error:Error) {
+			handleUserAction(false);
+			return;
+		}
+		
+		if (flushStatus != null) {
+			switch (flushStatus) {
+				case SharedObjectFlushStatus.PENDING: 
+					AssetLibraryStorage.handleUserAction = handleUserAction;
+					mySharedObjectIndex.addEventListener(NetStatusEvent.NET_STATUS, handleFlushStatus);
+					break;
+				case SharedObjectFlushStatus.FLUSHED: 
+					handleUserAction(true);
+					break;
+			}
+		}
+	}
+	
+	static private function handleFlushStatus(event:NetStatusEvent):void {
+		mySharedObjectIndex.removeEventListener(NetStatusEvent.NET_STATUS, handleFlushStatus);
+		switch (event.info.code) {
+			case "SharedObject.Flush.Success": 
+				handleUserAction(true);
+				break;
+			case "SharedObject.Flush.Failed": 
+				handleUserAction(false);
+				break;
+		}
+		handleUserAction = null;
 	}
 
 }

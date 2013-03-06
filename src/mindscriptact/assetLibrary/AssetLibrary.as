@@ -1,7 +1,11 @@
 package mindscriptact.assetLibrary {
+import adobe.utils.ProductManager;
+import flash.accessibility.Accessibility;
 import flash.display.*;
+import flash.events.NetStatusEvent;
 import flash.media.*;
 import flash.net.SharedObject;
+import flash.net.SharedObjectFlushStatus;
 import flash.system.*;
 import flash.utils.*;
 import mindscriptact.assetLibrary.assets.*;
@@ -49,7 +53,7 @@ public class AssetLibrary {
 	/** Time interval for asset library to try and unload not needed assets in secconds.
 	 * By default it is 0 - autounload is disabled.
 	 * @private */
-	static private var _autoUnloadIntervalTime:int = 0;
+	static private var _autoUnloadIntervalTime:int = 0
 	
 	//----------------------------------
 	//     System
@@ -85,7 +89,7 @@ public class AssetLibrary {
 	
 	static public function get isPermanentsProtected():Boolean {
 		return !assetLibraryIndex.canAddPermanents;
-	}	
+	}
 	
 	/**
 	 * Time interval in secconds for assets to be automaticaly unloaded.
@@ -273,7 +277,7 @@ public class AssetLibrary {
 	//     Local Storage controls
 	//----------------------------------
 	
-		/**
+	/**
 	 * Enables use of local storage to cash loaded assets.
 	 * @param	projectId	Unique project id. Project web url or project name should work just fine.
 	 */
@@ -283,7 +287,7 @@ public class AssetLibrary {
 	
 	/**
 	 * Disable use of local storage to cash loaded assets.
-	 */	
+	 */
 	static public function disableLocalStorage():void {
 		assetLibraryLoader.disableLocalStorage();
 	}
@@ -304,9 +308,8 @@ public class AssetLibrary {
 		Security.showSettings(SecurityPanel.LOCAL_STORAGE);
 	}
 	
-	static public function requestStorageSpace(handleUserAction:Function, size:int = 11):Boolean {
-		// TODO : implement.
-		return false;
+	static public function requestStorageSpace(handleUserAction:Function, size:Number = 11):void {
+		AssetLibraryStorage.requestStorageSpace(size);
 	}
 	
 	//
