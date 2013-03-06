@@ -1,6 +1,7 @@
 package mindscriptact.assetLibrary {
 import flash.display.*;
 import flash.media.*;
+import flash.net.SharedObject;
 import flash.system.*;
 import flash.utils.*;
 import mindscriptact.assetLibrary.assets.*;
@@ -84,29 +85,7 @@ public class AssetLibrary {
 	
 	static public function get isPermanentsProtected():Boolean {
 		return !assetLibraryIndex.canAddPermanents;
-	}
-	
-	/**
-	 * Enables use of local storage to cash loaded assets.
-	 */
-	static public function set useLocalStorage(value:Boolean):void {
-		use namespace assetlibrary;
-		if (value) {
-			if (!assetLibraryLoader._useLocalStorage) {
-				assetLibraryLoader.storageManager = new AssetLibraryStorage();
-			}
-		} else {
-			if (assetLibraryLoader._useLocalStorage) {
-				assetLibraryLoader.storageManager = null;
-			}
-		}
-		assetLibraryLoader._useLocalStorage = value;
-	}
-	
-	static public function get useLocalStorage():Boolean {
-		use namespace assetlibrary;
-		return assetLibraryLoader._useLocalStorage;
-	}
+	}	
 	
 	/**
 	 * Time interval in secconds for assets to be automaticaly unloaded.
@@ -151,6 +130,10 @@ public class AssetLibrary {
 	
 	static public function get fakeMissingAssets():Boolean {
 		return _fakeMissingAssets;
+	}
+	
+	static public function setErrorHandler(errorHandler:Function):void {
+		AssetLibrary.errorHandler = errorHandler;
 	}
 	
 	//----------------------------------
@@ -290,17 +273,46 @@ public class AssetLibrary {
 	//     Local Storage controls
 	//----------------------------------
 	
-	static public function clearLocalStorage():void {
-		// TODO : implement.
+		/**
+	 * Enables use of local storage to cash loaded assets.
+	 * @param	projectId	Unique project id. Project web url or project name should work just fine.
+	 */
+	static public function enableLocalStorage(projectId:String):void {
+		assetLibraryLoader.enableLocalStorage(projectId);
+	}
+	
+	/**
+	 * Disable use of local storage to cash loaded assets.
+	 */	
+	static public function disableLocalStorage():void {
+		assetLibraryLoader.disableLocalStorage();
+	}
+	
+	/**
+	 * Clears assetLebrary sharecd storage. If projectId is not provided - it will try to clear local storage in current use.
+	 * @param	projectId	Optional projectId if you want to clear another project assetLibrary shared storage, or shared storage is not enabled yet.
+	 */
+	static public function clearStorage(projectId:String = null):void {
+		assetLibraryLoader.clearLocalStorage(projectId);
 	}
 	
 	static public function setLocalStorageFailHandler(handleStorageFail:Function):void {
 		assetLibraryLoader.handleStorageFail = handleStorageFail;
 	}
 	
-	static public function forseOpenLocalStorageSettings():void {
+	static public function openStorageSettings():void {
 		Security.showSettings(SecurityPanel.LOCAL_STORAGE);
 	}
+	
+	static public function requestStorageSpace(handleUserAction:Function, size:int = 11):Boolean {
+		// TODO : implement.
+		return false;
+	}
+	
+	//
+	//private function handleUserAction(isAllowed:Boolean):void {
+	//
+	//}
 	
 	//--------------------------------------------------------------------------
 	//
@@ -611,6 +623,10 @@ public class AssetLibrary {
 	static public function playSwfSound(assetId:String, lincageId:String, startTime:Number = 0, loops:int = 0, sndTransform:SoundTransform = null):void {
 		var sound:Sound = getSWFSound(assetId, lincageId);
 		sound.play(startTime, loops, sndTransform);
+	}
+	
+	static public function stopSwfSoundChannels(assetId:String, lincageId:String):void {
+		// TODO : implement
 	}
 	
 	/**

@@ -17,8 +17,12 @@ import flash.text.TextFormat;
  */
 public class FakeAssetHelper {
 	
+	static private var fakeSoundposition:int = 0;
+	static private var fakeSoundObj:Sound;
+	static private var fakeSoundSamples:Vector.<Number>;
+	
 	static public function fakeBitmap(debugText:String = null, width:int = 100, height:int = 100):Bitmap {
-		var tempBD:BitmapData = new BitmapData(width, height, false, 0xFF0000);
+		var tempBD:BitmapData = new BitmapData(width, height, false, 0xFF8080);
 		
 		if (debugText) {
 			
@@ -37,7 +41,7 @@ public class FakeAssetHelper {
 	}
 	
 	static public function fakeBitmapData(debugText:String = null, width:int = 100, height:int = 100):BitmapData {
-		var retVal:BitmapData = new BitmapData(width, height, false, 0xFF0000);
+		var retVal:BitmapData = new BitmapData(width, height, false, 0xFF8080);
 		
 		if (debugText) {
 			
@@ -56,8 +60,8 @@ public class FakeAssetHelper {
 	static public function fakeMovieClip(debugText:String = null, width:int = 100, height:int = 100):MovieClip {
 		var retVal:MovieClip = new MovieClip();
 		
-		retVal.graphics.lineStyle(0.1, 0xFF0000);
-		retVal.graphics.beginFill(0x0000FF);
+		retVal.graphics.lineStyle(0.1, 0x808080);
+		retVal.graphics.beginFill(0xFF8080);
 		retVal.graphics.drawRect(0, 0, width, height);
 		retVal.graphics.endFill();
 		
@@ -81,8 +85,8 @@ public class FakeAssetHelper {
 	static public function fakeSprite(debugText:String = null, width:int = 100, height:int = 100):Sprite {
 		var retVal:Sprite = new Sprite();
 		
-		retVal.graphics.lineStyle(0.1, 0xFF0000);
-		retVal.graphics.beginFill(0x0000FF);
+		retVal.graphics.lineStyle(0.1, 0x808080);
+		retVal.graphics.beginFill(0xFF8080);
 		retVal.graphics.drawRect(0, 0, width, height);
 		retVal.graphics.endFill();
 		
@@ -109,8 +113,8 @@ public class FakeAssetHelper {
 		
 		var retVal:SimpleButton = new SimpleButton(buttonState, buttonState, buttonState, buttonState);
 		
-		buttonState.graphics.lineStyle(0.1, 0xFF0000);
-		buttonState.graphics.beginFill(0x0000FF);
+		buttonState.graphics.lineStyle(0.1, 0x808080);
+		buttonState.graphics.beginFill(0xFF8080);
 		buttonState.graphics.drawRect(0, 0, width, height);
 		buttonState.graphics.endFill();
 		
@@ -137,10 +141,6 @@ public class FakeAssetHelper {
 		}
 		return fakeSoundObj;
 	}
-	
-	static private var fakeSoundposition:int = 0;
-	static private var fakeSoundObj:Sound;
-	static private var fakeSoundSamples:Vector.<Number>;
 	
 	static private function createFakeSound():void {
 		fakeSoundObj = new Sound();

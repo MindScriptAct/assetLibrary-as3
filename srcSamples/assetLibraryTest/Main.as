@@ -37,6 +37,9 @@ public class Main extends Sprite {
 
 		assetLoader = AssetLibrary.getLoader();
 
+		
+		
+		AssetLibrary.setErrorHandler(handleError);
 		//var asset:AssetSWF = new AssetSWF();		
 		//assetIndex.addAsset(asset);
 
@@ -68,6 +71,8 @@ public class Main extends Sprite {
 
 
 		assetIndex.addAssetArrayToGroup("allFiles", ["test1", "test2", "test3def", "test4def"]);
+		
+		assetIndex.addAssetToGroup("groupId", "testId");
 
 		
 		assetIndex.addPathDefinition("versionDir", "assets/versionTest/");
@@ -108,7 +113,27 @@ public class Main extends Sprite {
 	 	AssetLibrary.loadAsset("pngSmiley", handlePic); 
 		AssetLibrary.loadAsset("jpgSmiley", handlePic); 
 		AssetLibrary.loadAsset("gifSmiley", handlePic);
+		
+		
+		
+		
+	//AssetLibrary.getSWFSprite("swfAssetId", "linkageId");
+	//AssetLibrary.getSWFMovieClip("swfAssetId", "linkageId")
+	//AssetLibrary.getSWFStageContent("swfAssetId", "linkageId");
+	//AssetLibrary.getSWFBitmapData("swfAssetId", "linkageId");
+	//AssetLibrary.getSWFSimpleButton("swfAssetId", "linkageId");
+	//AssetLibrary.getSWFSound("swfAssetId", "linkageId");
+		//
+		//
+	//AssetLibrary.getPICBitmap("picAssetId");
+	//AssetLibrary.getPICClonedBitmap("picAssetId");
+		//
+	//AssetLibrary.getMP3Sound("soundAssetId");
 
+	}
+	
+	private function handleError(error:Error):void {
+		
 	}
 
 
@@ -294,7 +319,7 @@ public class Main extends Sprite {
 	private function handlePic(asset:PicAsset):void {
 		//trace("Main.handlePic > asset : " + asset);
 		
-		var bitMap:Bitmap = asset.getBitmap();
+		var bitMap:Bitmap = asset.getClonedBitmap();
 		this.addChild(bitMap);
 		bitMap.x = Math.random() * 500 + 50;
 		bitMap.y = Math.random() * 100 + 300;

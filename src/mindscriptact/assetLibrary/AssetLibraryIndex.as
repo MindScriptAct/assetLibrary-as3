@@ -45,7 +45,7 @@ public class AssetLibraryIndex extends EventDispatcher {
 	 * @param	urlParams	url parameters that must be used then file is loaded.
 	 * @param	assetType	if you use not standart file extention, you can define asset type here, if extention is standart AssetLybrary automaticaly sets the type.
 	 */
-	public function addFileDefinition(assetId:String, fileUrl:String, pathId:String = null, isPermanent:Boolean = false, urlParams:String = null, assetType:String = null):void {
+	public function addFileDefinition(assetId:String, fileUrl:String, pathId:String = null, isPermanent:Boolean = false, urlParams:String = null, assetType:String = null, groupId:String = null):void {
 		use namespace assetlibrary;
 		var filePath:String = "";
 		// error checking.
@@ -152,6 +152,14 @@ public class AssetLibraryIndex extends EventDispatcher {
 		for (var i:int = 0; i < assetIds.length; i++) {
 			addAssetToGroup(groupId, assetIds[i]);
 		}
+	}
+	
+	//----------------------------------
+	//     urlParams
+	//----------------------------------
+	
+	public function addUrlParams(unl:String, urlParams:String):void {
+		// TODO : implement
 	}
 	
 	//----------------------------------

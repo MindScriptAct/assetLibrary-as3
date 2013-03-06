@@ -57,6 +57,7 @@ public class MainStorageTest extends Sprite {
 		new PushButton(this, 50, 150, "Show SO settings", handleShowSoSettings);
 		new PushButton(this, 150, 150, "Enable SO use", handleEnableSOUse);
 		new PushButton(this, 250, 150, "Force GC", handleForceGC);
+		new PushButton(this, 355, 150, "Force cashe clean", handleCachClean);
 		
 		new PushButton(this, 50, 200, "Load&Add pics", handleStartLoad);
 		new PushButton(this, 150, 200, "Remove pics", handleRemovePics);
@@ -75,6 +76,10 @@ public class MainStorageTest extends Sprite {
 		new PushButton(this, 50, 300, "CreateDict Objects", handleCreateDictObj);
 		new PushButton(this, 150, 300, "Remove some objects", handleRemoveDictObj);
 		new PushButton(this, 250, 300, "Trace Dictionary", handleTraceDictObj);
+	}
+	
+	private function handleCachClean(event:Event):void {
+		AssetLibrary.clearStorage();
 	}
 	
 	//----------------------------------
@@ -198,11 +203,11 @@ public class MainStorageTest extends Sprite {
 	}
 	
 	private function handleEnableSOUse(event:Event):void {
-		AssetLibrary.useLocalStorage = true;
+		AssetLibrary.enableLocalStorage("localCash_test");
 	}
 	
 	private function handleShowSoSettings(event:Event):void {
-		AssetLibrary.forseOpenLocalStorageSettings();
+		AssetLibrary.openStorageSettings();
 	}
 	
 	private function handleStartLoad(event:Event):void {

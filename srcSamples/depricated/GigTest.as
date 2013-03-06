@@ -39,7 +39,7 @@ public class GigTest extends Sprite {
 		AssetLibrary.useLocalStorage = true;
 		//AssetLibrary.setStorageFailHandler(showInfoWindow);
 		
-		AssetLibrary.clearLocalStorage();
+		AssetLibrary.clearStorage();
 		
 		trace("using Storage :" +AssetLibrary.useLocalStorage);
 		

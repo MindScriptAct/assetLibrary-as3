@@ -45,7 +45,7 @@ public class AssetLibraryLoader extends EventDispatcher {
 	
 	internal var handleStorageFail:Function = internalHandleStorageFail;
 	
-	assetlibrary var _useLocalStorage:Boolean = false;
+	private var useLocalStorage:Boolean = false;
 	
 	private var _fakeMissingAssets:Boolean = false;
 	//
@@ -100,6 +100,20 @@ public class AssetLibraryLoader extends EventDispatcher {
 	//     INTERNAL
 	//----------------------------------
 	
+	internal function enableLocalStorage(projectId:String):void {
+		if (!projectId) {
+			errorHandler(new Error("To enable Flash local storage you must provide projectid. Project web url or project name should work just fine."));
+		}
+		useLocalStorage = true;
+		storageManager = new AssetLibraryStorage(projectId);
+	
+	}
+	
+	internal function disableLocalStorage():void {
+		useLocalStorage = false;
+		storageManager = null;
+	}
+	
 	internal function loadAsset(item:AssetDefinition):void {
 		use namespace assetlibrary;
 		filesQueue.push(item);
@@ -128,7 +142,7 @@ public class AssetLibraryLoader extends EventDispatcher {
 				case AssetType.PNG: 
 				case AssetType.GIF: 
 					var loadNarmaly:Boolean = true;
-					if (_useLocalStorage) {
+					if (useLocalStorage) {
 						if (storageManager.canUseStore()) {
 							loadNarmaly = false;
 						} else {
@@ -202,6 +216,19 @@ public class AssetLibraryLoader extends EventDispatcher {
 	
 	private function internalHandleStorageFail():void {
 		errorHandler(Error("AssitLibrary failed to store data localy(Maybe it is disabled)"));
+	}
+	
+	internal function clearLocalStorage(projectId:String):void {
+		if (projectId) {
+			AssetLibraryStorage.clearStorage(projectId);
+		} else {
+			if (storageManager) {
+				AssetLibraryStorage.clearStorage();
+			} else {
+				errorHandler(Error("Local storage is not enabled. If you want to clear other then currently enabled storage, please provide 'projectId'."));
+			}
+		}
+	
 	}
 	
 	//----------------------------------
