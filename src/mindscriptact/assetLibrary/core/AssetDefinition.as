@@ -4,25 +4,25 @@ import mindscriptact.assetLibrary.assets.AssetAbstract;
 import mindscriptact.assetLibrary.core.namespaces.assetlibrary;
 
 /**
- * COMMENT
+ * INTERNAL. Asset definition.
  * @private
  * @author Raimundas Banevicius
  */
 public class AssetDefinition {
 	
-	assetlibrary var assetId:String;
+	public var assetId:String;
 	//
-	assetlibrary var asset:AssetAbstract;
+	public var asset:AssetAbstract;
 	//
-	assetlibrary var filePath:String;
-	assetlibrary var type:String;
+	public var filePath:String;
+	public var type:String;
 	//
-	assetlibrary var isPermanent:Boolean = false;
+	public var isPermanent:Boolean = false;
 	//
-	assetlibrary var isAssetXmlFile:Boolean = false;
+	public var isAssetXmlFile:Boolean = false;
 	//
-	assetlibrary var callBackFunctions:Vector.<Function> = new Vector.<Function>();
-	assetlibrary var callBackParams:Vector.<Array> = new Vector.<Array>;
+	public var callBackFunctions:Vector.<Function> = new Vector.<Function>();
+	public var callBackParams:Vector.<Array> = new Vector.<Array>;
 	//
 	private var _keepTime:int = int.MAX_VALUE;
 	
@@ -37,29 +37,33 @@ public class AssetDefinition {
 	
 	assetlibrary function setAssetData(data:String):void {
 		use namespace assetlibrary;
-		if (_keepTime > 0) {
-			asset.setData(data);
-		}
-		_keepTime = int.MAX_VALUE;
-		//
-		while (callBackFunctions.length) {
-			var params:Array = callBackParams.pop();
-			params.unshift(asset);
-			callBackFunctions.pop().apply(null, params);
+		if (asset) {
+			if (_keepTime > 0) {
+				asset.setData(data);
+			}
+			_keepTime = int.MAX_VALUE;
+			//
+			while (callBackFunctions.length) {
+				var params:Array = callBackParams.pop();
+				params.unshift(asset);
+				callBackFunctions.pop().apply(null, params);
+			}
 		}
 	}
 	
 	assetlibrary function setAssetContent(content:Object, applicationDomain:ApplicationDomain):void {
 		use namespace assetlibrary;
-		if (_keepTime > 0) {
-			asset.setContent(content, applicationDomain, isPermanent);
-		}
-		_keepTime = int.MAX_VALUE;
-		//
-		while (callBackFunctions.length) {
-			var params:Array = callBackParams.pop();
-			params.unshift(asset);
-			callBackFunctions.pop().apply(null, params);
+		if (asset) {
+			if (_keepTime > 0) {
+				asset.setContent(content, applicationDomain, isPermanent);
+			}
+			_keepTime = int.MAX_VALUE;
+			//
+			while (callBackFunctions.length) {
+				var params:Array = callBackParams.pop();
+				params.unshift(asset);
+				callBackFunctions.pop().apply(null, params);
+			}
 		}
 	}
 	
@@ -88,6 +92,16 @@ public class AssetDefinition {
 			_keepTime = value;
 		} else if (_keepTime < value) {
 			_keepTime = value;
+		}
+	}
+	
+	public function unload():void {
+		if (asset) {
+			asset.unload();
+			asset = null;
+			//
+			callBackFunctions = null;
+			callBackParams = null;
 		}
 	}
 }

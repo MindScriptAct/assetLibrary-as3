@@ -1,5 +1,4 @@
 package mindscriptact.assetLibrary {
-import flash.events.EventDispatcher;
 import flash.utils.Dictionary;
 import mindscriptact.assetLibrary.assets.*;
 import mindscriptact.assetLibrary.core.AssetDefinition;
@@ -11,7 +10,7 @@ import mindscriptact.assetLibrary.core.xml.XMLDefinition;
  * COMMENT
  * @author Raimundas Banevicius
  */
-public class AssetLibraryIndex extends EventDispatcher {
+public class AssetLibraryIndex {
 	
 	private var assetIndex:Dictionary = new Dictionary(); /** of AssetDefinition by String */
 	private var pathIndex:Dictionary = new Dictionary(); /** of String by String */
@@ -36,9 +35,13 @@ public class AssetLibraryIndex extends EventDispatcher {
 		AssetLibraryLoader.rootPath = rootPath;
 	}
 	
+	//----------------------------------
+	//     add definitions
+	//----------------------------------
+	
 	/**
 	 * Adds file definition for later us.
-	 * @param	assetId		unique file id to use for adressing the file
+	 * @param	assetId		unique asset id to use for working with file
 	 * @param	fileUrl		full path to the file or just name if you use pathId
 	 * @param	pathId		pathId of path definition for location there this file is.
 	 * @param	isPermanent	Treat file as pernament asset, or temporal.
@@ -87,12 +90,14 @@ public class AssetLibraryIndex extends EventDispatcher {
 	 * @param	path	path that will be linked with pathId
 	 */
 	public function addPathDefinition(pathId:String, url:String, dynamicPathAssetType:String = null):void {
+		// fix last letter.
+		var lastLetter:String = url.charAt(url.length - 1);
+		if (lastLetter != "/" && lastLetter != "\\") {
+			url += "/";
+		}
+		//
 		if (!pathIndex[pathId]) {
 			// ensure that path ends with "/" or "\" character.
-			var lastLetter:String = url.charAt(url.length - 1);
-			if (lastLetter != "/" && lastLetter != "\\") {
-				url += "/";
-			}
 			pathIndex[pathId] = url;
 			if (dynamicPathAssetType) {
 				dynamicPathAssetTypes[pathId] = dynamicPathAssetType;
@@ -128,6 +133,31 @@ public class AssetLibraryIndex extends EventDispatcher {
 	}
 	
 	//----------------------------------
+	//     remove definitions
+	//----------------------------------
+	
+	/**
+	 * Removes asset definition.
+	 * @param	assetId
+	 */
+	public function removeAssetDefinition(assetId:String):void {
+		var assetDefinition:AssetDefinition = assetIndex[assetId];
+		if (assetDefinition) {
+			assetDefinition.unload();
+			delete assetIndex[assetId]
+		}
+	}
+	
+	/**
+	 *
+	 * @param	pathId
+	 */
+	public function removePathDefinition(pathId:String):void {
+		delete pathIndex[pathId];
+		delete dynamicPathAssetTypes[pathId];
+	}
+	
+	//----------------------------------
 	//     groups
 	//----------------------------------
 	
@@ -136,11 +166,16 @@ public class AssetLibraryIndex extends EventDispatcher {
 	 * @param	groupId		unique group id.
 	 * @param	assetId		asset id to be added to group.
 	 */
-	public function addAssetToGroup(groupId:String, assetId:String):void {
+	public function addAssetToGroup(groupId:String, assetId:String, ...moreAssetIds:Array):void {
 		if (!groupIndex[groupId]) {
 			groupIndex[groupId] = new Vector.<String>();
 		}
-		groupIndex[groupId].push(assetId);
+		if (assetId) {
+			groupIndex[groupId].push(assetId);
+		}
+		if (moreAssetIds) {
+			addAssetArrayToGroup(groupId, moreAssetIds);
+		}
 	}
 	
 	/**
@@ -160,6 +195,29 @@ public class AssetLibraryIndex extends EventDispatcher {
 	
 	public function addUrlParams(unl:String, urlParams:String):void {
 		// TODO : implement
+	}
+	
+	/**
+	 * Returns true if asset with assetId is defined.
+	 * @param	assetId		unique asset id
+	 */
+	public function isAssetDefined(assetId:String):Boolean {
+		return (assetIndex[assetId] != null);
+	}
+	
+	public function removeAll():void {
+		for each (var assetDefinition:AssetDefinition in assetIndex) {
+			removeAssetDefinition(assetDefinition.assetId);
+			delete assetIndex[assetDefinition.assetId];
+		}
+		for (var pathId:String in pathIndex) {
+			delete pathIndex[pathId];
+			delete dynamicPathAssetTypes[pathId];
+		}
+		
+		// toto ... clean properly..
+		groupIndex = new Dictionary();
+		xmlFileDefinitions = new Dictionary();
 	}
 	
 	//----------------------------------

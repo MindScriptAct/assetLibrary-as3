@@ -18,6 +18,7 @@
     <class path="src" />
     <class path="srcSamples" />
     <class path="srcLibs" />
+    <class path="test" />
   </classpaths>
   <!-- Build options -->
   <build>
@@ -52,7 +53,8 @@
   </includeLibraries>
   <!-- SWC Libraries -->
   <libraryPaths>
-    <!-- example: <element path="..." /> -->
+    <element path="lib\flexunit-uilistener-4.1.0_RC2-4-4.1.0.16076.swc" />
+    <element path="lib\flexunit-4.1.0_RC2-4-as3_4.1.0.16076.swc" />
   </libraryPaths>
   <!-- External Libraries -->
   <externalLibraryPaths>
@@ -72,7 +74,7 @@
   </library>
   <!-- Class files to compile (other referenced classes will automatically be included) -->
   <compileTargets>
-    <compile path="srcSamples\storadgeTest\MainStorageTest.as" />
+    <compile path="test\MainTestRunner.as" />
   </compileTargets>
   <!-- Paths to exclude from the Project Explorer tree -->
   <hiddenPaths>
@@ -89,6 +91,6 @@
   </options>
   <!-- Plugin storage -->
   <storage>
-    <entry key="at_enabled"><![CDATA[1]]></entry>
+    <entry key="at_enabled"><![CDATA[0]]></entry>
   </storage>
 </project>

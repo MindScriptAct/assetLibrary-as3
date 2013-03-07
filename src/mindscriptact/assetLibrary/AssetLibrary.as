@@ -212,6 +212,8 @@ public class AssetLibrary {
 		return assetLibraryIndex.assetIsLoaded(assetId);
 	}
 	
+	
+	
 	//----------------------------------
 	//     Dynamic asset loading
 	//----------------------------------
