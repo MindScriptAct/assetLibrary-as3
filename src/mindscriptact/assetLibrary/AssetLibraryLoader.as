@@ -223,7 +223,7 @@ public class AssetLibraryLoader extends EventDispatcher {
 		if (storageManager) {
 			use namespace assetlibrary;
 			if (!projectId) {
-				projectId = AssetLibraryStorage.getProjectId();
+				projectId = storageManager.getProjectId();
 			}
 			var assetIndex:Dictionary = assetLibraryIndex.getAssetIndex();
 			for each (var asset:AssetDefinition in assetIndex) {

@@ -16,6 +16,7 @@ import mindscriptact.assetLibrary.AssetLibraryIndex;
 import mindscriptact.assetLibrary.AssetLibraryLoader;
 import mindscriptact.assetLibrary.assets.PicAsset;
 import mindscriptact.assetLibrary.assets.SwfAsset;
+import mindscriptact.assetLibrary.core.localStorage.AssetLibraryStorage;
 import utils.debug.Stats;
 
 /**
@@ -34,6 +35,7 @@ public class MainStorageTest extends Sprite {
 	static public const TEST_PIC:String = "test";
 	
 	public function MainStorageTest():void {
+		trace( "MainStorageTest.MainStorageTest" );
 		if (stage)
 			init();
 		else
@@ -58,11 +60,9 @@ public class MainStorageTest extends Sprite {
 		new PushButton(this, 150, 150, "Enable SO use", handleEnableSOUse);
 		new PushButton(this, 250, 150, "Force GC", handleForceGC);
 		new PushButton(this, 355, 150, "Force cashe clean", handleCachClean);
-		new PushButton(this, 460, 150, "Force 1 MB storage", handle1MBstorage);		
-		new PushButton(this, 560, 150, "Force 10 MB storage", handle10MBstorage);		
-		new PushButton(this, 660, 150, "Force 11 MB storage", handle11MBstorage);		
-		
-		
+		new PushButton(this, 460, 150, "Force 1 MB storage", handle1MBstorage);
+		new PushButton(this, 560, 150, "Force 10 MB storage", handle10MBstorage);
+		new PushButton(this, 660, 150, "Force 11 MB storage", handle11MBstorage);
 		
 		new PushButton(this, 50, 200, "Load&Add pics", handleStartLoad);
 		new PushButton(this, 150, 200, "Remove pics", handleRemovePics);
@@ -84,18 +84,19 @@ public class MainStorageTest extends Sprite {
 	}
 	
 	private function handle1MBstorage(event:Event):void {
-		AssetLibrary.requestStorageSpace(handleAllowed, 1);
+		AssetLibraryStorage.requestStorageSpace(handleAllowed, 1);
 	}
+	
 	private function handle10MBstorage(event:Event):void {
-		AssetLibrary.requestStorageSpace(handleAllowed, 10);
-	}	
+		AssetLibraryStorage.requestStorageSpace(handleAllowed, 10);
+	}
+	
 	private function handle11MBstorage(event:Event):void {
-		AssetLibrary.requestStorageSpace(handleAllowed, 11);
-	}	
+		AssetLibraryStorage.requestStorageSpace(handleAllowed, 11);
+	}
 	
 	private function handleAllowed(isAllowed:Boolean):void {
-		trace( "MainStorageTest.handleAllowed > isAllowed : " + isAllowed );
-		
+		trace("MainStorageTest.handleAllowed > isAllowed : " + isAllowed);
 	}
 	
 	private function handleCachClean(event:Event):void {
@@ -200,7 +201,6 @@ public class MainStorageTest extends Sprite {
 		//var content:DisplayObject = event.currentTarget.content as DisplayObject;
 		//addChild(content);
 		//content.y = 300;
-		
 		//mLoader.unload();
 		mLoader.unloadAndStop(false);
 		mLoader.contentLoaderInfo.removeEventListener(Event.COMPLETE, onCompleteHandler);
@@ -224,25 +224,22 @@ public class MainStorageTest extends Sprite {
 	
 	private function handleEnableSOUse(event:Event):void {
 		AssetLibrary.enableLocalStorage("localCash_test");
+		//AssetLibraryStorage.enableStorage("localCash_test");
 	}
 	
 	private function handleShowSoSettings(event:Event):void {
-		AssetLibrary.openStorageSettings();
+		AssetLibraryStorage.openStorageSettings();
 	}
 	
 	private function handleStartLoad(event:Event):void {
 		trace("MainStorageTest.handleStartLoad > event : " + event);
-		
 		startInitialLoad = getTimer();
-		
 		AssetLibrary.loadAsset(BIG20MB, handleSwfLoaded);
 	}
 	
 	private function handleSwfLoaded(asset:SwfAsset):void {
-		
 		trace("Loaded in " + (getTimer() - startInitialLoad));
 		startInitialLoad = getTimer();
-		
 		for (var i:int = 1; i < 7; i++) {
 			var testBd:Bitmap = asset.getBitmapFromBitmapData("Pic" + i + "_BD");
 			this.addChild(testBd);
@@ -250,12 +247,9 @@ public class MainStorageTest extends Sprite {
 			testBd.scaleY = 0.1;
 			testBd.x = 200 + i * 20;
 			testBd.y = 200 + i * 20;
-			
 			allBitmaps.push(testBd);
 		}
-		
 		trace("Created and added in " + (getTimer() - startInitialLoad));
-	
 	}
 
 }

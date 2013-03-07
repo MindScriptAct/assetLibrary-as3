@@ -2,6 +2,9 @@ package mindscriptact.assetLibrary.core.localStorage {
 import flash.events.NetStatusEvent;
 import flash.net.SharedObject;
 import flash.net.SharedObjectFlushStatus;
+import flash.system.Security;
+import flash.system.SecurityPanel;
+import flash.system.System;
 import flash.utils.ByteArray;
 import flash.utils.getTimer;
 
@@ -89,11 +92,11 @@ public class AssetLibraryStorage {
 		sharedObject.clear();
 	}
 	
-	static public function getProjectId():String {
+	public function getProjectId():String {
 		return projectId;
 	}
 	
-	static public function requestStorageSpace(size:Number):void {
+	static public function requestStorageSpace(handleUserAction:Function, size:Number):void {
 		if (!mySharedObjectIndex) {
 			mySharedObjectIndex = SharedObject.getLocal(projectId + "_Asset_Lybrary");
 		}
@@ -117,6 +120,10 @@ public class AssetLibraryStorage {
 					break;
 			}
 		}
+	}
+	
+	static public function openStorageSettings():void {
+		Security.showSettings(SecurityPanel.LOCAL_STORAGE);
 	}
 	
 	static private function handleFlushStatus(event:NetStatusEvent):void {

@@ -1,17 +1,11 @@
 package mindscriptact.assetLibrary {
-import adobe.utils.ProductManager;
-import flash.accessibility.Accessibility;
 import flash.display.*;
-import flash.events.NetStatusEvent;
 import flash.media.*;
-import flash.net.SharedObject;
-import flash.net.SharedObjectFlushStatus;
 import flash.system.*;
 import flash.utils.*;
 import mindscriptact.assetLibrary.assets.*;
 import mindscriptact.assetLibrary.core.*;
 import mindscriptact.assetLibrary.core.fakeAssets.FakeAssetHelper;
-import mindscriptact.assetLibrary.core.localStorage.AssetLibraryStorage;
 import mindscriptact.assetLibrary.core.namespaces.assetlibrary;
 import mindscriptact.assetLibrary.core.unloadHelper.AssetLibraryUnloader;
 
@@ -302,14 +296,6 @@ public class AssetLibrary {
 	
 	static public function setLocalStorageFailHandler(handleStorageFail:Function):void {
 		assetLibraryLoader.handleStorageFail = handleStorageFail;
-	}
-	
-	static public function openStorageSettings():void {
-		Security.showSettings(SecurityPanel.LOCAL_STORAGE);
-	}
-	
-	static public function requestStorageSpace(handleUserAction:Function, size:Number = 11):void {
-		AssetLibraryStorage.requestStorageSpace(size);
 	}
 	
 	//
