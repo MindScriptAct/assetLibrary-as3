@@ -6,6 +6,7 @@ package mindscriptact.assetLibrary.core.xml {
  * @author Deril
  */
 public class XMLDefinition {
+	
 	public var assetId:String;
 	
 	public var isLoaded:Boolean = false;

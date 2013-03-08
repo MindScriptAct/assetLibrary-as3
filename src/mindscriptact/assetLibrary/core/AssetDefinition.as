@@ -59,10 +59,12 @@ public class AssetDefinition {
 			}
 			_keepTime = int.MAX_VALUE;
 			//
-			while (callBackFunctions.length) {
+			
+			var callBacks:Vector.<Function> = callBackFunctions;
+			while (callBacks.length) {
 				var params:Array = callBackParams.pop();
 				params.unshift(asset);
-				callBackFunctions.pop().apply(null, params);
+				callBacks.pop().apply(null, params);
 			}
 		}
 	}

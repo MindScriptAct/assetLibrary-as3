@@ -166,7 +166,7 @@ public class AssetLibraryIndex {
 	 * @param	groupId		unique group id.
 	 * @param	assetId		asset id to be added to group.
 	 */
-	public function addAssetToGroup(groupId:String, assetId:String, ...moreAssetIds:Array):void {
+	public function addAssetToGroup(groupId:String, assetId:String, ... moreAssetIds:Array):void {
 		if (!groupIndex[groupId]) {
 			groupIndex[groupId] = new Vector.<String>();
 		}
@@ -206,18 +206,23 @@ public class AssetLibraryIndex {
 	}
 	
 	public function removeAll():void {
+		
 		for each (var assetDefinition:AssetDefinition in assetIndex) {
 			removeAssetDefinition(assetDefinition.assetId);
 			delete assetIndex[assetDefinition.assetId];
 		}
+		
 		for (var pathId:String in pathIndex) {
 			delete pathIndex[pathId];
 			delete dynamicPathAssetTypes[pathId];
 		}
 		
-		// toto ... clean properly..
 		groupIndex = new Dictionary();
-		xmlFileDefinitions = new Dictionary();
+		
+		for each (var xmlDefinition:XMLDefinition in xmlFileDefinitions) {
+			xmlDefinition.fileAssetIds = null;
+			delete xmlFileDefinitions[xmlDefinition.assetId]
+		}
 	}
 	
 	//----------------------------------

@@ -11,18 +11,24 @@ import mindscriptact.assetLibrary.AssetLibraryIndex;
  */
 public class AssetDefineTests {
 	
-	private var assetIndex:AssetLibraryIndex;
+	static private var assetIndex:AssetLibraryIndex = AssetLibrary.getIndex();
 	
 	[Before]
 	
 	public function runBeforeEveryTest():void {
-		assetIndex = AssetLibrary.getIndex();
 	}
 	
 	[After]
 	
 	public function runAfterEveryTest():void {
 		assetIndex.removeAll();
+	}
+	
+	[AfterClass]
+	
+	static public function runAfterClass():void {
+		assetIndex.removeAll();
+		assetIndex = null;
 	}
 	
 	//----------------------------------
