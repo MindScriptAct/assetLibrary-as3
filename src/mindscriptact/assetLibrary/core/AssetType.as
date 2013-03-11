@@ -14,5 +14,9 @@ public class AssetType {
 	static public const XML:String = "xml";
 	
 	static public const MP3:String = "mp3";
+	
+	
+	static public const FLV:String = "flv";
+	static public const F4V:String = "f4v";
 }
 }

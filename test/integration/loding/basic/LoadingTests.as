@@ -6,7 +6,6 @@ import flash.display.MovieClip;
 import flash.display.SimpleButton;
 import flash.display.Sprite;
 import flash.media.Sound;
-import flash.media.Video;
 import flash.text.TextField;
 import flexunit.framework.Assert;
 import mindscriptact.assetLibrary.AssetLibrary;
@@ -174,34 +173,6 @@ public class LoadingTests {
 	}
 	
 	private function simpleSwfSoundLoad_fail(param:Object = null):void {
-		Assert.fail("simpleLoad failed.");
-	}
-	
-	///
-	private var simpleSwfVideoLoad_asincFunction:Function;
-	
-	[Test(async)]
-	
-	public function loading_simpleSwfVideoLoad_ok():void {
-		
-		assetIndex.addFileDefinition(AssetId.ASSET1, AssetUrl.SWF_TEST_1);
-		
-		AssetLibrary.loadAsset(AssetId.ASSET1, simpleSwfVideoLoad_handleSimpleLoadAsset);
-		
-		simpleSwfVideoLoad_asincFunction = AsyncUtil.asyncHandler(this, simpleSwfVideoLoad_callBack, null, 1000, simpleSwfVideoLoad_fail);
-	
-	}
-	
-	private function simpleSwfVideoLoad_handleSimpleLoadAsset(asset:SwfAsset):void {
-		trace("LoadingTests.handleSimpleLoadAsset > asset : " + asset);
-		simpleSwfVideoLoad_asincFunction(asset.getVideo("test1VID"));
-	}
-	
-	private function simpleSwfVideoLoad_callBack(test:Video):void {
-		Assert.assertNotNull("Failed to get linked video.", test);
-	}
-	
-	private function simpleSwfVideoLoad_fail(param:Object = null):void {
 		Assert.fail("simpleLoad failed.");
 	}
 	

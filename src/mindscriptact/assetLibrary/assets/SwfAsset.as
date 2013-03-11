@@ -161,30 +161,6 @@ public class SwfAsset extends AssetAbstract {
 		}
 		return new lincageClass();
 	}
-	
-	/**
-	 * Gives instance of Video object from library
-	 * @param	lincageId	object lincage id in swf file library
-	 * @return	instance of Sound taken from asset library, using lincageId
-	 */
-	public function getVideo(lincageId:String):Video {
-		// TODO : implement
-		//if (!_isLoaded) {
-			//throw Error("AssetSWF has no loaded content. assetID:" + assetId);
-		//}
-		//try {
-			//var lincageClass:Class = applicationDomain.getDefinition(lincageId) as Class;
-		//} catch (error:Error) {
-			//if (_fakeMissingAssets) {
-				//return FakeAssetHelper.fakeSound();
-				// TODO : implement
-			//} else {
-				//throw Error("AssetSWF could not find class with lincageId:" + lincageId + " in assetID:" + assetId);
-			//}
-		//}
-		//return new lincageClass();
-		return null;
-	}	
 
 }
 }
