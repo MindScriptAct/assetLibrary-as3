@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="Flex" version="4">
+  <component name="FlexBuildConfigurationManager" active="assetLibrary-as3">
+    <configurations>
+      <configuration name="assetLibrary-as3" main-class="MainTestFlexRunner" output-file="assetLibrary-as3.swf" output-folder="$MODULE_DIR$/bin">
+        <dependencies target-player="11.4">
+          <entries>
+            <entry library-id="64f0ec04-1615-469f-bf5a-6b9b2b49563f">
+              <dependency linkage="Merged" />
+            </entry>
+            <entry library-id="207d79f2-c662-4e46-9cda-e67cec9e850c">
+              <dependency linkage="Merged" />
+            </entry>
+          </entries>
+          <sdk name="flex-sdk-4.9.0" />
+        </dependencies>
+        <compiler-options />
+        <packaging-air-desktop />
+        <packaging-android />
+        <packaging-ios />
+      </configuration>
+    </configurations>
+    <compiler-options />
+  </component>
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/test" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/srcSamples" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/srcLibs" isTestSource="false" />
+    </content>
+    <orderEntry type="jdk" jdkName="flex-sdk-4.9.0" jdkType="Flex SDK Type (new)" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" exported="" name="flexunit-uilistener-4.1.0_RC2-4-4.1.0.16076" level="project" />
+    <orderEntry type="module-library" exported="">
+      <library type="flex">
+        <properties id="64f0ec04-1615-469f-bf5a-6b9b2b49563f" />
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/flexunit-4.1.0_RC2-4-as3_4.1.0.16076.swc!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library type="flex">
+        <properties id="207d79f2-c662-4e46-9cda-e67cec9e850c" />
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/flexunit-uilistener-4.1.0_RC2-4-4.1.0.16076.swc!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+  </component>
+</module>
+
