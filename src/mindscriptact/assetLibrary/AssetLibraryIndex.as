@@ -1,10 +1,16 @@
 package mindscriptact.assetLibrary {
 import flash.utils.Dictionary;
+
+import integration.assetDefine.AssetDefineTests;
+
 import mindscriptact.assetLibrary.assets.*;
 import mindscriptact.assetLibrary.core.AssetDefinition;
 import mindscriptact.assetLibrary.core.AssetType;
 import mindscriptact.assetLibrary.core.namespaces.assetlibrary;
 import mindscriptact.assetLibrary.core.xml.XMLDefinition;
+
+import mx.printing.FlexPrintJob;
+import mx.skins.halo.HaloFocusRect;
 
 /**
  * COMMENT
@@ -12,12 +18,12 @@ import mindscriptact.assetLibrary.core.xml.XMLDefinition;
  */
 public class AssetLibraryIndex {
 	
-	private var assetIndex:Dictionary = new Dictionary(); /** of AssetDefinition by String */
-	private var pathIndex:Dictionary = new Dictionary(); /** of String by String */
-	private var dynamicPathAssetTypes:Dictionary = new Dictionary(); /** of String by String */
-	private var groupIndex:Dictionary = new Dictionary(); /** of Vector.<String> by String */
+	private var assetIndex:Dictionary = new Dictionary(); /* of AssetDefinition by String */
+	private var pathIndex:Dictionary = new Dictionary(); /* of String by String */
+	private var dynamicPathAssetTypes:Dictionary = new Dictionary(); /* of String by String */
+	private var groupIndex:Dictionary = new Dictionary(); /* of Vector.<String> by String */
 	//
-	private var xmlFileDefinitions:Dictionary = new Dictionary(); /** of XMLDefinition by String */
+	private var xmlFileDefinitions:Dictionary = new Dictionary(); /* of XMLDefinition by String */
 	private var errorHandler:Function;
 	//	
 	internal var xmlFilesTotal:int = 0;
@@ -25,6 +31,8 @@ public class AssetLibraryIndex {
 	//
 	internal var canAddPermanents:Boolean = true;
 	internal var libraryLaderLoadXmlFunction:Function;
+
+	private var urlParamRegistry:Dictionary = new Dictionary(); /* of Strings by Strings */
 	
 	public function AssetLibraryIndex(errorHandler:Function) {
 		this.errorHandler = errorHandler;
@@ -75,14 +83,16 @@ public class AssetLibraryIndex {
 			var nameSplit:Array = fileUrl.split(".");
 			assetType = nameSplit[nameSplit.length - 1];
 		}
-		
-		// handle urlParams
-		if (urlParams) {
-			filePath += urlParams;
+		var assetDefinition:AssetDefinition = new AssetDefinition(assetId, filePath, assetType, isPermanent);
+		if(urlParams){
+		    addAssetParams(assetDefinition, urlParams);
+		} else {
+			findAssetParams(assetDefinition);
 		}
-		
-		addAssetDefinition(new AssetDefinition(assetId, filePath, assetType, isPermanent));
+		addAssetDefinition(assetDefinition);
 	}
+
+
 	
 	/**
 	 * For convieneance enstead of writing full path with every file, its possible to assing id to the path and use id instead of full path with file definitions.
@@ -111,14 +121,17 @@ public class AssetLibraryIndex {
 	
 	/**
 	 * Adds file, path, group definitiens from xml file. XML file is loaded and parsed automaticaly. To track loading progress use AssetLibraryLoader object.(You can get it AssetLibrary.getLoader());
-	 * @param	xmlPath		path of xml that holds
+	 * @param	xmlUrl		path of xml that holds
 	 */
-	public function addDefinitionsFromXML(xmlPath:String):void {
+	public function addDefinitionsFromXML(xmlUrl:String, urlParams:String = null):void {
 		use namespace assetlibrary;
 		//if (!assetId){
 		var assetId:String = "$_xmlDefinition" + xmlFilesTotal;
 		//}
-		var xmlAssetDefinition:AssetDefinition = new AssetDefinition(assetId, xmlPath, AssetType.XML, false);
+		var xmlAssetDefinition:AssetDefinition = new AssetDefinition(assetId, xmlUrl, AssetType.XML, false);
+		if(urlParams){
+			addAssetParams(xmlAssetDefinition, urlParams);
+		}
 		addAssetDefinition(xmlAssetDefinition);
 		xmlAssetDefinition.isAssetXmlFile = true;
 		if (!xmlFileDefinitions[assetId]) {
@@ -126,7 +139,7 @@ public class AssetLibraryIndex {
 			xmlFilesTotal++;
 			libraryLaderLoadXmlFunction(assetIndex[assetId]);
 		} else {
-			if ((assetIndex[assetId] as AssetDefinition).filePath != xmlPath) {
+			if ((assetIndex[assetId] as AssetDefinition).filePath != xmlUrl) {
 				errorHandler(Error("AssetLibraryIndex.addDefinitionsFromXML failed. Different XML definition with assetId:" + assetId + " exists."));
 			}
 		}
@@ -193,8 +206,44 @@ public class AssetLibraryIndex {
 	//     urlParams
 	//----------------------------------
 	
-	public function addUrlParams(unl:String, urlParams:String):void {
-		// TODO : implement
+	public function addUrlParams(assetUrl:String, urlParams:String):void {
+
+
+		for each (var assetDefinition:AssetDefinition in assetIndex) {
+			var assetSplit:Array = assetDefinition.filePath.split(assetUrl);
+			if(assetSplit.length == 2){
+				if(assetSplit[1] == ""){
+					addAssetParams(assetDefinition, urlParams);
+					return;
+				}
+			}
+		}
+		// if loop is not broken...
+		urlParamRegistry[assetUrl] = urlParams;
+
+	}
+
+	private function addAssetParams(assetDefinition:AssetDefinition, urlParams:String):void {
+		    if(assetDefinition.urlParams == null){
+				assetDefinition.urlParams = urlParams
+				assetDefinition.filePath += urlParams;
+		    } else if(assetDefinition.urlParams != urlParams) {
+				errorHandler(Error("Asset with id:"+assetDefinition.assetId + " can not add urlParams:"+urlParams+". It already has url parameters:"+assetDefinition.filePath));
+			}
+	}
+
+	private function findAssetParams(assetDefinition:AssetDefinition):void {
+		var assetPath:String = assetDefinition.filePath;
+		for (var assetUrl:String in urlParamRegistry) {
+			var assetSplit:Array = assetDefinition.filePath.split(assetUrl);
+			if(assetSplit.length == 2){
+				if(assetSplit[1] == ""){
+					addAssetParams(assetDefinition, urlParamRegistry[assetUrl]);
+					delete urlParamRegistry[assetUrl];
+					return;
+				}
+			}
+		}
 	}
 	
 	/**
@@ -283,8 +332,8 @@ public class AssetLibraryIndex {
 			}
 		}
 	}
-	
-	internal function getAssetDefinition(assetId:String):AssetDefinition {
+
+	assetlibrary function getAssetDefinition(assetId:String):AssetDefinition {
 		use namespace assetlibrary;
 		if (assetIndex[assetId]) {
 			return assetIndex[assetId];

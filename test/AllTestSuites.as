@@ -1,8 +1,8 @@
 package {
 import integration.assetDefine.AssetDefineTests;
+import integration.assetVersioning.AssetVersioningTests;
 import integration.core.CoreTests;
 import integration.loding.basic.LoadingTests;
-import integration.storage.basic.StorageBasicTests;
 
 /**
  * COMMENT
@@ -13,17 +13,19 @@ import integration.storage.basic.StorageBasicTests;
 [RunWith("org.flexunit.runners.Suite")]
 
 public class AllTestSuites {
-	
+
 	///*
-	
-	   public var coreTests:CoreTests;
-	
-	   public var assetDefineTests:AssetDefineTests;
-	
-	   //public var assetLibraryStorageVersioning:AssetLibraryStorageVersioning;
-	
-	 //*/
-	
+
+	public var coreTests:CoreTests;
+
+	public var assetDefineTests:AssetDefineTests;
+
+	public var assetVelsioning:AssetVersioningTests;
+
+	//public var assetLibraryStorageVersioning:AssetLibraryStorageVersioning;
+
+	//*/
+
 	public var loadingTests:LoadingTests;
 }
 

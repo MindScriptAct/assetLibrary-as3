@@ -16,6 +16,7 @@ public class AssetDefinition {
 	//
 	public var filePath:String;
 	public var type:String;
+	public var urlParams:String;
 	//
 	public var isPermanent:Boolean = false;
 	//
@@ -25,16 +26,19 @@ public class AssetDefinition {
 	public var callBackParams:Vector.<Array> = new Vector.<Array>;
 	//
 	private var _keepTime:int = int.MAX_VALUE;
-	
+
+
 	public function AssetDefinition(assetId:String, filePath:String, type:String, isPermanent:Boolean = false) {
+
 		use namespace assetlibrary;
 		this.assetId = assetId;
 		//
 		this.filePath = filePath;
+
 		this.type = type;
 		this.isPermanent = isPermanent;
 	}
-	
+
 	assetlibrary function setAssetData(data:String):void {
 		use namespace assetlibrary;
 		if (asset) {
