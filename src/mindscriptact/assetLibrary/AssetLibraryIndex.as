@@ -17,7 +17,7 @@ import mx.skins.halo.HaloFocusRect;
  * @author Raimundas Banevicius
  */
 public class AssetLibraryIndex {
-	
+
 	private var assetIndex:Dictionary = new Dictionary(); /* of AssetDefinition by String */
 	private var pathIndex:Dictionary = new Dictionary(); /* of String by String */
 	private var dynamicPathAssetTypes:Dictionary = new Dictionary(); /* of String by String */
@@ -25,7 +25,7 @@ public class AssetLibraryIndex {
 	//
 	private var xmlFileDefinitions:Dictionary = new Dictionary(); /* of XMLDefinition by String */
 	private var errorHandler:Function;
-	//	
+	//
 	internal var xmlFilesTotal:int = 0;
 	internal var xmlFilesLoaded:int = 0;
 	//
@@ -33,20 +33,20 @@ public class AssetLibraryIndex {
 	internal var libraryLaderLoadXmlFunction:Function;
 
 	private var urlParamRegistry:Dictionary = new Dictionary(); /* of Strings by Strings */
-	
+
 	public function AssetLibraryIndex(errorHandler:Function) {
 		this.errorHandler = errorHandler;
 	}
-	
+
 	static public function setRootPath(rootPath:String):void {
 		use namespace assetlibrary;
 		AssetLibraryLoader.rootPath = rootPath;
 	}
-	
+
 	//----------------------------------
 	//     add definitions
 	//----------------------------------
-	
+
 	/**
 	 * Adds file definition for later us.
 	 * @param	assetId		unique asset id to use for working with file
@@ -66,7 +66,7 @@ public class AssetLibraryIndex {
 		if (!fileUrl) {
 			errorHandler(Error("AssetLibraryIndex.addFileDefinition failed : fileUrl must be defined." + "[assetId:" + assetId + " fileUrl:" + fileUrl + " assetType:" + assetType + " pathId:" + pathId + "]"));
 		}
-		
+
 		// path handling
 		if (pathId) {
 			if (pathIndex[pathId]) {
@@ -76,7 +76,7 @@ public class AssetLibraryIndex {
 			}
 		}
 		filePath += fileUrl;
-		
+
 		// extentien handling
 		if (!assetType) {
 			//errorHandler(Error("AssetLibraryIndex.addFileDefinition failed : assetType must be defined." + "[assetId:" + assetId + " fileUrl:" + fileUrl + " assetType:" + assetType + " pathId:" + pathId + "]"));
@@ -93,7 +93,7 @@ public class AssetLibraryIndex {
 	}
 
 
-	
+
 	/**
 	 * For convieneance enstead of writing full path with every file, its possible to assing id to the path and use id instead of full path with file definitions.
 	 * @param	pathId	unique path ide
@@ -118,7 +118,7 @@ public class AssetLibraryIndex {
 			}
 		}
 	}
-	
+
 	/**
 	 * Adds file, path, group definitiens from xml file. XML file is loaded and parsed automaticaly. To track loading progress use AssetLibraryLoader object.(You can get it AssetLibrary.getLoader());
 	 * @param	xmlUrl		path of xml that holds
@@ -144,11 +144,11 @@ public class AssetLibraryIndex {
 			}
 		}
 	}
-	
+
 	//----------------------------------
 	//     remove definitions
 	//----------------------------------
-	
+
 	/**
 	 * Removes asset definition.
 	 * @param	assetId
@@ -160,7 +160,7 @@ public class AssetLibraryIndex {
 			delete assetIndex[assetId]
 		}
 	}
-	
+
 	/**
 	 *
 	 * @param	pathId
@@ -169,11 +169,11 @@ public class AssetLibraryIndex {
 		delete pathIndex[pathId];
 		delete dynamicPathAssetTypes[pathId];
 	}
-	
+
 	//----------------------------------
 	//     groups
 	//----------------------------------
-	
+
 	/**
 	 * Add one assetId to groupId. Groups are used to load or unload group af assets. (asset ids cant be removed from groups, if you have a need - create 2 diferent groups.)
 	 * @param	groupId		unique group id.
@@ -190,7 +190,7 @@ public class AssetLibraryIndex {
 			addAssetArrayToGroup(groupId, moreAssetIds);
 		}
 	}
-	
+
 	/**
 	 * Add array of assetIds to groupId. Groups are used to load or unload group af assets. (asset ids cant be removed from groups, if you have a need - create 2 diferent groups.)
 	 * @param	groupId		unique group id.
@@ -201,11 +201,11 @@ public class AssetLibraryIndex {
 			addAssetToGroup(groupId, assetIds[i]);
 		}
 	}
-	
+
 	//----------------------------------
 	//     urlParams
 	//----------------------------------
-	
+
 	public function addUrlParams(assetUrl:String, urlParams:String):void {
 
 
@@ -245,7 +245,7 @@ public class AssetLibraryIndex {
 			}
 		}
 	}
-	
+
 	/**
 	 * Returns true if asset with assetId is defined.
 	 * @param	assetId		unique asset id
@@ -253,37 +253,37 @@ public class AssetLibraryIndex {
 	public function isAssetDefined(assetId:String):Boolean {
 		return (assetIndex[assetId] != null);
 	}
-	
+
 	public function removeAll():void {
-		
+
 		for each (var assetDefinition:AssetDefinition in assetIndex) {
 			removeAssetDefinition(assetDefinition.assetId);
 			delete assetIndex[assetDefinition.assetId];
 		}
-		
+
 		for (var pathId:String in pathIndex) {
 			delete pathIndex[pathId];
 			delete dynamicPathAssetTypes[pathId];
 		}
-		
+
 		groupIndex = new Dictionary();
-		
+
 		for each (var xmlDefinition:XMLDefinition in xmlFileDefinitions) {
 			xmlDefinition.fileAssetIds = null;
 			delete xmlFileDefinitions[xmlDefinition.assetId]
 		}
 	}
-	
+
 	//----------------------------------
 	//     INTERNAL
 	//----------------------------------
-	
+
 	/**
 	 * Checks if asset with specified id is already loaded.
 	 * @param	assetId		asset id to check if its loaded
 	 * @return	true if specified asset is loaded.
 	 */
-	internal function assetIsLoaded(assetId:String):Boolean {
+	internal function isAssetLoaded(assetId:String):Boolean {
 		use namespace assetlibrary;
 		var retVal:Boolean = false;
 		if (assetIndex[assetId]) {
@@ -291,11 +291,11 @@ public class AssetLibraryIndex {
 		}
 		return retVal;
 	}
-	
+
 	internal function getPathType(pathId:String):String {
 		return dynamicPathAssetTypes[pathId];
 	}
-	
+
 	private function addAssetDefinition(assetDefinition:AssetDefinition):void {
 		use namespace assetlibrary;
 		if (!assetIndex[assetDefinition.assetId]) {
@@ -306,21 +306,21 @@ public class AssetLibraryIndex {
 			//
 			var asset:AssetAbstract;
 			switch (assetDefinition.type) {
-				case AssetType.SWF: 
+				case AssetType.SWF:
 					asset = new SwfAsset(assetDefinition.assetId);
 					break;
-				case AssetType.JPG: 
-				case AssetType.PNG: 
-				case AssetType.GIF: 
+				case AssetType.JPG:
+				case AssetType.PNG:
+				case AssetType.GIF:
 					asset = new PicAsset(assetDefinition.assetId);
 					break;
-				case AssetType.MP3: 
+				case AssetType.MP3:
 					asset = new Mp3Asset(assetDefinition.assetId);
 					break;
-				case AssetType.XML: 
+				case AssetType.XML:
 					asset = new XmlAsset(assetDefinition.assetId);
 					break;
-				default: 
+				default:
 					trace("AssetLibraryLoader can't handle this type yet. Asset type:", assetDefinition.type);
 					break;
 			}
@@ -341,7 +341,7 @@ public class AssetLibraryIndex {
 			return null;
 		}
 	}
-	
+
 	internal function getAsset(assetId:String):AssetAbstract {
 		use namespace assetlibrary;
 		if (!assetIndex[assetId]) {
@@ -350,7 +350,7 @@ public class AssetLibraryIndex {
 		}
 		return (assetIndex[assetId] as AssetDefinition).asset;
 	}
-	
+
 	internal function getAssetsForPreloading():Vector.<AssetDefinition> {
 		use namespace assetlibrary;
 		var retVal:Vector.<AssetDefinition> = new Vector.<AssetDefinition>();
@@ -361,14 +361,14 @@ public class AssetLibraryIndex {
 		}
 		return retVal;
 	}
-	
+
 	internal function getGroupAssets(groupId:String):Vector.<String> {
 		if (!groupIndex[groupId]) {
 			errorHandler(Error("AssetLibraryIndex.getGroupAssets failed. Asset group with groupId:" + groupId + " is not created."));
 		}
 		return groupIndex[groupId];
 	}
-	
+
 	internal function getAllSoundAssets():Vector.<Mp3Asset> {
 		use namespace assetlibrary;
 		var retVal:Vector.<Mp3Asset> = new Vector.<Mp3Asset>();
@@ -379,7 +379,7 @@ public class AssetLibraryIndex {
 		}
 		return retVal;
 	}
-	
+
 	internal function getAssetIndex():Dictionary {
 		return assetIndex;
 	}

@@ -132,7 +132,7 @@ public class LoadingTests {
 		AssetLibrary.loadAsset(AssetId.ASSET1, simpleSwfSimpleButtonLoad_handleSimpleLoadAsset);
 		
 		simpleSwfSimpleButtonLoad_asincFunction = AsyncUtil.asyncHandler(this, simpleSwfSimpleButtonLoad_callBack, null, 1000, simpleSwfSimpleButtonLoad_fail);
-	
+
 	}
 	
 	private function simpleSwfSimpleButtonLoad_handleSimpleLoadAsset(asset:SwfAsset):void {

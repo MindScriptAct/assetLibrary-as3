@@ -14,45 +14,45 @@ import mindscriptact.assetLibrary.core.unloadHelper.AssetLibraryUnloader;
  * @author Raimundas Banevicius
  */
 public class AssetLibrary {
-	
+
 	/**
 	 * Function to handle all general errors.
 	 * @private */
 	static private var errorHandler:Function = throwError;
-	
+
 	/**
 	 * Asset index.
 	 * @private */
 	static private var assetLibraryIndex:AssetLibraryIndex = new AssetLibraryIndex(errorHandler);
-	
+
 	/**
 	 * Library asset loader.
 	 * @private */
 	static private var assetLibraryLoader:AssetLibraryLoader = new AssetLibraryLoader(assetLibraryIndex, errorHandler);
-	
+
 	/**
 	 * Lybrary asset automatic usloader.
 	 * @private */
 	static private var assetUnloader:AssetLibraryUnloader = new AssetLibraryUnloader();
-	
+
 	/** If set to true - trying to get not permanent asset dirrectly will throw an error.
 	 * @private */
 	static private var canGetNonPermanentsDirectly:Boolean = true;
-	
+
 	/**
 	 * If set to true - Asset lybrary will fake missing assets.
 	 * @private */
 	static private var _fakeMissingAssets:Boolean = false;
-	
+
 	/** Time interval for asset library to try and unload not needed assets in secconds.
 	 * By default it is 0 - autounload is disabled.
 	 * @private */
 	static private var _autoUnloadIntervalTime:int = 0
-	
+
 	//----------------------------------
 	//     System
 	//----------------------------------
-	
+
 	/**
 	 * Get AssetLibraryIndex object. It is used to define your files, paths, groups.
 	 * @return	AssetLibraryIndex object.
@@ -60,7 +60,7 @@ public class AssetLibrary {
 	static public function getIndex():AssetLibraryIndex {
 		return assetLibraryIndex;
 	}
-	
+
 	/**
 	 * Get AssetLibraryLoader object. Is is used to listen for loader events. (AssetEvent and AssetLoaderEvent)
 	 * @return	AssetLibraryLoader object.
@@ -68,11 +68,11 @@ public class AssetLibrary {
 	static public function getLoader():AssetLibraryLoader {
 		return assetLibraryLoader;
 	}
-	
+
 	//----------------------------------
 	//     AssetLibrary options
 	//----------------------------------
-	
+
 	/**
 	 * If set to true - permament asset protection is removed. It will be possible to add permanents after initial permanent asset load and will be posible to unload permanent assets.
 	 */
@@ -80,11 +80,11 @@ public class AssetLibrary {
 		assetLibraryIndex.canAddPermanents = !value;
 		assetLibraryLoader.canUnloadPermanents = !value;
 	}
-	
+
 	static public function get isPermanentsProtected():Boolean {
 		return !assetLibraryIndex.canAddPermanents;
 	}
-	
+
 	/**
 	 * Time interval in secconds for assets to be automaticaly unloaded.
 	 */
@@ -95,11 +95,11 @@ public class AssetLibrary {
 			assetUnloader.setUnloadIntervalTime(_autoUnloadIntervalTime);
 		}
 	}
-	
+
 	static public function get autoUnloadIntervalTime():int {
 		return _autoUnloadIntervalTime;
 	}
-	
+
 	/**
 	 *	Count of maximum simultaneous loadings. Default is 3. Minimum is 1.
 	 */
@@ -110,12 +110,12 @@ public class AssetLibrary {
 		}
 		assetLibraryLoader.maxSimultaneousLoads = value;
 	}
-	
+
 	static public function get maxSimultaneousLoads():int {
 		use namespace assetlibrary;
 		return assetLibraryLoader.maxSimultaneousLoads;
 	}
-	
+
 	/**
 	 *	If set to true - assetLibrary will fake missing assets instead of throwing an error.
 	 */
@@ -125,19 +125,19 @@ public class AssetLibrary {
 		_fakeMissingAssets = value;
 		AssetAbstract.fakeMissingAssets = value;
 	}
-	
+
 	static public function get fakeMissingAssets():Boolean {
 		return _fakeMissingAssets;
 	}
-	
+
 	static public function setErrorHandler(errorHandler:Function):void {
 		AssetLibrary.errorHandler = errorHandler;
 	}
-	
+
 	//----------------------------------
 	//     General asset loading and handling with callBack function.
 	//----------------------------------
-	
+
 	/**
 	 * Funcion will load and send asset object to callbackFunction function.
 	 * @param	assetId				assetId used to indentify asset.
@@ -150,7 +150,7 @@ public class AssetLibrary {
 		if (!callBackParams) {
 			callBackParams = [];
 		}
-		if (assetLibraryIndex.assetIsLoaded(assetId)) {
+		if (assetLibraryIndex.isAssetLoaded(assetId)) {
 			callBackParams.unshift(assetLibraryIndex.getAsset(assetId));
 			callbackFunction.apply(null, callBackParams);
 		} else {
@@ -164,10 +164,10 @@ public class AssetLibrary {
 			} else {
 				errorHandler(Error("AssetLibrary.sendAssetToFunction can't find asset definition with assetId :" + assetId));
 			}
-			
+
 		}
 	}
-	
+
 	/**
 	 * Unload asset to free used memory.
 	 * @param	assetId		assetId used to indentify asset.
@@ -181,7 +181,7 @@ public class AssetLibrary {
 			asset.unload();
 		}
 	}
-	
+
 	/**
 	 * Unleods all non permanent assets.
 	 * If permanent asset protection is removed - permanent assets unloaded too.
@@ -202,22 +202,22 @@ public class AssetLibrary {
 			}
 		}
 	}
-	
+
 	/**
 	 * Checks if asset is loaded.
 	 * @param	assetId		assetId used to indentify asset.
 	 * @return		returns true if asset is already loaded.
 	 */
-	static public function assetIsLoaded(assetId:String):Boolean {
-		return assetLibraryIndex.assetIsLoaded(assetId);
+	static public function isAssetLoassaded(assetId:String):Boolean {
+		return assetLibraryIndex.isAssetLoaded(assetId);
 	}
-	
-	
-	
+
+
+
 	//----------------------------------
 	//     Dynamic asset loading
 	//----------------------------------
-	
+
 	/**
 	 * Function to load asset dynamicaly. Asset does not need to be defined. pothId - must be defined and it must have 'dynamicPathAssetType' set. All suported types are in AssetType class.
 	 * @param	pathId				path id for defined path for dinamyc files, this path MUST have 'dynamicPathAssetType' set. All suported types are in AssetType class.
@@ -229,50 +229,50 @@ public class AssetLibrary {
 	 */
 	static public function loadDynamicAsset(pathId:String, assetId:String, callbackFunction:Function, callBackParams:Array = null, assetKeepTime:int = int.MAX_VALUE, fileName:String = null):void {
 		use namespace assetlibrary;
-		
+
 		// check if path is dynamic.
 		var assetType:String = assetLibraryIndex.getPathType(pathId);
 		if (!assetType) {
 			errorHandler(Error("AssetLibrary.loadDynamicAsset can load only files from paths that have 'dynamicPathAssetType' parameter set with assetIndex.addPathDefinition() function. Failed with assetId :" + assetId));
 		}
-		
+
 		if (!fileName) {
 			fileName = assetId;
 		}
-		
+
 		// check if definition exists, if not - created it.
 		var assetDefinition:AssetDefinition = assetLibraryIndex.getAssetDefinition(assetId);
 		if (!assetDefinition) {
 			assetLibraryIndex.addFileDefinition(assetId, fileName + "." + assetType, pathId);
 		}
-		
+
 		// load asset normaly
 		loadAsset(assetId, callbackFunction, callBackParams, assetKeepTime);
-	
+
 	}
-	
+
 	//----------------------------------
 	//     group handling
 	//----------------------------------
-	
+
 	static public function loadGroupAssets(groupId:String):void {
 		var assetIds:Vector.<String> = assetLibraryIndex.getGroupAssets(groupId);
 		for (var i:int = 0; i < assetIds.length; i++) {
 			AssetLibrary.loadAsset(assetIds[i], handleAssetBlank);
 		}
 	}
-	
+
 	static public function unloadGroupAssets(groupId:String):void {
 		var assetIds:Vector.<String> = assetLibraryIndex.getGroupAssets(groupId);
 		for (var i:int = 0; i < assetIds.length; i++) {
 			AssetLibrary.unloadAsset(assetIds[i]);
 		}
 	}
-	
+
 	//----------------------------------
 	//     Local Storage controls
 	//----------------------------------
-	
+
 	/**
 	 * Enables use of local storage to cash loaded assets.
 	 * @param	projectId	Unique project id. Project web url or project name should work just fine.
@@ -280,14 +280,14 @@ public class AssetLibrary {
 	static public function enableLocalStorage(projectId:String):void {
 		assetLibraryLoader.enableLocalStorage(projectId);
 	}
-	
+
 	/**
 	 * Disable use of local storage to cash loaded assets.
 	 */
 	static public function disableLocalStorage():void {
 		assetLibraryLoader.disableLocalStorage();
 	}
-	
+
 	/**
 	 * Clears assetLebrary sharecd storage. If projectId is not provided - it will try to clear local storage in current use.
 	 * @param	projectId	Optional projectId if you want to clear another project assetLibrary shared storage, or shared storage is not enabled yet.
@@ -295,26 +295,26 @@ public class AssetLibrary {
 	static public function clearStorage(projectId:String = null):void {
 		assetLibraryLoader.clearLocalStorage(projectId);
 	}
-	
+
 	static public function setLocalStorageFailHandler(handleStorageFail:Function):void {
 		assetLibraryLoader.handleStorageFail = handleStorageFail;
 	}
-	
+
 	//
 	//private function handleUserAction(isAllowed:Boolean):void {
 	//
 	//}
-	
+
 	//--------------------------------------------------------------------------
 	//
 	//      Permanent asset getters
 	//
 	//--------------------------------------------------------------------------
-	
+
 	//----------------------------------
 	//     SWF asset getters
 	//----------------------------------
-	
+
 	/**
 	 * Gives instance of SWF file stage.
 	 * Only pernament assets can be used this way. (For not pernament once use AssetLibrary.sendAssetToFunction(...));
@@ -326,7 +326,7 @@ public class AssetLibrary {
 	static public function getSWFStageContent(assetId:String):MovieClip {
 		return AssetLibrary.getSWFStuff(assetId, "", "STAGE") as MovieClip;
 	}
-	
+
 	/**
 	 * Gives instance of MovieClip object from SWF file library
 	 * Only pernament assets can be used this way. (For not pernament once use AssetLibrary.sendAssetToFunction(...));
@@ -337,7 +337,7 @@ public class AssetLibrary {
 	static public function getSWFMovieClip(assetId:String, lincageId:String):MovieClip {
 		return AssetLibrary.getSWFStuff(assetId, lincageId, "MC") as MovieClip;
 	}
-	
+
 	/**
 	 * Gives instance of Sprite object from SWF file library
 	 * Only pernament assets can be used this way. (For not pernament once use AssetLibrary.sendAssetToFunction(...));
@@ -348,7 +348,7 @@ public class AssetLibrary {
 	static public function getSWFSprite(assetId:String, lincageId:String):Sprite {
 		return AssetLibrary.getSWFStuff(assetId, lincageId, "SPR") as Sprite;
 	}
-	
+
 	/**
 	 * Gives instance of SimpleButton object from SWF file library
 	 * Only pernament assets can be used this way. (For not pernament once use AssetLibrary.sendAssetToFunction(...));
@@ -359,7 +359,7 @@ public class AssetLibrary {
 	static public function getSWFSimpleButton(assetId:String, lincageId:String):SimpleButton {
 		return AssetLibrary.getSWFStuff(assetId, lincageId, "BTN") as SimpleButton;
 	}
-	
+
 	/**
 	 * Gives instance of BitmapData object from SWF file library
 	 * Only pernament assets can be used this way. (For not pernament once use AssetLibrary.sendAssetToFunction(...));
@@ -370,7 +370,7 @@ public class AssetLibrary {
 	static public function getSWFBitmapData(assetId:String, lincageId:String):BitmapData {
 		return AssetLibrary.getSWFStuff(assetId, lincageId, "BD") as BitmapData;
 	}
-	
+
 	/**
 	 * Gives instance of Sound object from SWF file library
 	 * Only pernament assets can be used this way. (For not pernament once use AssetLibrary.sendAssetToFunction(...));
@@ -381,7 +381,7 @@ public class AssetLibrary {
 	static public function getSWFSound(assetId:String, lincageId:String):Sound {
 		return AssetLibrary.getSWFStuff(assetId, lincageId, "SND") as Sound;
 	}
-	
+
 	/** General function to get SWF asset stuff.
 	 * @private */
 	static private function getSWFStuff(assetId:String, lincageId:String, type:String):Object {
@@ -394,50 +394,50 @@ public class AssetLibrary {
 			} else {
 				try {
 					switch (type) {
-						case "STAGE": 
+						case "STAGE":
 							return asset.getStageContent();
 							break;
-						case "MC": 
+						case "MC":
 							return asset.getMovieClip(lincageId);
 							break;
-						case "SPR": 
+						case "SPR":
 							return asset.getSprite(lincageId);
 							break;
-						case "BTN": 
+						case "BTN":
 							return asset.getSimpleButton(lincageId);
 							break;
-						case "BD": 
+						case "BD":
 							return asset.getBitmapData(lincageId);
 							break;
-						case "SND": 
+						case "SND":
 							return asset.getSound(lincageId);
 							break;
-						default: 
+						default:
 							trace("not handled case : ", type);
 							break;
 					}
 				} catch (error:Error) {
 					if (_fakeMissingAssets) {
 						switch (type) {
-							case "STAGE": 
+							case "STAGE":
 								return FakeAssetHelper.fakeMovieClip(assetId + "\n" + lincageId + "\n" + type);
 								break;
-							case "MC": 
+							case "MC":
 								return FakeAssetHelper.fakeMovieClip(assetId + "\n" + lincageId + "\n" + type);
 								break;
-							case "SPR": 
+							case "SPR":
 								return FakeAssetHelper.fakeSprite(assetId + "\n" + lincageId + "\n" + type);
 								break;
-							case "BTN": 
+							case "BTN":
 								return FakeAssetHelper.fakeButton(assetId + "\n" + lincageId + "\n" + type);
 								break;
-							case "BD": 
+							case "BD":
 								return FakeAssetHelper.fakeBitmapData(assetId + "\n" + lincageId + "\n" + type);
 								break;
-							case "SND": 
+							case "SND":
 								return FakeAssetHelper.fakeSound();
 								break;
-							default: 
+							default:
 								trace("not handled case : ", type);
 								break;
 						}
@@ -449,11 +449,11 @@ public class AssetLibrary {
 		}
 		return null;
 	}
-	
+
 	//----------------------------------
 	//     PIC asset getter
 	//----------------------------------
-	
+
 	/**
 	 * Gives PIC asset Bitmap instance with loaded BitmapData content.
 	 * This metod does not clone pictures BitmapData, that means it will not use extra memory to show extra copies.
@@ -476,7 +476,7 @@ public class AssetLibrary {
 		}
 		return null;
 	}
-	
+
 	/**
 	 * Gives PIC asset Bitmap instance with loaded BitmapData content.
 	 * This method will create a clone of picture.
@@ -498,11 +498,11 @@ public class AssetLibrary {
 		}
 		return null;
 	}
-	
+
 	//----------------------------------
 	//     MP3 asset getter
 	//----------------------------------
-	
+
 	/**
 	 * Gives Sound object of loadede .mp3 file asset.
 	 * @param	assetId		Id of asset in assetIndex
@@ -521,11 +521,11 @@ public class AssetLibrary {
 		}
 		return null;
 	}
-	
+
 	//----------------------------------
 	//     MP3 sound managment
-	//----------------------------------	
-	
+	//----------------------------------
+
 	/**
 	 * Starts standart mp3 asset playBack.
 	 * The only thing you can do if you use this method after its started : use stopAllMP3Channels() to stop all sounds of this asset
@@ -548,7 +548,7 @@ public class AssetLibrary {
 			}
 		}
 	}
-	
+
 	/**
 	 * Stops all started channels for specidied sound.
 	 * Only channels started with AssetLibrary can be stoped this way.
@@ -566,7 +566,7 @@ public class AssetLibrary {
 			}
 		}
 	}
-	
+
 	/**
 	 * Stops all started sounds.
 	 * Only sounds started with AssetLibrary can be stoped this way.
@@ -577,7 +577,7 @@ public class AssetLibrary {
 			soundAssets[i].stopAllChannels();
 		}
 	}
-	
+
 	/**
 	 * Starts standart mp3 asset playBack, for pernament or temporary file.
 	 * If file is loaded, sound is started.
@@ -602,7 +602,7 @@ public class AssetLibrary {
 			}
 		}
 	}
-	
+
 	/**
 	 * Plays sound located in swf asset, and linked as a sound.
 	 * @param	assetId		Id of asset in assetIndex
@@ -615,11 +615,11 @@ public class AssetLibrary {
 		var sound:Sound = getSWFSound(assetId, lincageId);
 		sound.play(startTime, loops, sndTransform);
 	}
-	
+
 	static public function stopSwfSoundChannels(assetId:String, lincageId:String):void {
 		// TODO : implement
 	}
-	
+
 	/**
 	 * Plays sound  located in swf asset, and linked as a sound if it is currently loaded. If not - it will not play the sound - but it will loand the asset for next use.
 	 * @param	assetId		Id of asset in assetIndex
@@ -640,15 +640,15 @@ public class AssetLibrary {
 			}
 		}
 	}
-	
+
 	//----------------------------------
 	//     INTERNAL
 	//----------------------------------
-	
+
 	static private function throwError(error:Error):void {
 		throw error;
 	}
-	
+
 	static private function handleAssetBlank(asset:AssetAbstract):void {
 	}
 
