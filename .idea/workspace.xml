@@ -2,16 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="61087f06-2193-4a5d-9fc0-3d2cd968506b" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/mindscriptact/assetLibrary/AssetLibrary.as" afterPath="$PROJECT_DIR$/src/mindscriptact/assetLibrary/AssetLibrary.as" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/mindscriptact/assetLibrary/AssetLibraryLoader.as" afterPath="$PROJECT_DIR$/src/mindscriptact/assetLibrary/AssetLibraryLoader.as" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/mindscriptact/assetLibrary/core/loader/AssetLoadWorker.as" afterPath="$PROJECT_DIR$/src/mindscriptact/assetLibrary/core/loader/AssetLoadWorker.as" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/mindscriptact/assetLibrary/events/AssetLoaderEvent.as" afterPath="$PROJECT_DIR$/src/mindscriptact/assetLibrary/events/AssetLoaderEvent.as" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assetLibrary-as3.iml" afterPath="$PROJECT_DIR$/assetLibrary-as3.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="assetLibrary-as3.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/fragment.js2" changelist="61087f06-2193-4a5d-9fc0-3d2cd968506b" time="1366218288632" ignored="false" />
+    <file path="/fragment.js2" changelist="61087f06-2193-4a5d-9fc0-3d2cd968506b" time="1367675152059" ignored="false" />
     <file path="/fragment.java" changelist="61087f06-2193-4a5d-9fc0-3d2cd968506b" time="1366213319897" ignored="false" />
     <file path="/a.java" changelist="61087f06-2193-4a5d-9fc0-3d2cd968506b" time="1366214057446" ignored="false" />
     <file path="/a.as" changelist="61087f06-2193-4a5d-9fc0-3d2cd968506b" time="1366214058403" ignored="false" />
-    <file path="/Dummy.txt" changelist="61087f06-2193-4a5d-9fc0-3d2cd968506b" time="1367061443181" ignored="false" />
+    <file path="/Dummy.txt" changelist="61087f06-2193-4a5d-9fc0-3d2cd968506b" time="1367674980498" ignored="false" />
     <file path="/a.dummy" changelist="61087f06-2193-4a5d-9fc0-3d2cd968506b" time="1366905890399" ignored="false" />
     <file path="/AllTestSuites.as" changelist="61087f06-2193-4a5d-9fc0-3d2cd968506b" time="1366217162998" ignored="false" />
     <file path="/AssetVersioningTests.as" changelist="61087f06-2193-4a5d-9fc0-3d2cd968506b" time="1366218562734" ignored="false" />
@@ -68,7 +71,6 @@
     <disable_hints />
   </component>
   <component name="DebuggerManager">
-    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true">
       <breakpoint>
         <option name="NOTIFY_CAUGHT" value="true" />
@@ -105,6 +107,7 @@
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
     </breakpoint_any>
+    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_rules />
     <ui_properties />
   </component>
@@ -114,10 +117,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="AssetDefineTests.as" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="AssetDefineTests.as" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test/integration/assetDefine/AssetDefineTests.as">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="69" selection-start="372" selection-end="372" vertical-scroll-proportion="0.019473081">
+            <state line="21" column="56" selection-start="435" selection-end="435" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -135,7 +138,27 @@
       <file leaf-file-name="AssetLoadWorker.as" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/mindscriptact/assetLibrary/core/loader/AssetLoadWorker.as">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="287" column="66" selection-start="10059" selection-end="10059" vertical-scroll-proportion="0.0">
+            <state line="429" column="73" selection-start="14362" selection-end="14362" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="e#49#84#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AssetLibraryLoader.as" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/mindscriptact/assetLibrary/AssetLibraryLoader.as">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="18" column="90" selection-start="1078" selection-end="1078" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AssetLoaderEvent.as" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/mindscriptact/assetLibrary/events/AssetLoaderEvent.as">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="19" column="48" selection-start="637" selection-end="637" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -159,10 +182,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AssetLibrary.as" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="AssetLibrary.as" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/mindscriptact/assetLibrary/AssetLibrary.as">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="206" column="0" selection-start="6758" selection-end="6758" vertical-scroll-proportion="0.0">
+            <state line="625" column="90" selection-start="24276" selection-end="24276" vertical-scroll-proportion="0.22727273">
               <folding />
             </state>
           </provider>
@@ -199,7 +222,9 @@
         <option value="$PROJECT_DIR$/src/mindscriptact/assetLibrary/AssetLibraryIndex.as" />
         <option value="$PROJECT_DIR$/test/integration/loding/basic/LoadingTests.as" />
         <option value="$PROJECT_DIR$/src/mindscriptact/assetLibrary/AssetLibrary.as" />
+        <option value="$PROJECT_DIR$/src/mindscriptact/assetLibrary/core/loader/AssetLoadWorker.as" />
         <option value="$PROJECT_DIR$/src/mindscriptact/assetLibrary/AssetLibraryLoader.as" />
+        <option value="$PROJECT_DIR$/src/mindscriptact/assetLibrary/events/AssetLoaderEvent.as" />
       </list>
     </option>
   </component>
@@ -445,28 +470,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mindscriptact" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="assetLibrary" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="assetLibrary-as3" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="assetLibrary-as3" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="lib" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -489,11 +492,11 @@
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="restartRequiresConfirmation" value="true" />
-    <property name="MemberChooser.showClasses" value="true" />
     <property name="FullScreen" value="false" />
+    <property name="MemberChooser.showClasses" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
-    <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
+    <property name="options.splitter.details.proportions" value="0.2" />
   </component>
   <component name="RecentsManager">
     <key name="CreateActionScriptClassDialog.DESTINATION_PACKAGE_RECENT_KEY">
@@ -591,7 +594,7 @@
       <option name="airProgramParameters" value="" />
       <option name="appDescriptorForEmulator" value="Android" />
       <option name="debugTransport" value="USB" />
-      <option name="debuggerSdkRaw" value="BC SDK" />
+      <option name="debuggerSdkRaw" value="flex_sdk_4.9.1" />
       <option name="emulator" value="NexusOne" />
       <option name="emulatorAdlOptions" value="" />
       <option name="fastPackaging" value="true" />
@@ -681,13 +684,14 @@
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="false" />
     <layout>
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3298731" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3298731" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2614728" sideWeight="0.67012686" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.3979239" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" x="1703" y="533" width="1634" height="436" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26467448" sideWeight="0.67012686" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.3979239" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" x="740" y="525" width="1634" height="436" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3298731" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -696,7 +700,6 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3298731" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3298731" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -771,13 +774,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/test/integration/assetDefine/AssetDefineTests.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test/integration/assetVersioning/AssetVersioningTests.as">
       <provider selected="true" editor-type-id="text-editor">
         <state line="78" column="128" selection-start="2306" selection-end="2306" vertical-scroll-proportion="0.0">
@@ -788,7 +784,9 @@
     <entry file="file://$PROJECT_DIR$/src/mindscriptact/assetLibrary/core/loader/AssetLoadWorker.as">
       <provider selected="true" editor-type-id="text-editor">
         <state line="287" column="66" selection-start="10059" selection-end="10059" vertical-scroll-proportion="0.0">
-          <folding />
+          <folding>
+            <element signature="e#49#84#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -825,13 +823,6 @@
         <state line="151" column="75" selection-start="5186" selection-end="5186" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/mindscriptact/assetLibrary/core/loader/AssetLoadWorker.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="287" column="66" selection-start="10059" selection-end="10059" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test/integration/core/CoreTests.as">
       <provider selected="true" editor-type-id="text-editor">
         <state line="12" column="13" selection-start="326" selection-end="326" vertical-scroll-proportion="0.0">
@@ -853,18 +844,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/mindscriptact/assetLibrary/AssetLibrary.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="206" column="0" selection-start="6758" selection-end="6758" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/mindscriptact/assetLibrary/AssetLibraryLoader.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="190" column="8" selection-start="5903" selection-end="5903" vertical-scroll-proportion="0.40272614" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/mindscriptact/assetLibrary/core/AssetDefinition.as">
       <provider selected="true" editor-type-id="text-editor">
         <state line="101" column="22" selection-start="2468" selection-end="2468" vertical-scroll-proportion="0.66341466" />
@@ -872,7 +851,37 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/test/integration/assetDefine/AssetDefineTests.as">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="69" selection-start="372" selection-end="372" vertical-scroll-proportion="0.019473081">
+        <state line="21" column="56" selection-start="435" selection-end="435" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mindscriptact/assetLibrary/core/loader/AssetLoadWorker.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="429" column="73" selection-start="14362" selection-end="14362" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#49#84#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mindscriptact/assetLibrary/AssetLibraryLoader.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="90" selection-start="1078" selection-end="1078" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mindscriptact/assetLibrary/events/AssetLoaderEvent.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="48" selection-start="637" selection-end="637" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mindscriptact/assetLibrary/AssetLibrary.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="625" column="90" selection-start="24276" selection-end="24276" vertical-scroll-proportion="0.22727273">
           <folding />
         </state>
       </provider>
@@ -905,7 +914,7 @@
       </state>
       <state key="JdkListConfigurable.UI">
         <settings>
-          <last-edited>flex-sdk-4.9.0</last-edited>
+          <last-edited>1.7</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

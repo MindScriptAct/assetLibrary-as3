@@ -345,19 +345,21 @@ public class AssetLoadWorker {
 	private function handleFileProgress(event:ProgressEvent):void {
 		use namespace assetlibrary;
 		var assetLoader:AssetLoader = (event.target as LoaderInfo).loader as AssetLoader;
-		assetLibraryLoader.dispatchEvent(new AssetEvent(AssetEvent.PROGRESS, assetLoader.asssetDefinition.assetId, assetLibraryLoader.lodedFiles, assetLibraryLoader.totalFiles, this.filesInProgress, event.bytesLoaded, event.bytesTotal));
+		assetLibraryLoader.dispatchEvent(new AssetEvent(AssetEvent.PROGRESS, assetLoader.asssetDefinition.assetId, assetLibraryLoader.lodedFiles, assetLibraryLoader.totalFiles, this.filesInProgress, getProgress(), event.bytesLoaded, event.bytesTotal));
 	}
 	
 	private function handleTextProgress(event:ProgressEvent):void {
 		use namespace assetlibrary;
+
 		var assetLoader:AssetURLLoader = event.target as AssetURLLoader;
-		assetLibraryLoader.dispatchEvent(new AssetEvent(AssetEvent.PROGRESS, assetLoader.asssetDefinition.assetId, assetLibraryLoader.lodedFiles, assetLibraryLoader.totalFiles, this.filesInProgress, event.bytesLoaded, event.bytesTotal));
+		assetLibraryLoader.dispatchEvent(new AssetEvent(AssetEvent.PROGRESS, assetLoader.asssetDefinition.assetId, assetLibraryLoader.lodedFiles, assetLibraryLoader.totalFiles, this.filesInProgress, getProgress(), event.bytesLoaded, event.bytesTotal));
 	}
 	
 	private function handleSoundProgress(event:ProgressEvent):void {
 		use namespace assetlibrary;
+
 		var assetLoader:SoundLoader = event.target as SoundLoader;
-		assetLibraryLoader.dispatchEvent(new AssetEvent(AssetEvent.PROGRESS, assetLoader.asssetDefinition.assetId, assetLibraryLoader.lodedFiles, assetLibraryLoader.totalFiles, this.filesInProgress, event.bytesLoaded, event.bytesTotal));
+		assetLibraryLoader.dispatchEvent(new AssetEvent(AssetEvent.PROGRESS, assetLoader.asssetDefinition.assetId, assetLibraryLoader.lodedFiles, assetLibraryLoader.totalFiles, this.filesInProgress, getProgress(), event.bytesLoaded, event.bytesTotal));
 	}
 	
 	//----------------------------------
