@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="61087f06-2193-4a5d-9fc0-3d2cd968506b" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/mindscriptact/assetLibrary/AssetLibrary.as" afterPath="$PROJECT_DIR$/src/mindscriptact/assetLibrary/AssetLibrary.as" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/mindscriptact/assetLibrary/AssetLibraryIndex.as" afterPath="$PROJECT_DIR$/src/mindscriptact/assetLibrary/AssetLibraryIndex.as" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/integration/loding/basic/LoadingTests.as" afterPath="$PROJECT_DIR$/test/integration/loding/basic/LoadingTests.as" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/ant.xml" afterPath="$PROJECT_DIR$/.idea/ant.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="assetLibrary-as3.iws" />
@@ -15,14 +11,14 @@
     <file path="/fragment.java" changelist="61087f06-2193-4a5d-9fc0-3d2cd968506b" time="1366213319897" ignored="false" />
     <file path="/a.java" changelist="61087f06-2193-4a5d-9fc0-3d2cd968506b" time="1366214057446" ignored="false" />
     <file path="/a.as" changelist="61087f06-2193-4a5d-9fc0-3d2cd968506b" time="1366214058403" ignored="false" />
-    <file path="/Dummy.txt" changelist="61087f06-2193-4a5d-9fc0-3d2cd968506b" time="1366905172393" ignored="false" />
-    <file path="/a.dummy" changelist="61087f06-2193-4a5d-9fc0-3d2cd968506b" time="1366905265054" ignored="false" />
+    <file path="/Dummy.txt" changelist="61087f06-2193-4a5d-9fc0-3d2cd968506b" time="1367061443181" ignored="false" />
+    <file path="/a.dummy" changelist="61087f06-2193-4a5d-9fc0-3d2cd968506b" time="1366905890399" ignored="false" />
     <file path="/AllTestSuites.as" changelist="61087f06-2193-4a5d-9fc0-3d2cd968506b" time="1366217162998" ignored="false" />
     <file path="/AssetVersioningTests.as" changelist="61087f06-2193-4a5d-9fc0-3d2cd968506b" time="1366218562734" ignored="false" />
     <file path="/AssetLibraryIndex.as" changelist="61087f06-2193-4a5d-9fc0-3d2cd968506b" time="1366221456188" ignored="false" />
     <file path="/AssetConstants.as" changelist="61087f06-2193-4a5d-9fc0-3d2cd968506b" time="1366218367836" ignored="false" />
     <file path="/AssetDefinition.as" changelist="61087f06-2193-4a5d-9fc0-3d2cd968506b" time="1366220690811" ignored="false" />
-    <file path="/AssetLibrary.as" changelist="61087f06-2193-4a5d-9fc0-3d2cd968506b" time="1366905261228" ignored="false" />
+    <file path="/AssetLibrary.as" changelist="61087f06-2193-4a5d-9fc0-3d2cd968506b" time="1366905796494" ignored="false" />
     <file path="/LoadingTests.as" changelist="61087f06-2193-4a5d-9fc0-3d2cd968506b" time="1366301400308" ignored="false" />
     <file path="C:/!pirateSpace/messaging/src/main/flash/net/bigpoint/network/messages/ItemListMessage.as" changelist="61087f06-2193-4a5d-9fc0-3d2cd968506b" time="1366289396994" ignored="false" />
     <file path="C:/!pirateSpace/messaging/src/main/flash/net/bigpoint/network/MessageLookup.as" changelist="61087f06-2193-4a5d-9fc0-3d2cd968506b" time="1366289396994" ignored="false" />
@@ -118,28 +114,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="AssetLibraryLoader.as" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/mindscriptact/assetLibrary/AssetLibraryLoader.as">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="265" column="0" selection-start="8738" selection-end="8738" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AssetDefinition.as" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/mindscriptact/assetLibrary/core/AssetDefinition.as">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="70" column="0" selection-start="1814" selection-end="1814" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AssetDefineTests.as" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="AssetDefineTests.as" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/test/integration/assetDefine/AssetDefineTests.as">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="11" column="13" selection-start="264" selection-end="264" vertical-scroll-proportion="0.0">
+            <state line="15" column="69" selection-start="372" selection-end="372" vertical-scroll-proportion="0.019473081">
               <folding />
             </state>
           </provider>
@@ -154,28 +132,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AssetConstants.as" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/constants/AssetConstants.as">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="10" column="63" selection-start="270" selection-end="270" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="AssetLoadWorker.as" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/mindscriptact/assetLibrary/core/loader/AssetLoadWorker.as">
           <provider selected="true" editor-type-id="text-editor">
             <state line="287" column="66" selection-start="10059" selection-end="10059" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AllTestSuites.as" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/AllTestSuites.as">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="22" column="34" selection-start="481" selection-end="481" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -194,17 +154,15 @@
         <entry file="file://$PROJECT_DIR$/test/integration/loding/basic/LoadingTests.as">
           <provider selected="true" editor-type-id="text-editor">
             <state line="207" column="40" selection-start="6223" selection-end="6223" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="e#35#60#0" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AssetLibrary.as" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="AssetLibrary.as" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/mindscriptact/assetLibrary/AssetLibrary.as">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="205" column="31" selection-start="6761" selection-end="6761" vertical-scroll-proportion="0.22378516">
+            <state line="206" column="0" selection-start="6758" selection-end="6758" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -241,14 +199,15 @@
         <option value="$PROJECT_DIR$/src/mindscriptact/assetLibrary/AssetLibraryIndex.as" />
         <option value="$PROJECT_DIR$/test/integration/loding/basic/LoadingTests.as" />
         <option value="$PROJECT_DIR$/src/mindscriptact/assetLibrary/AssetLibrary.as" />
+        <option value="$PROJECT_DIR$/src/mindscriptact/assetLibrary/AssetLibraryLoader.as" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="1696" />
-    <option name="height" value="1026" />
+    <option name="width" value="1936" />
+    <option name="height" value="1056" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -282,6 +241,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -513,7 +473,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -531,6 +490,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="restartRequiresConfirmation" value="true" />
     <property name="MemberChooser.showClasses" value="true" />
+    <property name="FullScreen" value="false" />
     <property name="GoToClass.includeLibraries" value="false" />
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
@@ -710,29 +670,34 @@
       <created>1366881553632</created>
       <updated>1366881553632</updated>
     </task>
+    <task id="LOCAL-00001" summary="Cv tag as separate function added, with tests.">
+      <created>1366905330846</created>
+      <updated>1366905330846</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1696" height="1026" extended-state="0" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3298731" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3298731" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.3979239" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" x="1703" y="533" width="1634" height="436" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3298731" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2607099" sideWeight="0.67012686" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2614728" sideWeight="0.67012686" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.3979239" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" x="1703" y="533" width="1634" height="436" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3298731" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3298731" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3298731" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -806,43 +771,16 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/test/MainTestRunner.as">
+    <entry file="file://$PROJECT_DIR$/test/integration/assetDefine/AssetDefineTests.as">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/mindscriptact/assetLibrary/AssetLibraryIndex.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="51" column="72" selection-start="1759" selection-end="1759" vertical-scroll-proportion="0.0">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/constants/PathId.as">
+    <entry file="file://$PROJECT_DIR$/test/integration/assetVersioning/AssetVersioningTests.as">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/mindscriptact/assetLibrary/assets/SwfAsset.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="151" column="75" selection-start="5186" selection-end="5186" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/mindscriptact/assetLibrary/core/AssetDefinition.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="70" column="0" selection-start="1814" selection-end="1814" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/constants/AssetId.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="24" selection-start="67" selection-end="67" vertical-scroll-proportion="0.08292683" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/mindscriptact/assetLibrary/AssetLibraryLoader.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="265" column="0" selection-start="8738" selection-end="8738" vertical-scroll-proportion="0.0">
+        <state line="78" column="128" selection-start="2306" selection-end="2306" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -861,23 +799,44 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/integration/assetDefine/AssetDefineTests.as">
+    <entry file="file://$PROJECT_DIR$/test/integration/loding/basic/LoadingTests.as">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="13" selection-start="264" selection-end="264" vertical-scroll-proportion="0.0">
+        <state line="207" column="40" selection-start="6223" selection-end="6223" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/AllTestSuites.as">
+    <entry file="file://$PROJECT_DIR$/src/mindscriptact/assetLibrary/AssetLibrary.as">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="34" selection-start="481" selection-end="481" vertical-scroll-proportion="0.0">
+        <state line="206" column="0" selection-start="6758" selection-end="6758" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/constants/AssetUrl.as">
+    <entry file="file://$PROJECT_DIR$/src/mindscriptact/assetLibrary/AssetLibraryIndex.as">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="24" selection-start="198" selection-end="198" vertical-scroll-proportion="0.16585366" />
+        <state line="51" column="72" selection-start="1759" selection-end="1759" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mindscriptact/assetLibrary/assets/SwfAsset.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="151" column="75" selection-start="5186" selection-end="5186" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mindscriptact/assetLibrary/core/loader/AssetLoadWorker.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="287" column="66" selection-start="10059" selection-end="10059" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/integration/core/CoreTests.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="13" selection-start="326" selection-end="326" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test/integration/assetVersioning/AssetVersioningTests.as">
@@ -887,25 +846,33 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/constants/AssetConstants.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="63" selection-start="270" selection-end="270" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test/integration/loding/basic/LoadingTests.as">
       <provider selected="true" editor-type-id="text-editor">
         <state line="207" column="40" selection-start="6223" selection-end="6223" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#35#60#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/mindscriptact/assetLibrary/AssetLibrary.as">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="205" column="31" selection-start="6761" selection-end="6761" vertical-scroll-proportion="0.22378516">
+        <state line="206" column="0" selection-start="6758" selection-end="6758" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mindscriptact/assetLibrary/AssetLibraryLoader.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="190" column="8" selection-start="5903" selection-end="5903" vertical-scroll-proportion="0.40272614" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mindscriptact/assetLibrary/core/AssetDefinition.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="101" column="22" selection-start="2468" selection-end="2468" vertical-scroll-proportion="0.66341466" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/integration/assetDefine/AssetDefineTests.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="69" selection-start="372" selection-end="372" vertical-scroll-proportion="0.019473081">
           <folding />
         </state>
       </provider>
@@ -955,6 +922,18 @@
             <option name="proportions">
               <list>
                 <option value="0.19999999" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>flex_sdk_4.9.1</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
               </list>
             </option>
           </splitter-proportions>

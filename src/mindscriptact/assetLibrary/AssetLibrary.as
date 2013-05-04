@@ -203,6 +203,9 @@ public class AssetLibrary {
 		}
 	}
 
+
+
+
 	/**
 	 * Checks if asset is loaded.
 	 * @param	assetId		assetId used to indentify asset.
