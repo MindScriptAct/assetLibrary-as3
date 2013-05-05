@@ -13,11 +13,11 @@ import mindscriptact.assetLibrary.core.fakeAssets.FakeAssetHelper;
  * @author Raimundas Banevicius
  */
 public class SwfAsset extends AssetAbstract {
-	
+
 	public function SwfAsset(assetId:String) {
 		super(assetId);
 	}
-	
+
 	/**
 	 * Gives instance of SWF file stage.
 	 * It can be used only once(this function does not create instance of the stage, it gives stage itself.)
@@ -34,7 +34,7 @@ public class SwfAsset extends AssetAbstract {
 		}
 		return content as MovieClip;
 	}
-	
+
 	/**
 	 * Gives instance of MovieClip object from library
 	 * @param	lincageId	object lincage id in swf file library
@@ -55,7 +55,7 @@ public class SwfAsset extends AssetAbstract {
 		}
 		return new lincageClass();
 	}
-	
+
 	/**
 	 * Gives instance of Sprite object from library
 	 * @param	lincageId	object lincage id in swf file library
@@ -76,7 +76,7 @@ public class SwfAsset extends AssetAbstract {
 		}
 		return new lincageClass();
 	}
-	
+
 	/**
 	 * Gives instance of SimpleButton object from library
 	 * @param	lincageId	object lincage id in swf file library
@@ -97,7 +97,7 @@ public class SwfAsset extends AssetAbstract {
 		}
 		return new lincageClass();
 	}
-	
+
 	/**
 	 * Gives instance of BitmapData object from library
 	 * @param	lincageId	object lincage id in swf file library
@@ -113,13 +113,13 @@ public class SwfAsset extends AssetAbstract {
 			if (_fakeMissingAssets) {
 				return FakeAssetHelper.fakeBitmapData(assetId + "\n" + lincageId);
 			} else {
-				
+
 				throw Error("AssetSWF could not find class with lincageId:" + lincageId + " in assetID:" + assetId);
 			}
 		}
 		return new lincageClass();
 	}
-	
+
 	/**
 	 * Gives instance of Bitmap object, created with BitmapData from library
 	 * @param	lincageId	object lincage id in swf file library
@@ -140,7 +140,7 @@ public class SwfAsset extends AssetAbstract {
 		}
 		return new Bitmap(new lincageClass());
 	}
-	
+
 	/**
 	 * Gives instance of Sound object from library
 	 * @param	lincageId	object lincage id in swf file library
@@ -162,5 +162,16 @@ public class SwfAsset extends AssetAbstract {
 		return new lincageClass();
 	}
 
+
+	/**
+	 * Returns list of all available linkageIds.
+	 * @return	list of all linkage ids.
+	 */
+	public function getLincageNames():Vector.<String> {
+		if(applicationDomain){
+			return applicationDomain.getQualifiedDefinitionNames();
+		}
+		return null;
+	}
 }
 }
