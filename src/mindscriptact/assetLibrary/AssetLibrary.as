@@ -162,7 +162,7 @@ public class AssetLibrary {
 				assetUnloader.addAssetTime(assetId, assetKeepTime);
 				assetLibraryLoader.loadAsset(assetDef);
 			} else {
-				errorHandler(Error("AssetLibrary.sendAssetToFunction can't find asset definition with assetId :" + assetId));
+				errorHandler(Error("AssetLibrary.loadAsset can't find asset definition with assetId :" + assetId));
 			}
 
 		}
@@ -320,7 +320,7 @@ public class AssetLibrary {
 
 	/**
 	 * Gives instance of SWF file stage.
-	 * Only pernament assets can be used this way. (For not pernament once use AssetLibrary.sendAssetToFunction(...));
+	 * Only pernament assets can be used this way. (For not pernament once use AssetLibrary.loadAsset(...));
 	 * It can be used only once(this function does not create instance of the stage, it gives stage itself.)
 	 * If you need to use it twice - create MovieClip object in library instead.
 	 * @param	assetId		Id of asset in assetIndex
@@ -332,7 +332,7 @@ public class AssetLibrary {
 
 	/**
 	 * Gives instance of MovieClip object from SWF file library
-	 * Only pernament assets can be used this way. (For not pernament once use AssetLibrary.sendAssetToFunction(...));
+	 * Only pernament assets can be used this way. (For not pernament once use AssetLibrary.loadAsset(...));
 	 * @param	assetId		Id of asset in assetIndex
 	 * @param	lincageId	object lincage id in swf file library
 	 * @return	instance of MovieClip taken from asset library, using lincageId
@@ -343,7 +343,7 @@ public class AssetLibrary {
 
 	/**
 	 * Gives instance of Sprite object from SWF file library
-	 * Only pernament assets can be used this way. (For not pernament once use AssetLibrary.sendAssetToFunction(...));
+	 * Only pernament assets can be used this way. (For not pernament once use AssetLibrary.loadAsset(...));
 	 * @param	assetId		Id of asset in assetIndex
 	 * @param	lincageId	object lincage id in swf file library
 	 * @return	instance of Sprite taken from asset library, using lincageId
@@ -354,7 +354,7 @@ public class AssetLibrary {
 
 	/**
 	 * Gives instance of SimpleButton object from SWF file library
-	 * Only pernament assets can be used this way. (For not pernament once use AssetLibrary.sendAssetToFunction(...));
+	 * Only pernament assets can be used this way. (For not pernament once use AssetLibrary.loadAsset(...));
 	 * @param	assetId		Id of asset in assetIndex
 	 * @param	lincageId	object lincage id in swf file library
 	 * @return	instance of SimpleButton taken from asset library, using lincageId
@@ -365,7 +365,7 @@ public class AssetLibrary {
 
 	/**
 	 * Gives instance of BitmapData object from SWF file library
-	 * Only pernament assets can be used this way. (For not pernament once use AssetLibrary.sendAssetToFunction(...));
+	 * Only pernament assets can be used this way. (For not pernament once use AssetLibrary.loadAsset(...));
 	 * @param	assetId		Id of asset in assetIndex
 	 * @param	lincageId	object lincage id in swf file library
 	 * @return	instance of BitmapData taken from asset library, using lincageId
@@ -376,7 +376,7 @@ public class AssetLibrary {
 
 	/**
 	 * Gives instance of Sound object from SWF file library
-	 * Only pernament assets can be used this way. (For not pernament once use AssetLibrary.sendAssetToFunction(...));
+	 * Only pernament assets can be used this way. (For not pernament once use AssetLibrary.loadAsset(...));
 	 * @param	assetId		Id of asset in assetIndex
 	 * @param	lincageId	object lincage id in swf file library
 	 * @return	instance of Sound taken from asset library, using lincageId
@@ -393,7 +393,7 @@ public class AssetLibrary {
 			errorHandler(Error("AssetLibrary can't find SWF asset with assetId :" + assetId));
 		} else {
 			if (canGetNonPermanentsDirectly && !asset.isPermanent) {
-				errorHandler(Error("AssetLibrary can't directly use SWF asset with assetId:" + assetId + ". Only permanent assets can be used that way. Use AssetLibrary.sendAssetToFunction(" + assetId + ", myHandleAssetFunction); instead."));
+				errorHandler(Error("AssetLibrary can't directly use SWF asset with assetId:" + assetId + ". Only permanent assets can be used that way. Use AssetLibrary.loadAsset(" + assetId + ", myHandleAssetFunction); instead."));
 			} else {
 				try {
 					switch (type) {
@@ -462,7 +462,7 @@ public class AssetLibrary {
 	 * This metod does not clone pictures BitmapData, that means it will not use extra memory to show extra copies.
 	 * If you modify it's content - all other not cloned instances of same Pic will be modified with it,
 	 *   and all new cloned instances will clone those changes.
-	 * Only pernament assets can be used this way. (For not pernament once use AssetLibrary.sendAssetToFunction(...));
+	 * Only pernament assets can be used this way. (For not pernament once use AssetLibrary.loadAsset(...));
 	 * @param	assetId		Id of asset in assetIndex
 	 * @return	Bitmap instance with picture of PIC asset
 	 */
@@ -472,7 +472,7 @@ public class AssetLibrary {
 			errorHandler(Error("AssetLibrary can't find PIC asset with assetId :" + assetId));
 		} else {
 			if (canGetNonPermanentsDirectly && !asset.isPermanent) {
-				errorHandler(Error("AssetLibrary can't directly use PIC asset with assetId:" + assetId + ". Only permanent assets can be used that way. Use AssetLibrary.sendAssetToFunction(" + assetId + ", myHandleAssetFunction); instead."));
+				errorHandler(Error("AssetLibrary can't directly use PIC asset with assetId:" + assetId + ". Only permanent assets can be used that way. Use AssetLibrary.loadAsset(" + assetId + ", myHandleAssetFunction); instead."));
 			} else {
 				return asset.getBitmap();
 			}
@@ -484,7 +484,7 @@ public class AssetLibrary {
 	 * Gives PIC asset Bitmap instance with loaded BitmapData content.
 	 * This method will create a clone of picture.
 	 * It's possible to modify it without modifiing original loaded picture.
-	 * Only pernament assets can be used this way. (For not pernament once use AssetLibrary.sendAssetToFunction(...));
+	 * Only pernament assets can be used this way. (For not pernament once use AssetLibrary.loadAsset(...));
 	 * @param	assetId		Id of asset in assetIndex
 	 * @return	Bitmap instance with picture of PIC asset
 	 */
@@ -494,7 +494,7 @@ public class AssetLibrary {
 			errorHandler(Error("AssetLibrary can't find PIC asset with assetId :" + assetId));
 		} else {
 			if (canGetNonPermanentsDirectly && !asset.isPermanent) {
-				errorHandler(Error("AssetLibrary can't directly use PIC asset with assetId:" + assetId + ". Only permanent assets can be used that way. Use AssetLibrary.sendAssetToFunction(" + assetId + ", myHandleAssetFunction); instead."));
+				errorHandler(Error("AssetLibrary can't directly use PIC asset with assetId:" + assetId + ". Only permanent assets can be used that way. Use AssetLibrary.loadAsset(" + assetId + ", myHandleAssetFunction); instead."));
 			} else {
 				return asset.getClonedBitmap();
 			}
@@ -517,7 +517,7 @@ public class AssetLibrary {
 			errorHandler(Error("AssetLibrary can't find MP3 asset with assetId :" + assetId));
 		} else {
 			if (canGetNonPermanentsDirectly && !asset.isPermanent) {
-				errorHandler(Error("AssetLibrary can't directly use MP3 asset with assetId:" + assetId + ". Only permanent assets can be used that way. Use AssetLibrary.sendAssetToFunction(" + assetId + ", myHandleAssetFunction); instead."));
+				errorHandler(Error("AssetLibrary can't directly use MP3 asset with assetId:" + assetId + ". Only permanent assets can be used that way. Use AssetLibrary.loadAsset(" + assetId + ", myHandleAssetFunction); instead."));
 			} else {
 				return asset.getSound();
 			}
@@ -545,7 +545,7 @@ public class AssetLibrary {
 			errorHandler(Error("AssetLibrary can't find MP3 asset with assetId :" + assetId));
 		} else {
 			if (canGetNonPermanentsDirectly && !asset.isPermanent) {
-				errorHandler(Error("AssetLibrary can't directly use MP3 asset with assetId:" + assetId + ". Only permanent assets can be used that way. Use AssetLibrary.sendAssetToFunction(" + assetId + ", myHandleAssetFunction); instead."));
+				errorHandler(Error("AssetLibrary can't directly use MP3 asset with assetId:" + assetId + ". Only permanent assets can be used that way. Use AssetLibrary.loadAsset(" + assetId + ", myHandleAssetFunction); instead."));
 			} else {
 				asset.play(startTime, loops, sndTransform);
 			}
@@ -563,7 +563,7 @@ public class AssetLibrary {
 			errorHandler(Error("AssetLibrary can't find MP3 asset with assetId :" + assetId));
 		} else {
 			if (canGetNonPermanentsDirectly && !asset.isPermanent) {
-				errorHandler(Error("AssetLibrary can't directly use MP3 asset with assetId:" + assetId + ". Only permanent assets can be used that way. Use AssetLibrary.sendAssetToFunction(" + assetId + ", myHandleAssetFunction); instead."));
+				errorHandler(Error("AssetLibrary can't directly use MP3 asset with assetId:" + assetId + ". Only permanent assets can be used that way. Use AssetLibrary.loadAsset(" + assetId + ", myHandleAssetFunction); instead."));
 			} else {
 				asset.stopAllChannels();
 			}

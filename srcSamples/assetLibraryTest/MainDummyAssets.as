@@ -36,10 +36,10 @@ public class MainDummyAssets extends Sprite {
 		assetIndex = AssetLibrary.getIndex();
 
 		assetLoader = AssetLibrary.getLoader();
-		
+
 		AssetLibrary.fakeMissingAssets = true;
 
-		//var asset:AssetSWF = new AssetSWF();		
+		//var asset:AssetSWF = new AssetSWF();
 		//assetIndex.addAsset(asset);
 
 		//
@@ -71,13 +71,13 @@ public class MainDummyAssets extends Sprite {
 
 		assetIndex.addAssetArrayToGroup("allFiles", ["test1", "test2", "test3def", "test4def"]);
 
-		
+
 		assetIndex.addPathDefinition("versionDir", "assets/versionTest/");
-		
+
 		assetIndex.addFileDefinition("test7", "test7.swf", "versionDir", false);
 		assetIndex.addFileDefinition("test8", "test8.swf", "versionDir", true);
-		
-		
+
+
 
 		assetIndex.addDefinitionsFromXML("xml/mainAssets.xml");
 		assetIndex.addDefinitionsFromXML("xmlMore/secondaryAssets.xml");
@@ -85,19 +85,19 @@ public class MainDummyAssets extends Sprite {
 
 
 		assetLoader.preloadPermanents();
-		
-		
+
+
 		assetIndex.addPathDefinition("pictureDir", "assets/pics/");
-		
+
 		assetIndex.addFileDefinition("pngSmiley", "-smiley.png", "pictureDir");
 		assetIndex.addFileDefinition("jpgSmiley", "-smiley.jpg", "pictureDir");
 		assetIndex.addFileDefinition("gifSmiley", "-smiley.gif", "pictureDir");
-		
+
 		assetIndex.addPathDefinition("soundDir", "assets/sounds/");
-		
-		assetIndex.addFileDefinition("nin_the_warning", "nin_the_warning.mp3", "soundDir");		
-		
-		
+
+		assetIndex.addFileDefinition("nin_the_warning", "nin_the_warning.mp3", "soundDir");
+
+
 		//assetIndex.addPathDefinition("testPath", "assets/test", true, "_");
 		//
 
@@ -107,22 +107,22 @@ public class MainDummyAssets extends Sprite {
 	 //*/
 
 
-	 	AssetLibrary.loadAsset("pngSmiley", handlePic); 
-		AssetLibrary.loadAsset("jpgSmiley", handlePic); 
+	 	AssetLibrary.loadAsset("pngSmiley", handlePic);
+		AssetLibrary.loadAsset("jpgSmiley", handlePic);
 		AssetLibrary.loadAsset("gifSmiley", handlePic);
-		
+
 		AssetLibrary.loadAsset("nin_the_warning", handleSound);
 
-		
+
 		this.stage.addEventListener(MouseEvent.CLICK, handleStageClick);
-		
-		
+
+
 	}
-	
+
 	private function handleStageClick(event:MouseEvent):void {
 		AssetLibrary.loadAsset("nin_the_warning", handleSound);
 	}
-	
+
 	private function handleSound(asset:Mp3Asset):void {
 		trace( "MainDummyAssets.handleSound > asset : " + asset );
 		asset.play();
@@ -186,8 +186,8 @@ public class MainDummyAssets extends Sprite {
 		circle3.x = 450;
 		circle3.y = 50;
 		//
-		
-		
+
+
 		AssetLibrary.loadAsset("test7", handleTest7);
 		//
 		var circle4:Sprite = AssetLibrary.getSWFSprite("test8", "-CircleD_SPR");
@@ -226,7 +226,7 @@ public class MainDummyAssets extends Sprite {
 		testSprite.x = 700;
 		testSprite.y = 100;
 	}
-	
+
 	private function handleTest5(asset:SwfAsset):void {
 		////trace("Main.handleTest5 > asset : " + asset);
 		var testSprite:Sprite = asset.getSprite("-SquareC_SPR");
@@ -263,13 +263,13 @@ public class MainDummyAssets extends Sprite {
 
 //	private function testSomeStuff():void {
 		////trace("Main.testSomeStuff");
-		
-		
+
+
 		/*
-		// group asset load		
+		// group asset load
 		AssetLibrary.unloadGroupAssets("allFiles");
 		//*/
-		
+
 		/*
 		// group asset load
 		AssetLibrary.unloadAsset("test1");
@@ -277,45 +277,45 @@ public class MainDummyAssets extends Sprite {
 		AssetLibrary.unloadAsset("test5");
 
 		//AssetLibrary.loadGroupAssets("allFiles");
-		
+
 		//AssetLibrary.loadGroupAssets("loadTest");
 		AssetLibrary.unloadGroupAssets("loadTest");
-		
-		AssetLibrary.sendAssetToFunction("test5", handleTest5);
+
+		AssetLibrary.loadAsset("test5", handleTest5);
 		//*/
-		
+
 		/*
 		// all non permanents unload
 		AssetLibrary.unloadAllNonPermanents();
-		AssetLibrary.sendAssetToFunction("test5", handleTest5);
+		AssetLibrary.loadAsset("test5", handleTest5);
 		//*/
-		
-		
-		
+
+
+
 		/*
 		var testTime:int = getTimer();
 		var asset:AssetMP3 = ShareDemo.get("littleSound") as AssetMP3;
 		//trace("geting took : ", (getTimer() - testTime));
 		asset.play();
 		//*/
-		
-//		AssetLibrary.sendAssetToFunction("nin_the_warning", handleSound);
+
+//		AssetLibrary.loadAsset("nin_the_warning", handleSound);
 //	}
-	
+
 //	private function handleSound(asset:Mp3Asset):void {
 		//trace("Main.handleSound > asset : " + asset);
-		
+
 //		asset.play();
 //	}
-	
+
 	private function handlePic(asset:PicAsset):void {
 		//trace("Main.handlePic > asset : " + asset);
-		
+
 		var bitMap:Bitmap = asset.getBitmap();
 		this.addChild(bitMap);
 		bitMap.x = Math.random() * 500 + 50;
 		bitMap.y = Math.random() * 100 + 300;
-		
+
 	}
 
 
